@@ -20,7 +20,11 @@ public abstract class SingletonBase<T> : MonoBehaviour where T : SingletonBase<T
         _instance = go.GetComponent<T>();
         if (_instance._isDontDestroy)
             DontDestroyOnLoad(go);
+
+        _instance.Setup();
     }
+
+    protected virtual void Setup() { }
 
     // 메모리 정리 추상화 함수
     public abstract void Dispose();    
