@@ -2,43 +2,94 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Entity : MonoBehaviour
-{
-    public event Action OnDead;
+public abstract class Entity : MonoBehaviour
+{    
+    public event Action<Entity> OnDead;
+
+    public Entity_SO CurrentEntitySO { get; private set; }
+    public Vector3 HPBarPosition { get; private set; }
+    public bool IsDead => CurrentEntitySO.Hp.CurrentValue <= 0f;
 
     protected Dictionary<string, Entity_SO> _entitySODict = new();
+    
+    protected Animator _animator;
+    protected SpriteRenderer _renderer;
+    protected EntityDamageEffect _damageEffect;
+    [SerializeField]protected UI_HPBar _hpBar;    
 
-    protected Entity_SO _currentEntitySO;
+    private void Awake()
+    {
+        Init();
+    }
 
-    public virtual void SetupStats(string key)
+    protected virtual void Init()
+    {        
+        _animator = GetComponent<Animator>();
+        _renderer = GetComponent<SpriteRenderer>();
+        _damageEffect = GetComponent<EntityDamageEffect>();        
+    }
+
+    public virtual void SetupEntity<T>(string key) where T : Entity_SO
     {
         if (!_entitySODict.ContainsKey(key))
         {
-            Entity_SO entityClone = GetEntitySOClone(key);
-            if(entityClone == null)
+            T entityClone = GetEntitySOClone<T>(key);
+            if (entityClone == null)
             {
                 Debug.LogError($"Key-{key}에 해당하는 Entity_SO가 없습니다.");
                 return;
-            }
-
+            }            
             _entitySODict.Add(key, entityClone);
         }
-        _currentEntitySO = _entitySODict[key];
+        CurrentEntitySO = _entitySODict[key] as T;
+        HPBarPosition = Vector3.up * CurrentEntitySO.HPBarOffset;
+
+        SetSpriteSortingOrder();
+        SetHPBarUI();
     }
 
-    private Entity_SO GetEntitySOClone(string key)
+    private T GetEntitySOClone<T>(string key) where T : Entity_SO
     {
-        Entity_SO entitySO = ResourceManager.Instance.Load<Entity_SO>(key);
+        T entitySO = ResourceManager.Instance.Load<T>(key);
 
-        return entitySO.Clone() as Entity_SO;
+        return entitySO.Clone() as T;
     }
 
-    public void GetDamaged(float damage)
+    private void SetHPBarUI()
     {
-
+        _hpBar = UIManager.Instance.CreateWorldUI<UI_HPBar>(Constants.Key_HPBar);
+        _hpBar.SetEntity(this);
     }
 
-    protected Entity_SO GetEntitySO => _currentEntitySO;
+    private void SetSpriteSortingOrder()
+    {
+        int sortingOrderOffsetByPositionY = Mathf.FloorToInt(transform.position.y * 100f);
+        _renderer.sortingOrder = Util.GetSortingOreder(SpriteType.Entity) + sortingOrderOffsetByPositionY;
+    }
 
-    private void Dead() => OnDead?.Invoke();
+    public void GetDamaged(Entity attacker, float damage)
+    {
+        if (IsDead)
+            return;
+
+        Debug.Log($"{attacker.name}으로부터 {damage}데미지 피해받음. ");
+
+        CurrentEntitySO.Hp.Consume(damage);
+        _damageEffect.EffectDamaged();
+
+        if (CurrentEntitySO.Hp.CurrentValue <= 0f)
+            Dead();
+    }
+
+    protected Entity_SO GetEntitySO => CurrentEntitySO;
+
+    private void Dead()
+    {
+        _hpBar.ReturnToPool();
+        OnDead?.Invoke(this);
+        OnDead = null;
+        Dispose();
+    }
+
+    protected abstract void Dispose();
 }

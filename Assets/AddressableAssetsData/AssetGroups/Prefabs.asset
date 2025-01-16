@@ -15,10 +15,29 @@ MonoBehaviour:
   m_GroupName: Prefabs
   m_GUID: d9b468fb9b6504843b0713641003b447
   m_SerializeEntries:
+  - m_GUID: 46621396828fe5b42b4c2670576478f3
+    m_Address: Survivor.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Prefabs
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c9db197626efc7e45a290f480a26f9fd
     m_Address: Zombie.prefab
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Prefabs
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ce62ee984fa1f2249bef278eecaad43a
+    m_Address: FleshImpact_E.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Prefabs
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d976de402be916e4295d0164ec5a99dc
+    m_Address: Weapon.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Prefabs
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 2dd5316fe8037c944a38d7a281724bdb, type: 2}

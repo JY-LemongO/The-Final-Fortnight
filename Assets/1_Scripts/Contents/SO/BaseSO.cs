@@ -9,7 +9,7 @@ public class BaseSO : ScriptableObject, ICloneable
 
     [Header("Display Info")]
     [SerializeField] private string _displayName;
-    [SerializeField] private string _displayDesc;
+    [SerializeField][TextArea] private string _displayDesc;    
 
     public int Id => _id;
     public string CodeName => _codeName;
@@ -18,4 +18,6 @@ public class BaseSO : ScriptableObject, ICloneable
     public string DisplayDesc => _displayDesc;
 
     public virtual object Clone() => Instantiate(this);
+
+    public virtual void Dispose() { }
 }

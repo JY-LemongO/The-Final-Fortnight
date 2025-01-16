@@ -15,15 +15,23 @@ MonoBehaviour:
   m_GroupName: Entities
   m_GUID: f0c17a4b91e9a39438a3599abe9e46bb
   m_SerializeEntries:
+  - m_GUID: 906d010652a65b94980e4ee4e6c1a4fc
+    m_Address: SURVIVOR_SOLDIER_01.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Entities
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c914483064a0c464c8ee8c0570db990c
     m_Address: ZOMBIE_NORMAL_01.asset
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Entities
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e20567e131425454f83439b013b5380f
     m_Address: ZOMBIE_NORMAL_02.asset
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Entities
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 2dd5316fe8037c944a38d7a281724bdb, type: 2}

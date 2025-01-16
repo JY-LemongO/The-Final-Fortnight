@@ -21,6 +21,9 @@ public class Pool
     public GameObject Pop()
         => _pool.Get();
 
+    public void Dispose()
+        => _pool.Clear();
+
     #region Pool Args
     private GameObject OnCreate()
     {
@@ -69,6 +72,9 @@ public class PoolManager : SingletonBase<PoolManager>
 
     public override void Dispose()
     {
+        foreach (var pool in _poolDict.Values)
+            pool.Dispose();
         _poolDict.Clear();
+        base.Dispose();
     }
 }

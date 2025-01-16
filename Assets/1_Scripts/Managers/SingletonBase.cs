@@ -1,6 +1,7 @@
+using UnityEditor;
 using UnityEngine;
 
-public abstract class SingletonBase<T> : MonoBehaviour where T : SingletonBase<T>
+public class SingletonBase<T> : MonoBehaviour where T : SingletonBase<T>
 {    
     private static T _instance;
     private static bool _isInitialized = false;
@@ -21,11 +22,20 @@ public abstract class SingletonBase<T> : MonoBehaviour where T : SingletonBase<T
         if (_instance._isDontDestroy)
             DontDestroyOnLoad(go);
 
-        _instance.Setup();
+        _instance.InitChild();
+
+        EditorApplication.playModeStateChanged += state =>
+        {
+            if (state == PlayModeStateChange.ExitingPlayMode)
+                _instance.Dispose();
+        };
     }
 
-    protected virtual void Setup() { }
+    protected virtual void InitChild() { }
 
     // 메모리 정리 추상화 함수
-    public abstract void Dispose();    
+    public virtual void Dispose()
+    {
+        _isInitialized = false;         
+    }    
 }

@@ -2,11 +2,18 @@ using UnityEngine;
 
 public class Entity_SO : BaseSO
 {
+    [Header("Common Stat")]    
     [SerializeField] private Stat_SO _hpSO;
-    [SerializeField] private Stat_SO _rangeSO;
-    [SerializeField] private Stat_SO _atkSO;
+    [SerializeField] private float _hpBarOffset;
 
-    public Stat_SO HPSO => _hpSO;
-    public Stat_SO RangeSO => _rangeSO;
-    public Stat_SO AtkSO => _atkSO;
+    private Stat_SO _statHp;
+
+    public Stat_SO Hp => _statHp;
+    public float HPBarOffset => _hpBarOffset;
+
+    public virtual void InitializeStats()
+        => _statHp = _hpSO.Clone() as Stat_SO;
+
+    public virtual void ResetStats()
+        => Hp.ResetCurrentValue();
 }

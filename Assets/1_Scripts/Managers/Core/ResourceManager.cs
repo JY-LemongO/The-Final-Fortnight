@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 public class ResourceManager : SingletonBase<ResourceManager>
 {
@@ -24,26 +25,56 @@ public class ResourceManager : SingletonBase<ResourceManager>
             return null;
         }
 
-        if (isPooling)
-            return PoolManager.Instance.Get(prefab);
+        GameObject go = null;
 
-        GameObject go = Instantiate(prefab, parent);
+        if (isPooling)
+        {
+            go = PoolManager.Instance.Get(prefab);
+            go.transform.SetParent(parent);
+            return go;
+        }
+
+        go = Instantiate(prefab, parent);
+        go.transform.SetParent(parent);
         go.name = prefab.name;
         return go;
-    }
+    }    
 
-    public void LoadAsync<T>(string key, Action<T> callBack = null) where T : UnityEngine.Object
+    public void LoadAsync<T>(string key, Action callBack = null) where T : UnityEngine.Object
     {
         var asyncOp = Addressables.LoadAssetAsync<T>(key);
         asyncOp.Completed += (op) =>
         {
             _resourcesDict.Add(key, op.Result);
-            callBack?.Invoke(op.Result);
+            callBack?.Invoke();
         };
+    }
+
+    public AsyncOperationHandle LoadAllAsyncByLabel<T>(string label, Action<int, int> callBack = null) where T : UnityEngine.Object
+    {
+        var asyncOp = Addressables.LoadResourceLocationsAsync(label, typeof(T));
+        asyncOp.Completed += (op) =>
+        {
+            int totalCount = op.Result.Count;
+            int count = 0;
+
+            foreach(var item in op.Result)
+            {
+                Debug.Log(item.PrimaryKey);
+                LoadAsync<T>(item.PrimaryKey, () =>
+                {
+                    count++;
+                    callBack?.Invoke(count, totalCount);
+                });
+            }
+        };
+
+        return asyncOp;
     }
 
     public override void Dispose()
     {
         _resourcesDict.Clear();
+        base.Dispose();        
     }
 }
