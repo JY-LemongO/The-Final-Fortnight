@@ -12,4 +12,13 @@ public static class Define
         Gun,
         Grenade,
     }
+
+    public enum SpriteType
+    {
+        Background,
+        Foreground,
+        Entity,
+        Weapon,
+        WorldUI,
+    }
 }

@@ -25,7 +25,7 @@ public class Weapon : MonoBehaviour
     {
         _anim = GetComponent<Animator>();
         _renderer = GetComponent<SpriteRenderer>();
-        _renderer.sortingOrder = Util.GetSortingOreder(SpriteType.Weapon);
+        _renderer.sortingOrder = Util.GetSortingOreder(Define.SpriteType.Weapon);
 
         AnimationHashInitialize();
     }

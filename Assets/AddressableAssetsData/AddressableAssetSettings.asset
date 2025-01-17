@@ -61,6 +61,7 @@ MonoBehaviour:
   m_GroupAssets:
   - {fileID: 11400000, guid: 1db9977b822027743985133154f9c534, type: 2}
   - {fileID: 11400000, guid: 3e270d7772d3f3b4ea12e6617b5e2c36, type: 2}
+  - {fileID: 11400000, guid: 74b3d4f4f93ac344095488d9bc2ffae9, type: 2}
   - {fileID: 11400000, guid: 3580467106640f64a8df1669e8cb913f, type: 2}
   - {fileID: 11400000, guid: a82581fd174a6fc4eb838397f8416916, type: 2}
   - {fileID: 11400000, guid: 8a435b0e70758a4439475114ce156791, type: 2}

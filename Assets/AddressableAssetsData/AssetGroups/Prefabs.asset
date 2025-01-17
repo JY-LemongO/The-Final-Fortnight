@@ -27,12 +27,6 @@ MonoBehaviour:
     m_SerializedLabels:
     - Prefabs
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: ce62ee984fa1f2249bef278eecaad43a
-    m_Address: FleshImpact_E.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Prefabs
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d976de402be916e4295d0164ec5a99dc
     m_Address: Weapon.prefab
     m_ReadOnly: 0

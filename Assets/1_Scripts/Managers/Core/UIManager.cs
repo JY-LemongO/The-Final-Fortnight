@@ -30,7 +30,7 @@ public class UIManager : SingletonBase<UIManager>
 
         _worldUICanvas.renderMode = RenderMode.WorldSpace;
         _worldUICanvas.worldCamera = Camera.main;
-        _worldUICanvas.sortingOrder = Util.GetSortingOreder(SpriteType.WorldUI);
+        _worldUICanvas.sortingOrder = Util.GetSortingOreder(Define.SpriteType.WorldUI);
         
         CanvasScaler scaler = _worldUICanvas.GetComponent<CanvasScaler>();
         scaler.dynamicPixelsPerUnit = 1f;

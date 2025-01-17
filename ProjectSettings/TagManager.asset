@@ -40,8 +40,26 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: BG
+    uniqueID: 956258207
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: None
+    uniqueID: 3097007671
+    locked: 0
+  - name: Effect
+    uniqueID: 4271765931
+    locked: 0
+  - name: FG
+    uniqueID: 137325139
+    locked: 0
+  - name: DamageText
+    uniqueID: 2534123343
+    locked: 0
+  - name: WorldUI
+    uniqueID: 335430735
     locked: 0
   m_RenderingLayers:
   - Default

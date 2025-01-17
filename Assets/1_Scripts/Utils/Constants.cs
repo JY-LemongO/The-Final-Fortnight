@@ -12,10 +12,14 @@ public static class Constants
     public const string Key_Equipments = "Equipments";
 
     // Prefabs
-    public const string Key_Z_HitEffect = "FleshImpact_E.prefab";
+    
     public const string Key_Survivor = "Survivor.prefab";
     public const string Key_Zombie = "Zombie.prefab";
     public const string Key_Weapon = "Weapon.prefab";
+
+    // Effects
+    public const string Key_Z_HitEffect = "FleshImpact_E.prefab";
+    public const string Key_DamageText = "DamageText.prefab";
 
     // UI
     public const string Key_HPBar = "HP_Bar.prefab";
@@ -27,5 +31,15 @@ public static class Constants
 
     // Equipments
     public const string Key_W_Pistol_02 = "WEAPON_PISTOL_01.asset";
+    #endregion
+
+    #region Values
+    public const string DamageColorHEX_L = "#FF9700";
+    public const string DamageColorHEX_M = "#FF4F00";
+    public const string DamageColorHEX_H = "#FF0092";
+
+    public const float DamageTextFontSize_L = 4f;
+    public const float DamageTextFontSize_M = 6f;
+    public const float DamageTextFontSize_H = 10f;
     #endregion
 }

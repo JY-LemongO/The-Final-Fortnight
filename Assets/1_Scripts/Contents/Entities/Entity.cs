@@ -29,6 +29,8 @@ public abstract class Entity : MonoBehaviour
         _damageEffect = GetComponent<EntityDamageEffect>();        
     }
 
+    protected Entity_SO GetEntitySO => CurrentEntitySO;
+
     public virtual void SetupEntity<T>(string key) where T : Entity_SO
     {
         if (!_entitySODict.ContainsKey(key))
@@ -64,24 +66,28 @@ public abstract class Entity : MonoBehaviour
     private void SetSpriteSortingOrder()
     {
         int sortingOrderOffsetByPositionY = Mathf.FloorToInt(transform.position.y * 100f);
-        _renderer.sortingOrder = Util.GetSortingOreder(SpriteType.Entity) + sortingOrderOffsetByPositionY;
+        _renderer.sortingOrder = Util.GetSortingOreder(Define.SpriteType.Entity) + sortingOrderOffsetByPositionY;
+    }
+
+    private void SetupDamageText(float damage)
+    {
+        GameObject damageText = ResourceManager.Instance.Instantiate(Constants.Key_DamageText);
+        damageText.transform.position = transform.position + Vector3.up * CurrentEntitySO.HPBarOffset;
+        damageText.GetComponent<DamageText>().SetDamageText(damage);
     }
 
     public void GetDamaged(Entity attacker, float damage)
     {
         if (IsDead)
-            return;
-
-        Debug.Log($"{attacker.name}으로부터 {damage}데미지 피해받음. ");
+            return;        
 
         CurrentEntitySO.Hp.Consume(damage);
         _damageEffect.EffectDamaged();
+        SetupDamageText(damage);
 
         if (CurrentEntitySO.Hp.CurrentValue <= 0f)
             Dead();
-    }
-
-    protected Entity_SO GetEntitySO => CurrentEntitySO;
+    }    
 
     private void Dead()
     {
