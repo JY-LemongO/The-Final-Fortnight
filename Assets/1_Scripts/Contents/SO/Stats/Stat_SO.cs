@@ -13,11 +13,11 @@ public class Stat_SO : BaseSO
     [SerializeField] private bool _isPercentage;
     [SerializeField] private float _minValue;
     [SerializeField] private float _maxValue;
-    [SerializeField] private float _defaultValue;    
+    [SerializeField] private float _defaultValue;
 
     private float _currentValue;
 
-    private Dictionary<string, float> _bonusValuesDict;    
+    private Dictionary<string, float> _bonusValuesDict;
 
     public bool IsConsumable => _isConsumable;
     public bool IsPercentage => _isPercentage;
@@ -86,5 +86,5 @@ public class Stat_SO : BaseSO
         var clone = Instantiate(this);
         clone.CurrentValue = DefaultValue;
         return clone;
-    }    
+    }
 }

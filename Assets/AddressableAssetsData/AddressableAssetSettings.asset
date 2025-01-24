@@ -15,7 +15,7 @@ MonoBehaviour:
   m_DefaultGroup: 3cd85aa09bd32a14caf62d615922d497
   m_currentHash:
     serializedVersion: 2
-    Hash: 00000000000000000000000000000000
+    Hash: 8f1aa09977c7b3a8851576e7bb1b4989
   m_OptimizeCatalogSize: 0
   m_BuildRemoteCatalog: 0
   m_CatalogRequestsTimeout: 0
@@ -60,6 +60,7 @@ MonoBehaviour:
   m_overridePlayerVersion: '[UnityEditor.PlayerSettings.bundleVersion]'
   m_GroupAssets:
   - {fileID: 11400000, guid: 1db9977b822027743985133154f9c534, type: 2}
+  - {fileID: 11400000, guid: 5d28ca6bf405ec84f8a965989f8b6202, type: 2}
   - {fileID: 11400000, guid: 3e270d7772d3f3b4ea12e6617b5e2c36, type: 2}
   - {fileID: 11400000, guid: 74b3d4f4f93ac344095488d9bc2ffae9, type: 2}
   - {fileID: 11400000, guid: 3580467106640f64a8df1669e8cb913f, type: 2}
@@ -107,6 +108,7 @@ MonoBehaviour:
     - Prefabs
     - Entities
     - Equipments
+    - Init
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 46d63381086c9f54ebc806ce09802284, type: 2}

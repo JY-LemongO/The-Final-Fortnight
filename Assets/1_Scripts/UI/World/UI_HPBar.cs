@@ -4,10 +4,10 @@ using UnityEngine.UI;
 
 public class UI_HPBar : UIBase
 {
-    [SerializeField] Slider _hpSlider;    
+    [SerializeField] Slider _hpSlider;
 
     private Animator _animator;
-    private Entity _entity;    
+    private Entity _entity;
 
     private bool _isDisappearing = true;
     private float _currentFadeTimer = 0f;
@@ -40,8 +40,8 @@ public class UI_HPBar : UIBase
     private void HandleHPSliderValueChange(float currentValue, float totalValue)
     {
         if (Mathf.Approximately(currentValue, totalValue))
-            return;        
-        
+            return;
+
         _hpSlider.value = currentValue / totalValue;
         _currentFadeTimer = 0f;
 
@@ -56,7 +56,7 @@ public class UI_HPBar : UIBase
     {
         _animator.speed = 0f;
         _isDisappearing = false;
-        float waitTime = Constants.HPBarFadeOutWaitTime;        
+        float waitTime = Constants.HPBarFadeOutWaitTime;
 
         while (_currentFadeTimer < waitTime)
         {
@@ -68,7 +68,7 @@ public class UI_HPBar : UIBase
         _isDisappearing = true;
     }
 
-    public void ReturnToPool()
+    protected override void Dispose()
     {
         StopAllCoroutines();
         _isDisappearing = true;

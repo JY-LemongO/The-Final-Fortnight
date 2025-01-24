@@ -27,6 +27,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Entities
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e1131e923eab0c94bbd649fe4ff4cbf4
+    m_Address: SURVIVOR_SOLDIER_02.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Entities
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e20567e131425454f83439b013b5380f
     m_Address: ZOMBIE_NORMAL_02.asset
     m_ReadOnly: 0

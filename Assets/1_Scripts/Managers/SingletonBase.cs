@@ -1,8 +1,8 @@
 using UnityEditor;
 using UnityEngine;
 
-public class SingletonBase<T> : MonoBehaviour where T : SingletonBase<T>
-{    
+public abstract class SingletonBase<T> : MonoBehaviour where T : SingletonBase<T>
+{
     private static T _instance;
     private static bool _isInitialized = false;
 
@@ -31,11 +31,10 @@ public class SingletonBase<T> : MonoBehaviour where T : SingletonBase<T>
         };
     }
 
-    protected virtual void InitChild() { }
+    protected abstract void InitChild();
 
-    // 메모리 정리 추상화 함수
     public virtual void Dispose()
     {
-        _isInitialized = false;         
-    }    
+        _isInitialized = false;
+    }
 }

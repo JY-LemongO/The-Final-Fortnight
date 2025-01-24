@@ -4,7 +4,7 @@ public static class Define
     {
         Survivor,
         Zombie,
-        Barricate
+        Barricate,
     }
 
     public enum WeaponType
@@ -20,5 +20,25 @@ public static class Define
         Entity,
         Weapon,
         WorldUI,
+    }
+
+    public enum SurvivorKeys
+    {
+        SURVIVOR_SOLDIER_01,
+        SURVIVOR_SOLDIER_02,
+    }
+
+    public enum ZombieKeys
+    {
+        ZOMBIE_NORMAL_01,
+        ZOMBIE_NORMAL_02,
+    }
+
+    public enum SceneType
+    {
+        Unknown,
+        Main,
+        Loading,
+        Game,
     }
 }

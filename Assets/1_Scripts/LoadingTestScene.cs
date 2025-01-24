@@ -18,9 +18,10 @@ public class LoadingTestScene : MonoBehaviour
 
     private List<AsyncOperationHandle> _operations = new();
 
-    private void Awake()
+    private async void Awake()
     {
-        InitLoad();        
+        await DataManager.Instance.DataInit();
+        InitLoad();
     }
 
     private void InitLoad()
@@ -29,8 +30,8 @@ public class LoadingTestScene : MonoBehaviour
     private IEnumerator Co_LoadResources()
     {
         _operations.Add(ResourceManager.Instance.LoadAllAsyncByLabel<BaseSO>(Constants.Key_Entities));
+        _operations.Add(ResourceManager.Instance.LoadAllAsyncByLabel<BaseSO>(Constants.Key_Equipments));
         _operations.Add(ResourceManager.Instance.LoadAllAsyncByLabel<GameObject>(Constants.Key_Prefabs));
-        _operations.Add(ResourceManager.Instance.LoadAllAsyncByLabel<GameObject>(Constants.Key_Equipments));        
         _loadingText.text = "리소스 로드 중...";
         while (true)
         {
@@ -63,9 +64,9 @@ public class LoadingTestScene : MonoBehaviour
 
     private bool IsAllProgressDone()
     {
-        foreach(var operation in _operations)
+        foreach (var operation in _operations)
         {
-            if(!operation.IsDone)
+            if (!operation.IsDone)
                 return false;
         }
         return true;

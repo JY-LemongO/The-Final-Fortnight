@@ -60,7 +60,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 6b4034a5a5f319748bfc8ae11b2ae6b2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -81,12 +81,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -3752026665501001913, guid: 20be5462ae5a7ab4485551db7d2e40a6, type: 3}
+  m_Sprite: {fileID: -4672689291181798077, guid: 9080e6ce457c0614c9f8fd0c97ea3aac, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1.5}
+  m_Size: {x: 0.07, y: 0.07}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -167,6 +167,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ef7c376ff4c44a48b790cd18ceb2889, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _walkParamName: Walk
+  _attackParamName: Attack
+  _dieParamName: Die
 --- !u!114 &-6392227404906287342
 MonoBehaviour:
   m_ObjectHideFlags: 0

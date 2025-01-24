@@ -19,7 +19,7 @@ public class EntityDamageEffect : MonoBehaviour
                 break;
         }
     }
-    
+
     private void SurvivorEffect()
     {
 
@@ -27,8 +27,8 @@ public class EntityDamageEffect : MonoBehaviour
 
     private void ZombieEffect()
     {
-        GameObject effectObject = ResourceManager.Instance.Instantiate(Constants.Key_Z_HitEffect);
-        effectObject.transform.position = transform.position;        
+        GameObject effectObject = ResourceManager.Instance.Instantiate(Constants.Key_Z_HitAnimation);
+        effectObject.transform.position = transform.position;
     }
 
     private void BarricateEffect()

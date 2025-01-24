@@ -16,7 +16,7 @@ public class Survivor : Entity
     {
         base.SetupEntity<T>(key);
         _currentSurvivorSO = CurrentEntitySO as Survivor_SO;
-        _animator.runtimeAnimatorController = _currentSurvivorSO.AnimController;
+        _anim.runtimeAnimatorController = _currentSurvivorSO.AnimController;
 
         GameObject weaponClone = ResourceManager.Instance.Instantiate("Weapon.prefab", _weaponSlot);
         weaponClone.transform.localPosition = Vector3.zero;
@@ -40,13 +40,16 @@ public class Survivor : Entity
 
     public void AttackTarget(float damage)
     {
+        if (Target == null)
+            return;
+
         Target.GetDamaged(this, damage);
         CheckTargetIsDead();
     }
 
     public bool CheckTargetIsDead()
-    {
-        if (Target.IsDead)
+    {        
+        if (Target!= null && Target.IsDead)
         {
             Target = null;
             SearchTarget();

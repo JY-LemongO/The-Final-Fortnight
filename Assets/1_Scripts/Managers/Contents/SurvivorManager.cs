@@ -1,53 +1,111 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class SurvivorManager : SingletonBase<SurvivorManager>
 {
-    private Dictionary<string, Survivor> _survivorsDict = new();
-    private Dictionary<string, Weapon_SO> _weaponSODict = new();
+    #region Events
+    // T1: ChangedSurvivor, T2: prevCount, T3: currentCount
+    public event Action<Survivor, int, int> OnSurvivorsCountChanged;
+    #endregion
+
+    public List<Survivor_SO> SelectableSurvivorList { get; private set; } = new();
+    public List<Weapon_SO> SelectableSurvivorsWeaponList { get; private set; } = new();
+
+    private Dictionary<string, List<Survivor>> _spawnedSurvivorDict = new();
+    private string _survivorPrefabKey;
 
     #region Temp Code
     private Vector2 _spawnPosition;
-
     private const string SURVIVOR_SPAWN_MARKER = "SurvivorSpawnPoint";
-    private const string KEY_SURVIVOR_PREFAB = "Survivor.prefab";
     #endregion
+
+    public void SpawnSurvivor(string survivorSOKey)
+    {
+        int prevSurvivorsCount = GetSurvivorsCount();
+
+        GameObject go = ResourceManager.Instance.Instantiate(_survivorPrefabKey);
+        go.transform.position = _spawnPosition;
+
+        Survivor survivor = go.GetComponent<Survivor>();
+        survivor.SetupEntity<Survivor_SO>(survivorSOKey);
+
+        string survivorCodeName = survivor.CurrentEntitySO.CodeName;
+        if (!_spawnedSurvivorDict.ContainsKey(survivorCodeName))
+            _spawnedSurvivorDict.Add(survivorCodeName, new List<Survivor>());
+        _spawnedSurvivorDict[survivorCodeName].Add(survivor);
+
+        OnSurvivorsCountChanged?.Invoke(survivor, prevSurvivorsCount, GetSurvivorsCount());
+    }
+
+    public void DispawnSurvivor(Survivor dispawnSurvivor)
+    {
+        int prevSurvivorsCount = GetSurvivorsCount();
+        string key = dispawnSurvivor.CurrentEntitySO.CodeName;
+
+        if (!_spawnedSurvivorDict.ContainsKey(key))
+            return;
+
+        foreach (var survivor in _spawnedSurvivorDict[key])
+        {
+            if (survivor == dispawnSurvivor)
+            {
+                PoolManager.Instance.Return(survivor.gameObject);
+                _spawnedSurvivorDict[key].Remove(survivor);
+                OnSurvivorsCountChanged?.Invoke(dispawnSurvivor, prevSurvivorsCount, GetSurvivorsCount());
+                break;
+            }
+        }
+    }
+
+    public void UpgradeWeapon(string weaponSOKey)
+    {
+
+    }
+
+    public Survivor_SO GetSelectableSurvivor(int index)
+        => SelectableSurvivorList[index];
+
+    private void SetSelectableSurvivorList()
+    {
+        string[] survivorSOKeys = Enum.GetNames(typeof(Define.SurvivorKeys));
+
+        foreach (var str in survivorSOKeys)
+        {
+            string key = str + ".asset";
+            Survivor_SO survivoRO = ResourceManager.Instance.Load<Survivor_SO>(key);
+
+            Survivor_SO survivor = survivoRO.Clone() as Survivor_SO;
+            Weapon_SO weapon = survivoRO.DefaultWeapon.Clone() as Weapon_SO;
+
+            SelectableSurvivorList.Add(survivor);
+            SelectableSurvivorsWeaponList.Add(weapon);
+        }
+    }
+
+    private int GetSurvivorsCount()
+    {
+        int count = 0;
+        foreach (var list in _spawnedSurvivorDict.Values)
+            count += list.Count;
+        return count;
+    }
 
     protected override void InitChild()
     {
+        SetSelectableSurvivorList();
+
+        _survivorPrefabKey = Constants.Key_Survivor;
+        _spawnedSurvivorDict = new();
         // Temp
         _spawnPosition = GameObject.Find(SURVIVOR_SPAWN_MARKER).transform.position;
     }
 
-    public void SpawnSurvivor(string survivorKey)
-    {
-        GameObject go = ResourceManager.Instance.Instantiate(KEY_SURVIVOR_PREFAB);
-        go.transform.position = _spawnPosition;
-
-        Survivor survivor = go.GetComponent<Survivor>();
-        survivor.SetupEntity<Survivor_SO>(survivorKey);
-    }
-
-    public void ChangeWeapon(string selectedSurvivorKey, string weaponKey)
-    {
-        Weapon_SO newWeapon = null;
-
-        if (!_survivorsDict.TryGetValue(selectedSurvivorKey, out Survivor survivor))
-        {
-            Debug.LogError($"{selectedSurvivorKey}를 가진 Survivor가 존재하지 않습니다.");
-            return;
-        }
-        if (!_weaponSODict.ContainsKey(weaponKey))
-        {
-            Weapon_SO newWeaponOrigin = ResourceManager.Instance.Load<Weapon_SO>(weaponKey);
-            newWeapon = newWeaponOrigin.Clone() as Weapon_SO;
-            _weaponSODict.Add(weaponKey, newWeapon);
-        }
-        survivor.CurrentWeapon.ChangeWeapon(newWeapon);
-    }
-
     public override void Dispose()
     {
-        
+        SelectableSurvivorList.Clear();
+        SelectableSurvivorsWeaponList.Clear();
+        _spawnedSurvivorDict.Clear();
+        base.Dispose();
     }
 }

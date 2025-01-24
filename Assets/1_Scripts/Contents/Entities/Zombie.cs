@@ -4,12 +4,9 @@ using UnityEngine;
 
 public class Zombie : Entity
 {
-    private Zombie_SO _currentZombieSO;    
     private Queue<Entity> _targetQueue = new();
-
-    private WaitForSeconds _attackDelayTime;
-    private Coroutine _attackCoroutine;
-    private Entity _currentTarget;
+    private Zombie_SO _currentZombieSO;    
+    private Entity _currentTarget;    
 
     private const string TARGET_TAG = "HumanSideEntity";
 
@@ -18,19 +15,7 @@ public class Zombie : Entity
         base.SetupEntity<T>(key);
         _currentZombieSO = CurrentEntitySO as Zombie_SO;
         _currentZombieSO.ResetStats();
-        _animator.runtimeAnimatorController = _currentZombieSO.AnimController;
-        _attackDelayTime = Util.GetCachedWaitForSeconds(_currentZombieSO.AtkRate.Value);
-    }
-
-    private void Update()
-    {
-        if(_currentZombieSO == null)
-        {
-            Debug.LogError("현재 Zombie_SO 가 없습니다.");
-            return;
-        }
-        if (_targetQueue.Count > 0)
-            return;
+        _anim.runtimeAnimatorController = _currentZombieSO.AnimController;        
 
         Move();
     }
@@ -39,7 +24,7 @@ public class Zombie : Entity
     {
         if (!collision.CompareTag(TARGET_TAG))
             return;
-        
+
         _targetQueue.Enqueue(collision.GetComponent<Entity>());
 
         if (_currentTarget == null)
@@ -47,53 +32,66 @@ public class Zombie : Entity
     }
 
     private void Move()
-    {        
-        transform.position += Vector3.left * _currentZombieSO.MoveSpeed.Value * Time.deltaTime;
+    {
+        StartCoroutine(Co_Move());        
     }
 
     private void Attack()
     {
+        _anim.SetBool(_attackParamHash, true);
         _currentTarget = FindNextTarget();
-        if(_currentTarget == null)
-        {
-            Debug.Log($"{GetType().Name}::Target이 없습니다.");
-            return;
-        }
-        Debug.Log($"{GetType().Name}:: Attack");
-        _attackCoroutine = StartCoroutine(Co_Attack(_currentTarget));
     }
 
     private Entity FindNextTarget()
     {
-        if(_targetQueue.Count <= 0)
+        if (_targetQueue.Count <= 0)
             return null;
 
-        return _targetQueue.Peek();
+        return _targetQueue.Dequeue();
     }
 
-    private IEnumerator Co_Attack(Entity target)
+    #region AnimationEventTrigger
+    private void HandleAttackTarget()
     {
-        target.OnDead += (target) =>
+        float damage = _currentZombieSO.Atk.Value;
+        _currentTarget = FindNextTarget();
+        if (_currentTarget == null)
         {
-            if (_attackCoroutine != null)
-            {
-                StopCoroutine(_attackCoroutine);
-                Attack();
-            }
-        };
+            Debug.Log($"{GetType().Name}::Target이 없습니다.");
+            return;
+        }
+        _currentTarget.GetDamaged(this, damage);
+    }
 
-        while (true)
+    private void HandleFindTarget()
+    {
+        if (_currentTarget.IsDead)
+            _currentTarget = FindNextTarget();
+        if (_currentTarget == null)
+            Move();
+    }
+
+    private void HandleDie()
+    {
+        Dispose();
+    }
+    #endregion
+
+    private IEnumerator Co_Move()
+    {
+        _anim.SetBool(_attackParamHash, false);
+        _anim.SetBool(_walkParamHash, true);
+        while (_currentTarget == null)
         {
-            float damage = _currentZombieSO.Atk.Value;
-            target.GetDamaged(this, damage);
-            Debug.Log($"{GetType().Name}:: {target.name}에게 {damage}데미지를 입힘");
-
-            yield return _attackDelayTime;
-        }        
+            transform.position += Vector3.left * _currentZombieSO.MoveSpeed.Value * Time.deltaTime;
+            if(IsDead) break;
+            yield return null;
+        }
     }
 
     protected override void Dispose()
     {
+        _renderer.color = Color.white;
         _currentZombieSO = null;
         _targetQueue.Clear();
         ZombieManager.Instance.Dispawn(this);

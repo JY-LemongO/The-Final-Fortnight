@@ -5,8 +5,8 @@ using UnityEngine;
 public class DamageText : MonoBehaviour
 {
     [SerializeField] AnimationCurve _curve;
-    
-    private Animator _animator;    
+
+    private Animator _animator;
     private TextMeshPro _damageText;
 
     private const float _damageLow = 10f;
@@ -15,8 +15,8 @@ public class DamageText : MonoBehaviour
     private const float _moveUpOffsetMax = 0.5f;
 
     private void Awake()
-    {        
-        _animator = GetComponent<Animator>();        
+    {
+        _animator = GetComponent<Animator>();
         _damageText = GetComponentInChildren<TextMeshPro>();
     }
 
@@ -28,7 +28,7 @@ public class DamageText : MonoBehaviour
         _animator.speed = 0f;
 
         StartCoroutine(Co_MoveText());
-    }    
+    }
 
     private Color GetColorFromHexByDamage(float damage)
     {
@@ -42,7 +42,7 @@ public class DamageText : MonoBehaviour
 
         if (ColorUtility.TryParseHtmlString(hex, out Color hexToColor))
             color = hexToColor;
-            
+
         return color;
     }
 
@@ -66,7 +66,7 @@ public class DamageText : MonoBehaviour
         float current = 0f;
         float percent = 0f;
         Vector2 startPosition = transform.position;
-        Vector2 endPosition = startPosition + Vector2.up * _moveUpOffsetMax;     
+        Vector2 endPosition = startPosition + Vector2.up * _moveUpOffsetMax;
 
         while (percent < 1f)
         {

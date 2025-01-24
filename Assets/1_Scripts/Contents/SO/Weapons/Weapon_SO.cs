@@ -13,6 +13,7 @@ public class Weapon_SO : BaseSO
     [SerializeField] private Stat_SO _fireRangeSO;
     [Header("Visual")]
     [SerializeField] private RuntimeAnimatorController _animController;
+    [SerializeField] private Sprite _profileSprite;
 
     private Stat_SO _statDamage;
     private Stat_SO _statMagazine;
@@ -23,8 +24,9 @@ public class Weapon_SO : BaseSO
     public Stat_SO Magazine => _statMagazine;
     public Stat_SO FireRate => _statFireRate;
     public Stat_SO FireRange => _statFireRange;
-    
-    public RuntimeAnimatorController AnimController => _animController;     
+
+    public RuntimeAnimatorController AnimController => _animController;
+    public Sprite ProfileSprite => _profileSprite;
 
     public void Fire()
     {

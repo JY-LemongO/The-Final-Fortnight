@@ -17,6 +17,6 @@ public static class Util
     public static int GetSortingOreder(Define.SpriteType type)
         => SortingOrdersDict.ContainsKey(type) ? SortingOrdersDict[type] : 0;
 
-    public static WaitForSeconds GetCachedWaitForSeconds(float time) 
-        => WaitForSecDict.ContainsKey(time) ? WaitForSecDict[time] : WaitForSecDict[time] = new WaitForSeconds(time);    
+    public static WaitForSeconds GetCachedWaitForSeconds(float time)
+        => WaitForSecDict.ContainsKey(time) ? WaitForSecDict[time] : WaitForSecDict[time] = new WaitForSeconds(time);
 }

@@ -15,12 +15,19 @@ public class UIManager : SingletonBase<UIManager>
     private Canvas _worldUICanvas;
     private UIBase _frontUI;
 
-    protected override void InitChild()
+    private void InitializeCanvasSetting()
     {
-        OpenedUITrs = transform;
+        Canvas canvas = gameObject.AddComponent<Canvas>();
+        canvas.renderMode = RenderMode.ScreenSpaceOverlay;
 
-        ClosedUITrs = new GameObject("ClosedUITrs").transform;
-        ClosedUITrs.parent = transform;
+        CanvasScaler scaler = gameObject.AddComponent<CanvasScaler>();
+        scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+        scaler.referenceResolution = new Vector2(1920, 1080);
+        scaler.screenMatchMode = CanvasScaler.ScreenMatchMode.MatchWidthOrHeight;
+        scaler.matchWidthOrHeight = 0.5f;
+        scaler.referencePixelsPerUnit = 16;
+
+        gameObject.AddComponent<GraphicRaycaster>();
     }
 
     private void InitializeWorldUICanvas()
@@ -31,10 +38,10 @@ public class UIManager : SingletonBase<UIManager>
         _worldUICanvas.renderMode = RenderMode.WorldSpace;
         _worldUICanvas.worldCamera = Camera.main;
         _worldUICanvas.sortingOrder = Util.GetSortingOreder(Define.SpriteType.WorldUI);
-        
+
         CanvasScaler scaler = _worldUICanvas.GetComponent<CanvasScaler>();
         scaler.dynamicPixelsPerUnit = 1f;
-        scaler.referencePixelsPerUnit = 1f;        
+        scaler.referencePixelsPerUnit = 1f;
     }
 
     // 이미 최초 1회 이상 Open된 경우, openedUIList나 closedUIList 에서 찾아서 보내준다.
@@ -77,18 +84,20 @@ public class UIManager : SingletonBase<UIManager>
     public T OpenPopupUI<T>(string path = null) where T : UIBase
     {
         if (string.IsNullOrEmpty(path))
-            path = typeof(T).Name;
+            path = typeof(T).Name + ".prefab";
 
         T popup = null;
 
         if (!IsAlreadySpawned(out popup))
         {
-            T uiRef = Resources.Load<T>($"1_JY/Prefabs/{path}");
+            GameObject go = ResourceManager.Instance.Instantiate(path);
+            go.transform.SetParent(OpenedUITrs);
 
-            popup = Instantiate(uiRef, OpenedUITrs);
-            popup.gameObject.SetActive(true);
-            popup.name = path;
+            RectTransform rect = go.GetComponent<RectTransform>();
+            rect.offsetMin = Vector2.zero;
+            rect.offsetMax = Vector2.zero;
 
+            popup = go.GetComponent<T>();
             _openedUIList.Add(popup);
             _frontUI = popup;
         }
@@ -109,7 +118,7 @@ public class UIManager : SingletonBase<UIManager>
         if (string.IsNullOrEmpty(path))
             path = typeof(T).Name;
 
-        GameObject go = ResourceManager.Instance.Instantiate(path, _worldUICanvas.transform, pooling);        
+        GameObject go = ResourceManager.Instance.Instantiate(path, _worldUICanvas.transform, pooling);
 
         T worldUI = go.GetComponent<T>();
         return worldUI;
@@ -172,6 +181,15 @@ public class UIManager : SingletonBase<UIManager>
         _openedUIList.Clear();
 
         _frontUI = null;
+    }
+
+    protected override void InitChild()
+    {
+        InitializeCanvasSetting();
+        OpenedUITrs = transform;
+
+        ClosedUITrs = new GameObject("ClosedUITrs").transform;
+        ClosedUITrs.parent = transform;
     }
 
     public override void Dispose()

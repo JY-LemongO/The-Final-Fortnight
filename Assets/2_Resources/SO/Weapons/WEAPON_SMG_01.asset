@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da0b7a70815cb794bab75a51a7fb4881, type: 3}
+  m_Name: WEAPON_SMG_01
+  m_EditorClassIdentifier: 
+  _id: 0
+  _codeName: WEAPON_SMG_01
+  _displayName: "\uAE30\uAD00\uB2E8\uCD1D"
+  _displayDesc: "3\uC5F0\uBC1C \uAE30\uAD00\uB2E8\uCD1D\uC785\uB2C8\uB2E4."
+  _damageSO: {fileID: 11400000, guid: 01cac8bcf17407e4b95a54e800477720, type: 2}
+  _magazineSO: {fileID: 11400000, guid: f4b7358d0576c3a49a1cf50c87f2d63e, type: 2}
+  _fireRateSO: {fileID: 11400000, guid: ab5546e59b8665f46a28c0283438d246, type: 2}
+  _fireRangeSO: {fileID: 11400000, guid: b3f714a93ad692f4b948de9045877672, type: 2}
+  _animController: {fileID: 22100000, guid: 3ae842d1aeab32d4e89c84caab35ac62, type: 2}
+  _profileSprite: {fileID: 21300000, guid: ad8f3374374085243a4bfaf37f70feac, type: 3}

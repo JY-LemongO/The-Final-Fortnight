@@ -21,3 +21,4 @@ MonoBehaviour:
   _fireRateSO: {fileID: 11400000, guid: 2e754ef7a5f06b041915d47e1fc8cb8e, type: 2}
   _fireRangeSO: {fileID: 11400000, guid: c3dabbdaa5a7d464aaa538aa576855df, type: 2}
   _animController: {fileID: 9100000, guid: 4b36f757f74ee004a93db1c4648ab65e, type: 2}
+  _profileSprite: {fileID: 21300000, guid: 718f46f6345e2144d8324e47a4e18317, type: 3}

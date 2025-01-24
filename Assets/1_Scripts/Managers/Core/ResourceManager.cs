@@ -19,7 +19,7 @@ public class ResourceManager : SingletonBase<ResourceManager>
     {
         GameObject prefab = Load<GameObject>(key);
 
-        if(prefab == null)
+        if (prefab == null)
         {
             Debug.LogError($"로드 실패 :: Key - {key}");
             return null;
@@ -38,7 +38,7 @@ public class ResourceManager : SingletonBase<ResourceManager>
         go.transform.SetParent(parent);
         go.name = prefab.name;
         return go;
-    }    
+    }
 
     public void LoadAsync<T>(string key, Action callBack = null) where T : UnityEngine.Object
     {
@@ -58,7 +58,7 @@ public class ResourceManager : SingletonBase<ResourceManager>
             int totalCount = op.Result.Count;
             int count = 0;
 
-            foreach(var item in op.Result)
+            foreach (var item in op.Result)
             {
                 Debug.Log(item.PrimaryKey);
                 LoadAsync<T>(item.PrimaryKey, () =>
@@ -72,9 +72,14 @@ public class ResourceManager : SingletonBase<ResourceManager>
         return asyncOp;
     }
 
+    protected override void InitChild()
+    {
+
+    }
+
     public override void Dispose()
     {
         _resourcesDict.Clear();
-        base.Dispose();        
+        base.Dispose();
     }
 }

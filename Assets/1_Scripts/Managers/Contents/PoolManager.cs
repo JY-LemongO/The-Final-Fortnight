@@ -7,7 +7,7 @@ public class Pool
 {
     public GameObject originPrefab;
 
-    private IObjectPool<GameObject> _pool;    
+    private IObjectPool<GameObject> _pool;
 
     public Pool(GameObject prefab)
     {
@@ -50,7 +50,7 @@ public class PoolManager : SingletonBase<PoolManager>
 
     public GameObject Get(GameObject prefab)
     {
-        if(!_poolDict.ContainsKey(prefab.name))
+        if (!_poolDict.ContainsKey(prefab.name))
             CreatePool(prefab);
 
         return _poolDict[prefab.name].Pop();
@@ -69,6 +69,11 @@ public class PoolManager : SingletonBase<PoolManager>
 
     private void CreatePool(GameObject prefab)
         => _poolDict.Add(prefab.name, new Pool(prefab));
+
+    protected override void InitChild()
+    {
+
+    }
 
     public override void Dispose()
     {

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour
@@ -7,12 +5,14 @@ public class Weapon : MonoBehaviour
     #region renderer
     [Header("AnimationData")]
     [SerializeField] private string _fireParamName;
-    [SerializeField] private string _reloadParamName;    
+    [SerializeField] private string _reloadParamName;
+
+    public Animator AnimForTest => _anim;
 
     private SpriteRenderer _renderer;
     private Animator _anim;
     private int _fireParamHash;
-    private int _reloadParamHash;    
+    private int _reloadParamHash;
     #endregion
 
     public Weapon_SO WeaponData => _currentWeapon;
@@ -49,7 +49,11 @@ public class Weapon : MonoBehaviour
         => _currentWeapon = newWeapon;
 
     private void Fire()
-        => _anim.SetTrigger(_fireParamHash);
+    {
+        _anim.SetTrigger(_fireParamHash);
+        _currentWeapon.Fire();
+    }
+
     private void Reload()
         => _anim.SetTrigger(_reloadParamHash);
 
@@ -63,7 +67,7 @@ public class Weapon : MonoBehaviour
                 return;
             if (_currentWeapon.Magazine.CurrentValue <= 0)
                 return;
-            
+
             Fire();
             _currentCooldown = 0f;
         }
@@ -73,17 +77,13 @@ public class Weapon : MonoBehaviour
     private void AnimationHashInitialize()
     {
         _fireParamHash = Animator.StringToHash(_fireParamName);
-        _reloadParamHash = Animator.StringToHash(_reloadParamName);        
+        _reloadParamHash = Animator.StringToHash(_reloadParamName);
     }
 
     private void HandleAttackTarget()
     {
         if (!_context.CheckTargetIsDead())
-        {
-            _currentWeapon.Fire();
             _context.AttackTarget(_currentWeapon.Damage.Value);
-            Debug.Log($"남은 탄약 [{_currentWeapon.Magazine.CurrentValue}/{_currentWeapon.Magazine.Value}]");
-        }            
     }
 
     private void HandleCheckMagazineIsEmpty()

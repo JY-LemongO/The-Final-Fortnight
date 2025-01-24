@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Entity_SO : BaseSO
 {
-    [Header("Common Stat")]    
+    [Header("Common Stat")]
     [SerializeField] private Stat_SO _hpSO;
     [SerializeField] private float _hpBarOffset;
 
