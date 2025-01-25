@@ -22,4 +22,4 @@ MonoBehaviour:
   _rangeSO: {fileID: 11400000, guid: 37f43a3819f46eb47b9f3514a2e17c24, type: 2}
   _atkSO: {fileID: 11400000, guid: 97f339119891fe9439f3a25c45e8c24c, type: 2}
   _atkRateSO: {fileID: 11400000, guid: 338158ce63702ac48a6c8e6eb18bb2f9, type: 2}
-  _animController: {fileID: 9100000, guid: 805e0a53347a7f048867f9289c4c804e, type: 2}
+  _animController: {fileID: 22100000, guid: 12d2fa435c840db4a8ba103a3b0a3e55, type: 2}

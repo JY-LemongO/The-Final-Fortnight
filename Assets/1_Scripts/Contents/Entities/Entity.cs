@@ -22,8 +22,9 @@ public abstract class Entity : MonoBehaviour
 
     public event Action<Entity> OnDead;
 
-    public Entity_SO CurrentEntitySO { get; private set; }
-    public Vector3 HPBarPosition { get; private set; }
+    public Entity_SO CurrentEntitySO { get; protected set; }
+    public Define.EntityType EntityType { get; protected set; }
+    public Vector3 HPBarPosition { get; protected set; }
     public bool IsDead => CurrentEntitySO.Hp.CurrentValue <= 0f;
 
     protected Dictionary<string, Entity_SO> _entitySODict = new();
@@ -77,7 +78,9 @@ public abstract class Entity : MonoBehaviour
         HPBarPosition = Vector3.up * CurrentEntitySO.HPBarOffset;
 
         SetSpriteSortingOrder();
-        SetHPBarUI();
+
+        if (EntityType != Define.EntityType.Survivor)
+            SetHPBarUI();
     }
 
     private T GetEntitySOClone<T>(string key) where T : Entity_SO
@@ -89,7 +92,7 @@ public abstract class Entity : MonoBehaviour
 
     private void SetHPBarUI()
     {
-        _hpBar = UIManager.Instance.CreateWorldUI<UI_HPBar>(Constants.Key_HPBar);
+        _hpBar = UIManager.Instance.CreateWorldUI<UI_HPBar>();
         _hpBar.SetEntity(this);
     }
 
@@ -134,7 +137,7 @@ public abstract class Entity : MonoBehaviour
 
     private IEnumerator Co_HitFlash()
     {
-        _mat.SetFloat(_flashAmountKey, 1f);
+        _mat.SetFloat(_flashAmountKey, 0.7f);
         yield return Util.GetCachedWaitForSeconds(_hitFlashTime);
         _mat.SetFloat(_flashAmountKey, 0f);
     }

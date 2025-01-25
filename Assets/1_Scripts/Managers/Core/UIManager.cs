@@ -96,6 +96,7 @@ public class UIManager : SingletonBase<UIManager>
             RectTransform rect = go.GetComponent<RectTransform>();
             rect.offsetMin = Vector2.zero;
             rect.offsetMax = Vector2.zero;
+            rect.localScale = Vector2.one;            
 
             popup = go.GetComponent<T>();
             _openedUIList.Add(popup);
@@ -116,7 +117,7 @@ public class UIManager : SingletonBase<UIManager>
             InitializeWorldUICanvas();
 
         if (string.IsNullOrEmpty(path))
-            path = typeof(T).Name;
+            path = typeof(T).Name + ".prefab";
 
         GameObject go = ResourceManager.Instance.Instantiate(path, _worldUICanvas.transform, pooling);
 
@@ -148,6 +149,12 @@ public class UIManager : SingletonBase<UIManager>
             Debug.Log("Front UI가 없습니다.");
             return;
         }
+
+        if (_frontUI.UIType == Define.UIType.Scene)
+        {
+            Debug.Log("Scene UI는 닫을 수 없습니다.");
+            return;
+        }            
 
         CloseUI(_frontUI);
     }

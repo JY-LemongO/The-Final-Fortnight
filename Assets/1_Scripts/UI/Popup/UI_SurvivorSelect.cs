@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UI_SurvivorSelect : UIBase
+public class UI_SurvivorSelect : UI_Popup
 {
     [Header("Profile")]
     [SerializeField] private Image _survivorImage;
@@ -29,6 +29,8 @@ public class UI_SurvivorSelect : UIBase
 
     private void Awake()
     {
+        base.Init();
+
         _currentSurvivorKey = Constants.Key_S_Soldier_01;
         Survivor_SO initSurvivor = ResourceManager.Instance.Load<Survivor_SO>(_currentSurvivorKey);        
 

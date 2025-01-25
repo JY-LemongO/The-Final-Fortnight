@@ -15,7 +15,7 @@ public class EntityDamageEffect : MonoBehaviour
             case Define.EntityType.Zombie:
                 ZombieEffect();
                 break;
-            case Define.EntityType.Barricate:
+            case Define.EntityType.Structure:
                 break;
         }
     }

@@ -72,14 +72,14 @@ public class PoolManager : SingletonBase<PoolManager>
 
     protected override void InitChild()
     {
-
+        
     }
 
     public override void Dispose()
     {
         foreach (var pool in _poolDict.Values)
             pool.Dispose();
-        _poolDict.Clear();
+        _poolDict.Clear();        
         base.Dispose();
     }
 }

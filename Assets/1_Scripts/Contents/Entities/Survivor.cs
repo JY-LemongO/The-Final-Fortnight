@@ -12,6 +12,12 @@ public class Survivor : Entity
 
     private Coroutine _targetSearchCoroutine;
 
+    protected override void Init()
+    {
+        base.Init();
+        EntityType = Define.EntityType.Survivor;
+    }
+
     public override void SetupEntity<T>(string key)
     {
         base.SetupEntity<T>(key);
@@ -25,7 +31,8 @@ public class Survivor : Entity
         CurrentWeapon = weaponClone.GetComponent<Weapon>();
         CurrentWeapon.InitializeWeapon(this, weaponSOClone);
 
-        SearchTarget();
+        SetBulletUI();
+        SearchTarget();        
     }
 
     public void SearchTarget()
@@ -56,6 +63,13 @@ public class Survivor : Entity
             return true;
         }
         return false;
+    }
+
+    private void SetBulletUI()
+    {
+        UI_Bullet ui = UIManager.Instance.CreateWorldUI<UI_Bullet>();
+        ui.SetSurvivor(this);
+        ui.transform.position = transform.position + Vector3.up * 1.2f;
     }
 
     private IEnumerator Co_SearchTarget()

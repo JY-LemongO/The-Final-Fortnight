@@ -34,6 +34,11 @@ public class WaveManager : SingletonBase<WaveManager>
         {
             _isWaveEnd = value;
             OnWaveStateChanged?.Invoke(value);
+            if (_currentWave == SpawnDataDict.Count)
+            {
+                StopAllCoroutines();
+                GameManager.Instance.GameOver();
+            }
         }
     }
 
@@ -46,7 +51,7 @@ public class WaveManager : SingletonBase<WaveManager>
     {
         _currentWave = wave;
         StartWave();
-    }    
+    }
 
     private void StartWave()
     {
@@ -68,11 +73,19 @@ public class WaveManager : SingletonBase<WaveManager>
                 SpawnDataDict.Add(data.wave, new List<SpawnData>());
             SpawnDataDict[data.wave].Add(spawnData);
         }
-    }    
+    }
+
+    private void OnRestart()
+    {
+        _isWaveEnd = true;        
+        _currentSpawnEndedCount = 0;
+        _currentWave = 0;
+    }
 
     protected override void InitChild()
     {
         WaveDataSetup();
+        GameManager.Instance.OnRestartGame += OnRestart;
     }
 
     private IEnumerator Co_WaveStart(SpawnData spawnData)
@@ -90,13 +103,14 @@ public class WaveManager : SingletonBase<WaveManager>
         Debug.Log($"Zombie - {spawnData.zombieKey}:: Coroutine has Ended.");
 
         _currentSpawnEndedCount++;
+        IsWaveEnd = true;
         if (_currentSpawnDataCount == _currentSpawnEndedCount)
             StartCoroutine(Co_RestForNextWave());
     }
 
     private IEnumerator Co_RestForNextWave()
     {
-        float restTime = 10f;
+        float restTime = 2f;
         OnRestTimeChanged?.Invoke(restTime);
         _currentSpawnEndedCount = 0;
 
@@ -110,5 +124,13 @@ public class WaveManager : SingletonBase<WaveManager>
         Debug.Log("Rest over. Next Day Start.");
         _currentWave++;
         StartWave();
+    }
+
+    public override void Dispose()
+    {
+        GameManager.Instance.OnRestartGame -= OnRestart;
+        OnRestTimeChanged = null;
+        OnWaveStateChanged = null;
+        base.Dispose();
     }
 }

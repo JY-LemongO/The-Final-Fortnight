@@ -49,6 +49,12 @@ public class DataManager : SingletonBase<DataManager>
     }
 
     protected override void InitChild() { }
+
+    public override void Dispose()
+    {
+        WaveData.Clear();
+        base.Dispose();
+    }
 }
 
 [Serializable]

@@ -2,6 +2,8 @@ using UnityEngine;
 
 public abstract class UIBase : MonoBehaviour
 {
+    public Define.UIType UIType { get; protected set; }
+
     private void Awake()
     {
         Init();

@@ -11,6 +11,7 @@ public class InGameData
     #region 인게임 재화
     public int Money;
     public int Scrap;
+    public int Battery;
     #endregion
 
     #region 업적 관련
@@ -30,7 +31,9 @@ public class GameManager : SingletonBase<GameManager>
     #region Events
     public event Action<int> OnDayChanged;
     public event Action<int> OnMoneyChanged;
-    public event Action<int> OnScrapChanged;    
+    public event Action<int> OnScrapChanged;
+    public event Action<int> OnBatteryChanged;
+    public event Action OnRestartGame;
     #endregion
 
     private InGameData _inGameData = new();
@@ -65,6 +68,15 @@ public class GameManager : SingletonBase<GameManager>
         }
     }
 
+    public int CurrentBattery
+    {
+        get => _inGameData.Battery;
+        private set
+        {
+            _inGameData.Battery = value;
+            OnBatteryChanged?.Invoke(value);
+        }
+    }
 
     public void StartGame()
     {        
@@ -78,8 +90,19 @@ public class GameManager : SingletonBase<GameManager>
     }
 
     public void GameOver()
-    {        
-        
+    {
+        Debug.Log("게임 오버.");
+        UIManager.Instance.OpenPopupUI<UI_GameOver>();
+    }
+
+    public void Restart()
+    {
+        CurrentDay = 1;
+        CurrentMoney = 0;
+        CurrentScrap = 0;
+        CurrentBattery = 0;
+
+        OnRestartGame?.Invoke();        
     }
 
     protected override void InitChild()
@@ -89,6 +112,12 @@ public class GameManager : SingletonBase<GameManager>
 
     public override void Dispose()
     {
+        OnDayChanged = null;
+        OnMoneyChanged = null;
+        OnScrapChanged = null;
+        OnBatteryChanged = null;
+        OnRestartGame = null;
+
         base.Dispose();
     }
 }

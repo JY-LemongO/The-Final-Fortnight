@@ -15,6 +15,18 @@ MonoBehaviour:
   m_GroupName: UI
   m_GUID: 86896cbe65caef84b87a3e73e41e34ba
   m_SerializeEntries:
+  - m_GUID: 4318069e921d43e418f1ea530332e4f6
+    m_Address: UI_GameOver.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Prefabs
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 839aa98226343b4458d4356ceb959d44
+    m_Address: UI_GameScene.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Prefabs
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f06a28c2e7a16f24997057d13b64a0cf
     m_Address: UI_SurvivorSelect.prefab
     m_ReadOnly: 0
@@ -22,7 +34,13 @@ MonoBehaviour:
     - Prefabs
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f8f48ad6e232a7748a174599301367ca
-    m_Address: HP_Bar.prefab
+    m_Address: UI_HPBar.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Prefabs
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fe6a3e08d3103604f9f3177e77ec007f
+    m_Address: UI_Bullet.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
     - Prefabs

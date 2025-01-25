@@ -18,6 +18,6 @@ MonoBehaviour:
   _displayDesc: 
   _isConsumable: 0
   _isPercentage: 0
-  _minValue: 2
+  _minValue: 5
   _maxValue: 50
-  _defaultValue: 2
+  _defaultValue: 5

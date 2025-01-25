@@ -66,7 +66,7 @@ public class SurvivorManager : SingletonBase<SurvivorManager>
     public Survivor_SO GetSelectableSurvivor(int index)
         => SelectableSurvivorList[index];
 
-    private void SetSelectableSurvivorList()
+    private void InitSelectableSurvivorList()
     {
         string[] survivorSOKeys = Enum.GetNames(typeof(Define.SurvivorKeys));
 
@@ -83,6 +83,22 @@ public class SurvivorManager : SingletonBase<SurvivorManager>
         }
     }
 
+    private void InitSurvivorManage()
+    {
+        _survivorPrefabKey = Constants.Key_Survivor;
+        _spawnedSurvivorDict = new();
+        // Temp
+        _spawnPosition = GameObject.Find(SURVIVOR_SPAWN_MARKER).transform.position;
+    }
+
+    private void OnRestart()
+    {
+        foreach (var survivorList in _spawnedSurvivorDict.Values)
+            foreach (var survivor in survivorList)
+                PoolManager.Instance.Return(survivor.gameObject);
+        _spawnedSurvivorDict.Clear();
+    }        
+
     private int GetSurvivorsCount()
     {
         int count = 0;
@@ -93,12 +109,9 @@ public class SurvivorManager : SingletonBase<SurvivorManager>
 
     protected override void InitChild()
     {
-        SetSelectableSurvivorList();
-
-        _survivorPrefabKey = Constants.Key_Survivor;
-        _spawnedSurvivorDict = new();
-        // Temp
-        _spawnPosition = GameObject.Find(SURVIVOR_SPAWN_MARKER).transform.position;
+        InitSelectableSurvivorList();
+        InitSurvivorManage();
+        GameManager.Instance.OnRestartGame += OnRestart;
     }
 
     public override void Dispose()
@@ -106,6 +119,7 @@ public class SurvivorManager : SingletonBase<SurvivorManager>
         SelectableSurvivorList.Clear();
         SelectableSurvivorsWeaponList.Clear();
         _spawnedSurvivorDict.Clear();
+        GameManager.Instance.OnRestartGame -= OnRestart;
         base.Dispose();
     }
 }

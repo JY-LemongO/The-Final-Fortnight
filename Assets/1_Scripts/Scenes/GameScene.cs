@@ -12,7 +12,7 @@ public class GameScene : BaseScene
         base.Init();
         CurrentScene = Define.SceneType.Game;
 
-        UIManager.Instance.OpenPopupUI<UI_SurvivorSelect>();
+        UIManager.Instance.OpenPopupUI<UI_GameScene>();        
         WaveManager.Instance.OnRestTimeChanged += time => _timerText.text = $"다음 웨이브까지 : {time.ToString()}s";
     }
 

@@ -1,10 +1,25 @@
 public static class Define
 {
+    public enum SceneType
+    {
+        Unknown,
+        Main,
+        Loading,
+        Game,
+    }
+
+    public enum UIType
+    {
+        Scene,
+        Popup,
+        World,
+    }
+
     public enum EntityType
     {
         Survivor,
         Zombie,
-        Barricate,
+        Structure,
     }
 
     public enum WeaponType
@@ -32,13 +47,5 @@ public static class Define
     {
         ZOMBIE_NORMAL_01,
         ZOMBIE_NORMAL_02,
-    }
-
-    public enum SceneType
-    {
-        Unknown,
-        Main,
-        Loading,
-        Game,
-    }
+    }    
 }

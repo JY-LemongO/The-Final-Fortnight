@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UI_HPBar : UIBase
+public class UI_HPBar : UI_World
 {
     [SerializeField] Slider _hpSlider;
 
@@ -14,8 +14,10 @@ public class UI_HPBar : UIBase
 
     private const string DISAPPEAR_STATE = "HPBar_Disappear";
 
-    private void Awake()
+    protected override void Init()
     {
+        base.Init();
+
         _animator = GetComponent<Animator>();
     }
 

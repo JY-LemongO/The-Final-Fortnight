@@ -10,6 +10,12 @@ public class Zombie : Entity
 
     private const string TARGET_TAG = "HumanSideEntity";
 
+    protected override void Init()
+    {
+        base.Init();
+        EntityType = Define.EntityType.Zombie;
+    }
+
     public override void SetupEntity<T>(string key)
     {
         base.SetupEntity<T>(key);
@@ -38,8 +44,8 @@ public class Zombie : Entity
 
     private void Attack()
     {
-        _anim.SetBool(_attackParamHash, true);
         _currentTarget = FindNextTarget();
+        _anim.SetBool(_attackParamHash, true);        
     }
 
     private Entity FindNextTarget()
@@ -47,26 +53,23 @@ public class Zombie : Entity
         if (_targetQueue.Count <= 0)
             return null;
 
-        return _targetQueue.Dequeue();
+        return _targetQueue.Peek();
     }
 
     #region AnimationEventTrigger
     private void HandleAttackTarget()
     {
-        float damage = _currentZombieSO.Atk.Value;
-        _currentTarget = FindNextTarget();
-        if (_currentTarget == null)
-        {
-            Debug.Log($"{GetType().Name}::Target이 없습니다.");
-            return;
-        }
+        float damage = _currentZombieSO.Atk.Value;                
         _currentTarget.GetDamaged(this, damage);
     }
 
     private void HandleFindTarget()
     {
         if (_currentTarget.IsDead)
+        {
+            _targetQueue.Dequeue();
             _currentTarget = FindNextTarget();
+        }            
         if (_currentTarget == null)
             Move();
     }
@@ -81,10 +84,12 @@ public class Zombie : Entity
     {
         _anim.SetBool(_attackParamHash, false);
         _anim.SetBool(_walkParamHash, true);
-        while (_currentTarget == null)
+        while (true)
         {
-            transform.position += Vector3.left * _currentZombieSO.MoveSpeed.Value * Time.deltaTime;
-            if(IsDead) break;
+            if (IsDead) break;
+            if (_currentTarget != null) break;
+
+            transform.position += Vector3.left * _currentZombieSO.MoveSpeed.Value * Time.deltaTime;            
             yield return null;
         }
     }
@@ -93,6 +98,7 @@ public class Zombie : Entity
     {
         _renderer.color = Color.white;
         _currentZombieSO = null;
+        _currentTarget = null;
         _targetQueue.Clear();
         ZombieManager.Instance.Dispawn(this);
     }
