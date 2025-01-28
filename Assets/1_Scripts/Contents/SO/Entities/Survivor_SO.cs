@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Entitity/New Survivor", fileName = "SURVIVOR_")]
+[CreateAssetMenu(menuName = "Entity/New Survivor", fileName = "SURVIVOR_")]
 public class Survivor_SO : Entity_SO
 {
     [Header("Survivor Stats")]
@@ -17,7 +17,7 @@ public class Survivor_SO : Entity_SO
     {
         base.InitializeStats();
         _defaultWeaponSO.Clone();
-    }
+    }        
 
     public override object Clone()
     {

@@ -15,8 +15,20 @@ MonoBehaviour:
   m_GroupName: Prefabs
   m_GUID: d9b468fb9b6504843b0713641003b447
   m_SerializeEntries:
+  - m_GUID: 23875c52d6b02c84c859edeb1618c6f9
+    m_Address: Barricate.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Prefabs
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 46621396828fe5b42b4c2670576478f3
     m_Address: Survivor.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Prefabs
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 63b02864df36540459e58cae0532c07b
+    m_Address: PreviewObject.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
     - Prefabs

@@ -20,4 +20,31 @@ public class GameScene : BaseScene
     {
         
     }
+
+    #region Debug
+#if UNITY_EDITOR
+    [Header("Debug Only")]
+    [SerializeField] private float minX;
+    [SerializeField] private float maxX;
+    [SerializeField] private float minY;
+    [SerializeField] private float maxY;
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+
+        Vector3 fromLeft = new Vector3(minX, -3);
+        Gizmos.DrawRay(fromLeft, Vector3.up * 6);
+
+        Vector3 fromRight = new Vector3(maxX, -3);
+        Gizmos.DrawRay(fromRight, Vector3.up * 6);
+
+        Vector3 fromBottom = new Vector3(-20, minY);
+        Gizmos.DrawRay(fromBottom, Vector3.right * 40);
+
+        Vector3 fromTop = new Vector3(-20, maxY);        
+        Gizmos.DrawRay(fromTop, Vector3.right * 40);
+    }
+#endif
+    #endregion
 }

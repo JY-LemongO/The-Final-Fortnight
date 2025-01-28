@@ -16,7 +16,7 @@ MonoBehaviour:
   m_GUID: 4748041993c1c164c9843ce1692b62e0
   m_SerializeEntries:
   - m_GUID: 9ecf1c81ba2c0d74cbae97917c606276
-    m_Address: EventSystem.prefab
+    m_Address: EventSystem
     m_ReadOnly: 0
     m_SerializedLabels:
     - Init

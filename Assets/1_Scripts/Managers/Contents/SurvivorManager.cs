@@ -91,11 +91,16 @@ public class SurvivorManager : SingletonBase<SurvivorManager>
         _spawnPosition = GameObject.Find(SURVIVOR_SPAWN_MARKER).transform.position;
     }
 
-    private void OnRestart()
+    private void OnRestartGame()
     {
         foreach (var survivorList in _spawnedSurvivorDict.Values)
+        {
             foreach (var survivor in survivorList)
+            {
+                survivor.ResetEntity();
                 PoolManager.Instance.Return(survivor.gameObject);
+            }                
+        }            
         _spawnedSurvivorDict.Clear();
     }        
 
@@ -111,7 +116,7 @@ public class SurvivorManager : SingletonBase<SurvivorManager>
     {
         InitSelectableSurvivorList();
         InitSurvivorManage();
-        GameManager.Instance.OnRestartGame += OnRestart;
+        GameManager.Instance.OnRestartGame += OnRestartGame;
     }
 
     public override void Dispose()
@@ -119,7 +124,7 @@ public class SurvivorManager : SingletonBase<SurvivorManager>
         SelectableSurvivorList.Clear();
         SelectableSurvivorsWeaponList.Clear();
         _spawnedSurvivorDict.Clear();
-        GameManager.Instance.OnRestartGame -= OnRestart;
+        GameManager.Instance.OnRestartGame -= OnRestartGame;
         base.Dispose();
     }
 }

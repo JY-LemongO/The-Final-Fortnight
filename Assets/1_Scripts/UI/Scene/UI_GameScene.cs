@@ -9,8 +9,8 @@ public class UI_GameScene : UI_Scene
     [SerializeField] private Button _inventoryBtn;
     [SerializeField] private Button _radioBtn;
 
-    [Header("Contents")]
-    [SerializeField] private Transform _itemUITrs;
+    [Header("Blinder")]
+    [SerializeField] private GameObject _blinder;
 
     private Animator _blinderAnim;
 
@@ -26,7 +26,11 @@ public class UI_GameScene : UI_Scene
         _radioBtn.onClick.AddListener(OnRadioBtn);
 
         HandleFadeIn();
-        GameManager.Instance.OnRestartGame += () => _blinderAnim.SetTrigger("FadeOut");
+        GameManager.Instance.OnRestartGame += () =>
+        {
+            _blinder.SetActive(true);
+            _blinderAnim.SetTrigger("FadeOut");
+        };
     }
 
     private void OnSurvivorsBtn()
@@ -37,6 +41,7 @@ public class UI_GameScene : UI_Scene
     private void OnCraftingBtn()
     {
         // To Do - 건축 목록 보여주기
+        UIManager.Instance.OpenPopupUI<UI_Crafting>();
     }
 
     private void OnInventoryBtn()
@@ -51,11 +56,12 @@ public class UI_GameScene : UI_Scene
 
     private void HandleFadeIn()
     {
-        _blinderAnim.SetTrigger("FadeIn");
+        _blinderAnim.SetTrigger("FadeIn");        
     }
 
     private void HandleSelectSurvivor()
     {
+        _blinder.SetActive(false);
         UIManager.Instance.OpenPopupUI<UI_SurvivorSelect>();
     }
 

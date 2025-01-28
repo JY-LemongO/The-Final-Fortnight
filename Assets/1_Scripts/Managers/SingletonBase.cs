@@ -19,10 +19,10 @@ public abstract class SingletonBase<T> : MonoBehaviour where T : SingletonBase<T
             go = new GameObject($"@{typeof(T).Name}", typeof(T));
 
         _instance = go.GetComponent<T>();
+        _instance.InitChild();
+
         if (_instance._isDontDestroy)
             DontDestroyOnLoad(go);
-
-        _instance.InitChild();
 
         EditorApplication.playModeStateChanged += state =>
         {

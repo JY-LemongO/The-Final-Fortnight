@@ -84,7 +84,7 @@ public class UIManager : SingletonBase<UIManager>
     public T OpenPopupUI<T>(string path = null) where T : UIBase
     {
         if (string.IsNullOrEmpty(path))
-            path = typeof(T).Name + ".prefab";
+            path = typeof(T).Name;
 
         T popup = null;
 
@@ -117,7 +117,7 @@ public class UIManager : SingletonBase<UIManager>
             InitializeWorldUICanvas();
 
         if (string.IsNullOrEmpty(path))
-            path = typeof(T).Name + ".prefab";
+            path = typeof(T).Name;
 
         GameObject go = ResourceManager.Instance.Instantiate(path, _worldUICanvas.transform, pooling);
 

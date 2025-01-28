@@ -28,10 +28,23 @@ public class ZombieManager : SingletonBase<ZombieManager>
     {
         ZombiesList.Remove(zombie);
         PoolManager.Instance.Return(zombie.gameObject);
+    }    
+
+    private void OnRestartGame()
+    {
+        foreach(var zombie in ZombiesList)
+        {
+            zombie.ResetEntity();
+            PoolManager.Instance.Return(zombie.gameObject);
+        }            
+
+        ZombiesList.Clear();
     }
 
     protected override void InitChild()
     {
+        GameManager.Instance.OnRestartGame += OnRestartGame;
+
         _spawnPositionX = GameObject.Find(ZOMBIE_SPAWN_MARKER).transform.position.x;
         _minPositionY = GameObject.Find(POSITION_MARKER_MIN).transform.position.y;
         _maxPositionY = GameObject.Find(POSITION_MARKER_MAX).transform.position.y;
@@ -39,6 +52,7 @@ public class ZombieManager : SingletonBase<ZombieManager>
 
     public override void Dispose()
     {
+        GameManager.Instance.OnRestartGame -= OnRestartGame;
         ZombiesList.Clear();
         base.Dispose();
     }

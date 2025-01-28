@@ -18,8 +18,8 @@ public class UI_Bullet : UI_World
             gameObject.SetActive(true);
 
         _survivor = survivor;
-        _survivor.CurrentWeapon.WeaponData.Magazine.OnStatCurrentValueChanged += OnBulletUpdate;
-        _bulletText.text = _survivor.CurrentWeapon.WeaponData.Magazine.CurrentValue.ToString();
+        _survivor.Weapon.WeaponData.Magazine.OnStatCurrentValueChanged += OnBulletUpdate;
+        _bulletText.text = _survivor.Weapon.WeaponData.Magazine.CurrentValue.ToString();
     }
 
     private void OnBulletUpdate(float current, float total)

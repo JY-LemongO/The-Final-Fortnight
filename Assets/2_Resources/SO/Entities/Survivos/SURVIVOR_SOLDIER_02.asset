@@ -20,4 +20,4 @@ MonoBehaviour:
   _hpBarOffset: 1
   _defaultWeaponSO: {fileID: 11400000, guid: 535d3e891f5c4ad44afa0e6b30fe0d11, type: 2}
   _animController: {fileID: 9100000, guid: ce56de0ff320f494e9063e26cdc8e310, type: 2}
-  _profileSprite: {fileID: -3752026665501001913, guid: 20be5462ae5a7ab4485551db7d2e40a6, type: 3}
+  _profileSprite: {fileID: 21300000, guid: d28aadcba8870024f93eb2b3716ca354, type: 3}

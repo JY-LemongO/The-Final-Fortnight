@@ -14,6 +14,7 @@ public class Weapon_SO : BaseSO
     [Header("Visual")]
     [SerializeField] private RuntimeAnimatorController _animController;
     [SerializeField] private Sprite _profileSprite;
+    [SerializeField] private Vector2 _weaponPosition;
 
     private Stat_SO _statDamage;
     private Stat_SO _statMagazine;
@@ -27,6 +28,7 @@ public class Weapon_SO : BaseSO
 
     public RuntimeAnimatorController AnimController => _animController;
     public Sprite ProfileSprite => _profileSprite;
+    public Vector2 WeaponPosition => _weaponPosition;
 
     public void Fire()
     {

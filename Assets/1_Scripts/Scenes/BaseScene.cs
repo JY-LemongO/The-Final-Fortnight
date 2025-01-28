@@ -14,7 +14,7 @@ public abstract class BaseScene : MonoBehaviour
     {
         EventSystem eventSystem = FindFirstObjectByType<EventSystem>();
         if(eventSystem == null)
-            ResourceManager.Instance.Instantiate("EventSystem.prefab").name = "EventSystem";
+            ResourceManager.Instance.Instantiate("EventSystem").name = "EventSystem";
     }
 
     public abstract void Dispose();

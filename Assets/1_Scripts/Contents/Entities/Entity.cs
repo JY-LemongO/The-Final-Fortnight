@@ -5,22 +5,14 @@ using UnityEngine;
 
 public abstract class Entity : MonoBehaviour
 {
-    #region renderer
-    [Header("AnimationData")]
-    [SerializeField] private string _walkParamName;
-    [SerializeField] private string _attackParamName;
-    [SerializeField] private string _dieParamName;    
-
-    public Animator AnimForTest => _anim;
+    #region Renderer
     protected Animator _anim;
     protected SpriteRenderer _renderer;
-    
-    protected int _walkParamHash;
-    protected int _attackParamHash;
-    protected int _dieParamHash;
     #endregion
 
+    #region Events
     public event Action<Entity> OnDead;
+    #endregion
 
     public Entity_SO CurrentEntitySO { get; protected set; }
     public Define.EntityType EntityType { get; protected set; }
@@ -31,12 +23,11 @@ public abstract class Entity : MonoBehaviour
     
     protected EntityDamageEffect _damageEffect;
     protected Material _mat;
+    protected UI_HPBar _hpBar;
+    protected Coroutine _hitCoroutine;
 
-    private UI_HPBar _hpBar;
-    private Coroutine _hitCoroutine;
-
-    private float _hitFlashTime;
-    private string _flashAmountKey;
+    protected float _hitFlashTime;
+    protected string _flashAmountKey;
 
     private void Awake()
     {
@@ -78,9 +69,7 @@ public abstract class Entity : MonoBehaviour
         HPBarPosition = Vector3.up * CurrentEntitySO.HPBarOffset;
 
         SetSpriteSortingOrder();
-
-        if (EntityType != Define.EntityType.Survivor)
-            SetHPBarUI();
+        SetHPBarUI();
     }
 
     private T GetEntitySOClone<T>(string key) where T : Entity_SO
@@ -98,7 +87,7 @@ public abstract class Entity : MonoBehaviour
 
     private void SetSpriteSortingOrder()
     {
-        int sortingOrderOffsetByPositionY = Mathf.FloorToInt(transform.position.y * 100f);
+        int sortingOrderOffsetByPositionY = Mathf.FloorToInt(transform.position.y * 100f) * -1;
         _renderer.sortingOrder = Util.GetSortingOreder(Define.SpriteType.Entity) + sortingOrderOffsetByPositionY;
     }
 
@@ -126,14 +115,23 @@ public abstract class Entity : MonoBehaviour
             Dead();
     }
 
-    private void Dead()
-    {
-        _anim.SetTrigger(_dieParamHash);
+    protected virtual void Dead()
+    {        
         _mat.SetFloat(_flashAmountKey, 0f);
         _hpBar.Close();
         OnDead?.Invoke(this);
         OnDead = null;        
+    }    
+
+    protected virtual void AnimationHashInitialize() { }
+
+    public virtual void ResetEntity()
+    {
+        _mat.SetFloat(_flashAmountKey, 0f);
+        _hpBar.Close();
     }
+
+    public abstract void Dispose();
 
     private IEnumerator Co_HitFlash()
     {
@@ -141,13 +139,4 @@ public abstract class Entity : MonoBehaviour
         yield return Util.GetCachedWaitForSeconds(_hitFlashTime);
         _mat.SetFloat(_flashAmountKey, 0f);
     }
-
-    private void AnimationHashInitialize()
-    {
-        _walkParamHash = Animator.StringToHash(_walkParamName);
-        _attackParamHash = Animator.StringToHash(_attackParamName);
-        _dieParamHash = Animator.StringToHash(_dieParamName);        
-    }
-
-    protected abstract void Dispose();
 }

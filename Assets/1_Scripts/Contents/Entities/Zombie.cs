@@ -4,11 +4,20 @@ using UnityEngine;
 
 public class Zombie : Entity
 {
+    #region Renderer
+    [Header("AnimationData")]
+    [SerializeField] private string _walkParamName;
+    [SerializeField] private string _attackParamName;
+    [SerializeField] private string _dieParamName;
+
+    protected int _walkParamHash;
+    protected int _attackParamHash;
+    protected int _dieParamHash;
+    #endregion
+
     private Queue<Entity> _targetQueue = new();
     private Zombie_SO _currentZombieSO;    
     private Entity _currentTarget;    
-
-    private const string TARGET_TAG = "HumanSideEntity";
 
     protected override void Init()
     {
@@ -28,7 +37,7 @@ public class Zombie : Entity
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!collision.CompareTag(TARGET_TAG))
+        if (!collision.CompareTag(Constants.TARGET_TAG))
             return;
 
         _targetQueue.Enqueue(collision.GetComponent<Entity>());
@@ -77,7 +86,8 @@ public class Zombie : Entity
     private void HandleDie()
     {
         Dispose();
-    }
+        ZombieManager.Instance.Dispawn(this);
+    }        
     #endregion
 
     private IEnumerator Co_Move()
@@ -94,12 +104,31 @@ public class Zombie : Entity
         }
     }
 
-    protected override void Dispose()
+    protected override void Dead()
     {
+        _anim.SetTrigger(_dieParamHash);
+        base.Dead();
+    }
+
+    protected override void AnimationHashInitialize()
+    {
+        _walkParamHash = Animator.StringToHash(_walkParamName);
+        _attackParamHash = Animator.StringToHash(_attackParamName);
+        _dieParamHash = Animator.StringToHash(_dieParamName);
+    }
+
+    public override void ResetEntity()
+    {
+        base.ResetEntity();
+        Dispose();
+    }
+
+    public override void Dispose()
+    {
+        StopAllCoroutines();
         _renderer.color = Color.white;
         _currentZombieSO = null;
         _currentTarget = null;
-        _targetQueue.Clear();
-        ZombieManager.Instance.Dispawn(this);
+        _targetQueue.Clear();        
     }
 }

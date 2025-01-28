@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Entitity/New Zombie", fileName = "ZOMBIE_")]
+[CreateAssetMenu(menuName = "Entity/New Zombie", fileName = "ZOMBIE_")]
 public class Zombie_SO : Entity_SO
 {
     [Header("Zombie Stats")]

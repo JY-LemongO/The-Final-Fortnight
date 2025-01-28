@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e887af8438010f14a928c640115e0e53, type: 3}
-  m_Name: WSTAT_ATK_SMG
+  m_Name: STAT_STRUCTURE_BC1
   m_EditorClassIdentifier: 
   _id: 0
-  _codeName: WSTAT_ATK_PISTOL
+  _codeName: 
   _displayName: 
   _displayDesc: 
-  _isConsumable: 0
+  _isConsumable: 1
   _isPercentage: 0
-  _minValue: 2
-  _maxValue: 50
-  _defaultValue: 2
+  _minValue: 0
+  _maxValue: 100
+  _defaultValue: 100

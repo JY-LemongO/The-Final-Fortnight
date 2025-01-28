@@ -4,12 +4,23 @@ using UnityEngine;
 
 public class Survivor : Entity
 {
-    [SerializeField] private Transform _weaponSlot;
+    #region Renderer
+    [Header("AnimationData")]
+    [SerializeField] private string _walkParamName;
+    [SerializeField] private string _attackParamName;
+    [SerializeField] private string _dieParamName;
+
+    protected int _walkParamHash;
+    protected int _attackParamHash;
+    protected int _dieParamHash;
+    #endregion
+
+    [Header("Weapon")]
+    [field:SerializeField] 
+    public Weapon Weapon { get; private set; }
+    public Zombie Target { get; private set; }
 
     private Survivor_SO _currentSurvivorSO;
-    public Weapon CurrentWeapon { get; private set; }
-    [field: SerializeField] public Zombie Target { get; private set; }
-
     private Coroutine _targetSearchCoroutine;
 
     protected override void Init()
@@ -23,14 +34,8 @@ public class Survivor : Entity
         base.SetupEntity<T>(key);
         _currentSurvivorSO = CurrentEntitySO as Survivor_SO;
         _anim.runtimeAnimatorController = _currentSurvivorSO.AnimController;
-
-        GameObject weaponClone = ResourceManager.Instance.Instantiate("Weapon.prefab", _weaponSlot);
-        weaponClone.transform.localPosition = Vector3.zero;
-
-        Weapon_SO weaponSOClone = _currentSurvivorSO.DefaultWeapon.Clone() as Weapon_SO;
-        CurrentWeapon = weaponClone.GetComponent<Weapon>();
-        CurrentWeapon.InitializeWeapon(this, weaponSOClone);
-
+        
+        SetWeapon(_currentSurvivorSO.DefaultWeapon);
         SetBulletUI();
         SearchTarget();        
     }
@@ -50,6 +55,7 @@ public class Survivor : Entity
         if (Target == null)
             return;
 
+        Debug.Log("Attack Target"); 
         Target.GetDamaged(this, damage);
         CheckTargetIsDead();
     }
@@ -65,6 +71,16 @@ public class Survivor : Entity
         return false;
     }
 
+    /// <summary>
+    /// 사용 할 Weapon 셋팅. 매개변수로 클론화 하지 않은 Weapon_SO 전달.
+    /// </summary>    
+    public void SetWeapon(Weapon_SO weaponSO)
+    {
+        Weapon_SO weaponSOClone = weaponSO.Clone() as Weapon_SO;        
+        Weapon.SetWeapon(this, weaponSOClone);
+        Weapon.transform.localPosition = weaponSOClone.WeaponPosition;
+    }
+
     private void SetBulletUI()
     {
         UI_Bullet ui = UIManager.Instance.CreateWorldUI<UI_Bullet>();
@@ -75,7 +91,7 @@ public class Survivor : Entity
     private IEnumerator Co_SearchTarget()
     {
         float serachingDelay = Constants.SearchingDelay;
-        float fireRange = CurrentWeapon.WeaponData.FireRange.Value;
+        float fireRange = Weapon.WeaponData.FireRange.Value;
         List<Zombie> zombies = ZombieManager.Instance.ZombiesList;
         while (Target == null)
         {
@@ -102,11 +118,30 @@ public class Survivor : Entity
         }
     }
 
-    protected override void Dispose()
+    protected override void Dead()
     {
+        _anim.SetTrigger(_dieParamHash);
+        base.Dead();
+    }
+
+    protected override void AnimationHashInitialize()
+    {
+        _walkParamHash = Animator.StringToHash(_walkParamName);
+        _attackParamHash = Animator.StringToHash(_attackParamName);
+        _dieParamHash = Animator.StringToHash(_dieParamName);
+    }
+
+    public override void ResetEntity()
+    {
+        base.ResetEntity();
+        Dispose();
+    }
+
+    public override void Dispose()
+    {
+        StopAllCoroutines();
         _currentSurvivorSO = null;
-        Target = null;
-        CurrentWeapon = null;
+        Target = null;        
         _targetSearchCoroutine = null;
     }
 }

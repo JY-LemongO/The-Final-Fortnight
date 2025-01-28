@@ -38,7 +38,7 @@ public class Weapon : MonoBehaviour
         HandleGunFireTimer();
     }
 
-    public void InitializeWeapon(Survivor context, Weapon_SO weapon)
+    public void SetWeapon(Survivor context, Weapon_SO weapon)
     {
         _context = context;
         _currentWeapon = weapon;

@@ -17,6 +17,7 @@ public static class Constants
     public const string Key_Survivor = "Survivor.prefab";
     public const string Key_Zombie = "Zombie.prefab";
     public const string Key_Weapon = "Weapon.prefab";
+    public const string Key_Barricate = "Barricate.prefab";
 
     // Effects
     public const string Key_Z_HitParticle = "FleshImpact_E.prefab";
@@ -46,5 +47,17 @@ public static class Constants
     public const float DamageTextFontSize_L = 4f;
     public const float DamageTextFontSize_M = 6f;
     public const float DamageTextFontSize_H = 10f;
+
+    public const string TARGET_TAG = "HumanSideEntity";
+
+    public const int Barricate_Buildable = 3;
+
+    public const float Min_Build_PosX = -2f;
+    public const float Max_Build_PosX = 0f;
+
+    public const float Min_Build_PosY = -2f;
+    public const float Max_Build_PosY = 0f;    
     #endregion
+
+
 }
