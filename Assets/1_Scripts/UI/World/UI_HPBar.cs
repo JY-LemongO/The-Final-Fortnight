@@ -72,10 +72,13 @@ public class UI_HPBar : UI_World
 
     protected override void Dispose()
     {
+        if (!gameObject.activeSelf)
+            return;
+
         StopAllCoroutines();
         _isDisappearing = true;
         _entity.CurrentEntitySO.Hp.OnStatCurrentValueChanged -= HandleHPSliderValueChange;
         _entity = null;
-        PoolManager.Instance.Return(gameObject);
+        base.Dispose();
     }
 }

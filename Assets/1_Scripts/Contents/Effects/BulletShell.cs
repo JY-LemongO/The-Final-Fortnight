@@ -32,26 +32,36 @@ public class BulletShell : MonoBehaviour
 
     private void Awake()
     {
-        Init();
+        Init();        
     }
 
+#if UNITY_EDITOR
     private void Update()
     {
         // Test
         if (Input.GetMouseButtonDown(0))
             StartCoroutine(Co_ShellMove());
     }
+#endif
 
     private void Init()
     {
         _rend = GetComponent<SpriteRenderer>();
         _rigid = GetComponent<Rigidbody2D>();
+
+        GameManager.Instance.OnRestartGame += OnActiveObjectDispose;
     }
 
     public void Setup(Vector3 position)
     {
         transform.position = position;
         StartCoroutine(Co_ShellMove());
+    }
+
+    private void OnActiveObjectDispose()
+    {
+        if (gameObject.activeSelf)
+            Dispose();
     }
 
     private void StopShell()
@@ -118,5 +128,10 @@ public class BulletShell : MonoBehaviour
         StopAllCoroutines();
         PoolManager.Instance.Return(gameObject);
         _rend.color = Color.white;
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.Instance.OnRestartGame -= OnActiveObjectDispose;
     }
 }
