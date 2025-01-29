@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da0b7a70815cb794bab75a51a7fb4881, type: 3}
+  m_Name: WEAPON_AR_01
+  m_EditorClassIdentifier: 
+  _id: 0
+  _codeName: WEAPON_AR_01
+  _displayName: "\uB3CC\uACA9\uC18C\uCD1D"
+  _displayDesc: "\uB3CC\uACA9\uC18C\uCD1D\uC785\uB2C8\uB2E4."
+  _damageSO: {fileID: 11400000, guid: f5be817c53977c04aa4e308b42799a42, type: 2}
+  _magazineSO: {fileID: 11400000, guid: e8df9f917e1b3404fa93a74fc0e828c5, type: 2}
+  _fireRateSO: {fileID: 11400000, guid: 0d6488895f5c81b48a8914c8a06938d3, type: 2}
+  _fireRangeSO: {fileID: 11400000, guid: 652e8f5ed292801498ef8f99689d0764, type: 2}
+  _animController: {fileID: 22100000, guid: d7a80a5560ead86438b6ba5a5a240e8d, type: 2}
+  _profileSprite: {fileID: -7401850915574699805, guid: fa642e03b263aa84e996d7e016442e65, type: 3}
+  _weaponPosition: {x: 0.428, y: -0.297}
+  _bulletShellPosition: {x: -0.099, y: 0.192}

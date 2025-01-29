@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: SMG01_Idle
+  m_Name: AR01_Idle
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,7 +21,7 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: -1922401519095733787, guid: e528ab39fdc93174a906abf039ae40b4, type: 3}
+      value: {fileID: -4576248161068963089, guid: 5a69add2d60356e4faa8a9c1a8380e19, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -44,7 +44,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: -1922401519095733787, guid: e528ab39fdc93174a906abf039ae40b4, type: 3}
+    - {fileID: -4576248161068963089, guid: 5a69add2d60356e4faa8a9c1a8380e19, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}

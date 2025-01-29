@@ -18,6 +18,7 @@ public static class Constants
     public const string Key_Zombie = "Zombie.prefab";
     public const string Key_Weapon = "Weapon.prefab";
     public const string Key_Barricate = "Barricate.prefab";
+    public const string Key_BulletShell = "BulletShell.prefab";
 
     // Effects
     public const string Key_Z_HitParticle = "FleshImpact_E.prefab";

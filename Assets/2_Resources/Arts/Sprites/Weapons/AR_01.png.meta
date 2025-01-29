@@ -1,112 +1,106 @@
 fileFormatVersion: 2
-guid: e528ab39fdc93174a906abf039ae40b4
+guid: 5a69add2d60356e4faa8a9c1a8380e19
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1922401519095733787
-    second: SMG_01_0
+      213: -4576248161068963089
+    second: AR_01_0
   - first:
-      213: -203953751234708530
-    second: SMG_01_1
+      213: -7515472061738072794
+    second: AR_01_1
   - first:
-      213: -5160621176311665072
-    second: SMG_01_2
+      213: 3153868963689442159
+    second: AR_01_2
   - first:
-      213: 5639667040793567488
-    second: SMG_01_3
+      213: -1399337259961672226
+    second: AR_01_3
   - first:
-      213: 7278107100714493689
-    second: SMG_01_4
+      213: 1555543799733974596
+    second: AR_01_4
   - first:
-      213: -1701408607739019199
-    second: SMG_01_5
+      213: 3362117294410170916
+    second: AR_01_5
   - first:
-      213: -3690849047354528163
-    second: SMG_01_6
+      213: 2394491897983195015
+    second: AR_01_6
   - first:
-      213: 5109123047687905618
-    second: SMG_01_7
+      213: -3804247947466623196
+    second: AR_01_7
   - first:
-      213: 9027821044602325366
-    second: SMG_01_8
+      213: -4602642819483529418
+    second: AR_01_8
   - first:
-      213: -4802234525292570150
-    second: SMG_01_9
+      213: 3262528999743051823
+    second: AR_01_9
   - first:
-      213: 7126932277658879516
-    second: SMG_01_10
+      213: -8880026891662358040
+    second: AR_01_10
   - first:
-      213: 3494896913374207414
-    second: SMG_01_11
+      213: -2340363304559197564
+    second: AR_01_11
   - first:
-      213: 4906615851482770314
-    second: SMG_01_12
+      213: 7283318405065748631
+    second: AR_01_12
   - first:
-      213: 6777030133268963782
-    second: SMG_01_13
+      213: 8704802033488881307
+    second: AR_01_13
   - first:
-      213: -7758553406169781833
-    second: SMG_01_14
+      213: 8424924688122199892
+    second: AR_01_14
   - first:
-      213: 5885894403654605041
-    second: SMG_01_15
+      213: 2369616210004084087
+    second: AR_01_15
   - first:
-      213: 2354630159411480535
-    second: SMG_01_16
+      213: -2178604238617204954
+    second: AR_01_16
   - first:
-      213: 3460922037205922026
-    second: SMG_01_17
+      213: 6147262101362161195
+    second: AR_01_17
   - first:
-      213: 4590866839958389319
-    second: SMG_01_18
+      213: -5514474725550061786
+    second: AR_01_18
   - first:
-      213: -5641890225841725805
-    second: SMG_01_19
+      213: -885082777061719649
+    second: AR_01_19
   - first:
-      213: -23671059113530890
-    second: SMG_01_20
+      213: -3336447104335853429
+    second: AR_01_20
   - first:
-      213: -623700971624729768
-    second: SMG_01_21
+      213: -7857810648115254994
+    second: AR_01_21
   - first:
-      213: 6078349486861322917
-    second: SMG_01_22
+      213: -942075031174079258
+    second: AR_01_22
   - first:
-      213: -3093143622904066664
-    second: SMG_01_23
+      213: 3841041516559227533
+    second: AR_01_23
   - first:
-      213: 8968518884142071092
-    second: SMG_01_24
+      213: -4183824105763825714
+    second: AR_01_24
   - first:
-      213: -892054712898335651
-    second: SMG_01_25
+      213: 2092376380623701013
+    second: AR_01_25
   - first:
-      213: -3309522371584486673
-    second: SMG_01_26
+      213: 3467367308530660044
+    second: AR_01_26
   - first:
-      213: 1697933823536381435
-    second: SMG_01_27
+      213: -4664083847344936499
+    second: AR_01_27
   - first:
-      213: 2154235343465182149
-    second: SMG_01_28
+      213: 3269934464937162956
+    second: AR_01_28
   - first:
-      213: 4307350867156763610
-    second: SMG_01_29
+      213: 4167008323283989810
+    second: AR_01_29
   - first:
-      213: 4866263615163202394
-    second: SMG_01_30
+      213: 194928408024413404
+    second: AR_01_30
   - first:
-      213: -8814138934792680903
-    second: SMG_01_31
+      213: 7506365229683686263
+    second: AR_01_31
   - first:
-      213: -5190264209321026149
-    second: SMG_01_32
-  - first:
-      213: -6741098733627946395
-    second: SMG_01_33
-  - first:
-      213: 7173749938161168641
-    second: SMG_01_34
+      213: 4158992584129113850
+    second: AR_01_32
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -215,13 +209,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: SMG_01_0
+      name: AR_01_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 128
+        y: 192
         width: 64
-        height: 32
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -230,20 +224,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5e1a0a2f0024255e0800000000000000
-      internalID: -1922401519095733787
+      spriteID: fea23732b86ed70c0800000000000000
+      internalID: -4576248161068963089
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SMG_01_1
+      name: AR_01_1
       rect:
         serializedVersion: 2
         x: 64
-        y: 128
+        y: 192
         width: 64
-        height: 32
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -252,20 +246,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ecbfb03d4296b2df0800000000000000
-      internalID: -203953751234708530
+      spriteID: 625cab08afda3b790800000000000000
+      internalID: -7515472061738072794
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SMG_01_2
+      name: AR_01_2
       rect:
         serializedVersion: 2
         x: 128
-        y: 128
+        y: 192
         width: 64
-        height: 32
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -274,20 +268,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 05ea59dd16ac168b0800000000000000
-      internalID: -5160621176311665072
+      spriteID: f6ba6d0dc1bc4cb20800000000000000
+      internalID: 3153868963689442159
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SMG_01_3
+      name: AR_01_3
       rect:
         serializedVersion: 2
         x: 192
-        y: 128
+        y: 192
         width: 64
-        height: 32
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -296,20 +290,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 001aaf91b4f144e40800000000000000
-      internalID: 5639667040793567488
+      spriteID: edd14031d2e849ce0800000000000000
+      internalID: -1399337259961672226
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SMG_01_4
+      name: AR_01_4
       rect:
         serializedVersion: 2
         x: 256
-        y: 128
+        y: 192
         width: 64
-        height: 32
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -318,20 +312,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9f6e557d8d7010560800000000000000
-      internalID: 7278107100714493689
+      spriteID: 44674bf18d6669510800000000000000
+      internalID: 1555543799733974596
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SMG_01_5
+      name: AR_01_5
       rect:
         serializedVersion: 2
-        x: 320
-        y: 128
+        x: 0
+        y: 144
         width: 64
-        height: 32
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -340,20 +334,108 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1408cedb2e16368e0800000000000000
-      internalID: -1701408607739019199
+      spriteID: 4220482bdd3a8ae20800000000000000
+      internalID: 3362117294410170916
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SMG_01_6
+      name: AR_01_6
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 144
+        width: 64
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 787d6d4d1b1fa3120800000000000000
+      internalID: 2394491897983195015
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AR_01_7
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 144
+        width: 64
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4273eb5c5a8943bc0800000000000000
+      internalID: -3804247947466623196
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AR_01_8
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 144
+        width: 64
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63f8ea4ddb02020c0800000000000000
+      internalID: -4602642819483529418
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AR_01_9
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 144
+        width: 64
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f285813f6d4d64d20800000000000000
+      internalID: 3262528999743051823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AR_01_10
       rect:
         serializedVersion: 2
         x: 0
         y: 96
         width: 64
-        height: 32
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -362,20 +444,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d5e28dca85877ccc0800000000000000
-      internalID: -3690849047354528163
+      spriteID: 8e98c86279ec3c480800000000000000
+      internalID: -8880026891662358040
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SMG_01_7
+      name: AR_01_11
       rect:
         serializedVersion: 2
         x: 64
         y: 96
         width: 64
-        height: 32
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -384,20 +466,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 251e233b75047e640800000000000000
-      internalID: 5109123047687905618
+      spriteID: 482c36a69fb558fd0800000000000000
+      internalID: -2340363304559197564
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SMG_01_8
+      name: AR_01_12
       rect:
         serializedVersion: 2
         x: 128
         y: 96
         width: 64
-        height: 32
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -406,20 +488,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 679415b9863494d70800000000000000
-      internalID: 9027821044602325366
+      spriteID: 7903200308b831560800000000000000
+      internalID: 7283318405065748631
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SMG_01_9
+      name: AR_01_13
       rect:
         serializedVersion: 2
         x: 192
         y: 96
         width: 64
-        height: 32
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -428,20 +510,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ad9d1df74290b5db0800000000000000
-      internalID: -4802234525292570150
+      spriteID: b96e336545badc870800000000000000
+      internalID: 8704802033488881307
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SMG_01_10
+      name: AR_01_14
       rect:
         serializedVersion: 2
         x: 256
         y: 96
         width: 64
-        height: 32
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -450,42 +532,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c168f1c7523f7e260800000000000000
-      internalID: 7126932277658879516
+      spriteID: 45f31fedd585be470800000000000000
+      internalID: 8424924688122199892
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SMG_01_11
-      rect:
-        serializedVersion: 2
-        x: 320
-        y: 96
-        width: 64
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 6bd5748d93e508030800000000000000
-      internalID: 3494896913374207414
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SMG_01_12
+      name: AR_01_15
       rect:
         serializedVersion: 2
         x: 0
-        y: 64
+        y: 48
         width: 64
-        height: 32
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -494,20 +554,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a8b6eecde1dc71440800000000000000
-      internalID: 4906615851482770314
+      spriteID: 7750d43636192e020800000000000000
+      internalID: 2369616210004084087
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SMG_01_13
+      name: AR_01_16
       rect:
         serializedVersion: 2
         x: 64
-        y: 64
+        y: 48
         width: 64
-        height: 32
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -516,20 +576,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6c16d9dfff8dc0e50800000000000000
-      internalID: 6777030133268963782
+      spriteID: 627af0bdcfa04c1e0800000000000000
+      internalID: -2178604238617204954
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SMG_01_14
+      name: AR_01_17
       rect:
         serializedVersion: 2
         x: 128
-        y: 64
+        y: 48
         width: 64
-        height: 32
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -538,20 +598,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7b96a5e98c4145490800000000000000
-      internalID: -7758553406169781833
+      spriteID: b26b9e4cf467f4550800000000000000
+      internalID: 6147262101362161195
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SMG_01_15
+      name: AR_01_18
       rect:
         serializedVersion: 2
         x: 192
-        y: 64
+        y: 48
         width: 64
-        height: 32
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -560,20 +620,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1f8da4b76c5eea150800000000000000
-      internalID: 5885894403654605041
+      spriteID: 62708bc3476a873b0800000000000000
+      internalID: -5514474725550061786
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SMG_01_16
+      name: AR_01_19
       rect:
         serializedVersion: 2
         x: 256
-        y: 64
+        y: 48
         width: 64
-        height: 32
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -582,174 +642,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7d7842597a35da020800000000000000
-      internalID: 2354630159411480535
+      spriteID: f918b6457ed87b3f0800000000000000
+      internalID: -885082777061719649
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SMG_01_17
-      rect:
-        serializedVersion: 2
-        x: 320
-        y: 64
-        width: 64
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: ae0fafe814aa70030800000000000000
-      internalID: 3460922037205922026
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SMG_01_18
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 32
-        width: 64
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 74207d6411906bf30800000000000000
-      internalID: 4590866839958389319
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SMG_01_19
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 32
-        width: 64
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 39e94fa4bbaf3b1b0800000000000000
-      internalID: -5641890225841725805
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SMG_01_20
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 32
-        width: 64
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 6f9a4121c47ebaff0800000000000000
-      internalID: -23671059113530890
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SMG_01_21
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 32
-        width: 64
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 853fd34554b2857f0800000000000000
-      internalID: -623700971624729768
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SMG_01_22
-      rect:
-        serializedVersion: 2
-        x: 256
-        y: 32
-        width: 64
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 5aa0c0167a2aa5450800000000000000
-      internalID: 6078349486861322917
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SMG_01_23
-      rect:
-        serializedVersion: 2
-        x: 320
-        y: 32
-        width: 64
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 89dc98d5342f215d0800000000000000
-      internalID: -3093143622904066664
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SMG_01_24
+      name: AR_01_20
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 64
-        height: 32
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -758,20 +664,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 43dbbaa6864967c70800000000000000
-      internalID: 8968518884142071092
+      spriteID: b884e2e290f82b1d0800000000000000
+      internalID: -3336447104335853429
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SMG_01_25
+      name: AR_01_21
       rect:
         serializedVersion: 2
         x: 64
         y: 0
         width: 64
-        height: 32
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -780,20 +686,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d5c4b7507f8ce93f0800000000000000
-      internalID: -892054712898335651
+      spriteID: e29eec619d273f290800000000000000
+      internalID: -7857810648115254994
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SMG_01_26
+      name: AR_01_22
       rect:
         serializedVersion: 2
         x: 128
         y: 0
         width: 64
-        height: 32
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -802,8 +708,52 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: fe29f7900f63212d0800000000000000
-      internalID: -3309522371584486673
+      spriteID: 6ec9a1f10c31de2f0800000000000000
+      internalID: -942075031174079258
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AR_01_23
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 64
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8a5a0a98ee1e4530800000000000000
+      internalID: 3841041516559227533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AR_01_24
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 64
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec71b35842210f5c0800000000000000
+      internalID: -4183824105763825714
       vertices: []
       indices: 
       edges: []
@@ -812,7 +762,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 8763077887d4dc54da9813118d70008e
+    spriteID: 6c8e345116ed9e04181e7491e48c4bc5
     internalID: 0
     vertices: []
     indices: 
@@ -822,33 +772,31 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      SMG_01_0: -1922401519095733787
-      SMG_01_1: -203953751234708530
-      SMG_01_10: 7126932277658879516
-      SMG_01_11: 3494896913374207414
-      SMG_01_12: 4906615851482770314
-      SMG_01_13: 6777030133268963782
-      SMG_01_14: -7758553406169781833
-      SMG_01_15: 5885894403654605041
-      SMG_01_16: 2354630159411480535
-      SMG_01_17: 3460922037205922026
-      SMG_01_18: 4590866839958389319
-      SMG_01_19: -5641890225841725805
-      SMG_01_2: -5160621176311665072
-      SMG_01_20: -23671059113530890
-      SMG_01_21: -623700971624729768
-      SMG_01_22: 6078349486861322917
-      SMG_01_23: -3093143622904066664
-      SMG_01_24: 8968518884142071092
-      SMG_01_25: -892054712898335651
-      SMG_01_26: -3309522371584486673
-      SMG_01_3: 5639667040793567488
-      SMG_01_4: 7278107100714493689
-      SMG_01_5: -1701408607739019199
-      SMG_01_6: -3690849047354528163
-      SMG_01_7: 5109123047687905618
-      SMG_01_8: 9027821044602325366
-      SMG_01_9: -4802234525292570150
+      AR_01_0: -4576248161068963089
+      AR_01_1: -7515472061738072794
+      AR_01_10: -8880026891662358040
+      AR_01_11: -2340363304559197564
+      AR_01_12: 7283318405065748631
+      AR_01_13: 8704802033488881307
+      AR_01_14: 8424924688122199892
+      AR_01_15: 2369616210004084087
+      AR_01_16: -2178604238617204954
+      AR_01_17: 6147262101362161195
+      AR_01_18: -5514474725550061786
+      AR_01_19: -885082777061719649
+      AR_01_2: 3153868963689442159
+      AR_01_20: -3336447104335853429
+      AR_01_21: -7857810648115254994
+      AR_01_22: -942075031174079258
+      AR_01_23: 3841041516559227533
+      AR_01_24: -4183824105763825714
+      AR_01_3: -1399337259961672226
+      AR_01_4: 1555543799733974596
+      AR_01_5: 3362117294410170916
+      AR_01_6: 2394491897983195015
+      AR_01_7: -3804247947466623196
+      AR_01_8: -4602642819483529418
+      AR_01_9: 3262528999743051823
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 842a7116ed34ca540bd850ed795a632f, type: 3}
+  m_Name: SURVIVOR_SOLDIER_03
+  m_EditorClassIdentifier: 
+  _id: 0
+  _codeName: SURVIVOR_SOLDIER
+  _displayName: "\uD14C\uC2A4\uD2B82"
+  _displayDesc: "\uD14C\uC2A4\uD2B8\uD14C\uC2A4\uD2B8\n\uD14C\uC2A4\uD2B8\uD14C\uC2A4\uD2B8"
+  _hpSO: {fileID: 11400000, guid: 2185671d4b6f16e4fba56de005687788, type: 2}
+  _hpBarOffset: 1
+  _defaultWeaponSO: {fileID: 11400000, guid: 08ec24506b94ece4196c7c51bd3c0ce2, type: 2}
+  _animController: {fileID: 9100000, guid: ce56de0ff320f494e9063e26cdc8e310, type: 2}
+  _profileSprite: {fileID: 21300000, guid: b2c5ccc71b958f04a8bd127f80c89835, type: 3}

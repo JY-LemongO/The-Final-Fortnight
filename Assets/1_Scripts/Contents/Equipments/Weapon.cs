@@ -21,6 +21,7 @@ public class Weapon : MonoBehaviour
 
     private float _currentCooldown;
 
+
     private void Awake()
     {
         _anim = GetComponent<Animator>();
@@ -43,19 +44,26 @@ public class Weapon : MonoBehaviour
         _context = context;
         _currentWeapon = weapon;
         _anim.runtimeAnimatorController = weapon.AnimController;
+
+        _currentWeapon.OnReloadWeapon += Reload;
     }
 
     public void ChangeWeapon(Weapon_SO newWeapon)
         => _currentWeapon = newWeapon;
 
-    private void Fire()
-    {
-        _anim.SetTrigger(_fireParamHash);
-        _currentWeapon.Fire();
-    }
+    public void Fire()
+        => _anim.SetTrigger(_fireParamHash);
 
     private void Reload()
         => _anim.SetTrigger(_reloadParamHash);
+
+    private void SpawnBulletShell()
+    {
+        GameObject go = ResourceManager.Instance.Instantiate(Constants.Key_BulletShell);
+        BulletShell shell = go.GetComponent<BulletShell>();
+        Vector3 shellPos = transform.position + _currentWeapon.BulletShellPosition;
+        shell.Setup(shellPos);
+    }
 
     private void HandleGunFireTimer()
     {
@@ -84,17 +92,13 @@ public class Weapon : MonoBehaviour
     {
         if (!_context.CheckTargetIsDead())
             _context.AttackTarget(_currentWeapon.Damage.Value);
-    }
-
-    private void HandleCheckMagazineIsEmpty()
-    {
-        if (_currentWeapon.Magazine.CurrentValue <= 0)
-            Reload();
+        _currentWeapon.Fire();
+        SpawnBulletShell();
     }
 
     private void HandleReload()
     {
-        _currentWeapon.Magazine.ResetCurrentValue();
+        _currentWeapon.Reload();
     }
     #endregion
 }

@@ -22,3 +22,5 @@ MonoBehaviour:
   _fireRangeSO: {fileID: 11400000, guid: b3f714a93ad692f4b948de9045877672, type: 2}
   _animController: {fileID: 22100000, guid: 3ae842d1aeab32d4e89c84caab35ac62, type: 2}
   _profileSprite: {fileID: 21300000, guid: ad8f3374374085243a4bfaf37f70feac, type: 3}
+  _weaponPosition: {x: 0.229, y: -0.226}
+  _bulletShellPosition: {x: 0.06, y: 0.077}

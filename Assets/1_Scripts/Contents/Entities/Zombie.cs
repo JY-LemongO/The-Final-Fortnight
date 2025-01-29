@@ -129,6 +129,6 @@ public class Zombie : Entity
         _renderer.color = Color.white;
         _currentZombieSO = null;
         _currentTarget = null;
-        _targetQueue.Clear();        
+        _targetQueue.Clear();
     }
 }

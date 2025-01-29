@@ -41,11 +41,12 @@ public static class Define
     {
         SURVIVOR_SOLDIER_01,
         SURVIVOR_SOLDIER_02,
+        SURVIVOR_SOLDIER_03,
     }
 
     public enum ZombieKeys
     {
         ZOMBIE_NORMAL_01,
         ZOMBIE_NORMAL_02,
-    }    
+    }
 }
