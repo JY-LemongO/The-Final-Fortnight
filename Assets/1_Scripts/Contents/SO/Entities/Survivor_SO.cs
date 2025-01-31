@@ -19,11 +19,11 @@ public class Survivor_SO : Entity_SO
         _defaultWeaponSO.Clone();
     }        
 
-    public override object Clone()
-    {
-        var survivorClone = Instantiate(this);
-        survivorClone.InitializeStats();
+    //public override object Clone()
+    //{
+    //    var survivorClone = Instantiate(this);
+    //    survivorClone.InitializeStats();
 
-        return survivorClone;
-    }
+    //    return survivorClone;
+    //}
 }

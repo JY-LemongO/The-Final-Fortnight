@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(EntityDamageEffect))]
 public abstract class Entity : MonoBehaviour
 {
     #region Renderer
@@ -11,7 +12,7 @@ public abstract class Entity : MonoBehaviour
     #endregion
 
     #region Events
-    public event Action<Entity> OnDead;
+    public event Action OnDead;
     #endregion
 
     public Entity_SO CurrentEntitySO { get; protected set; }
@@ -21,13 +22,8 @@ public abstract class Entity : MonoBehaviour
 
     protected Dictionary<string, Entity_SO> _entitySODict = new();
     
-    protected EntityDamageEffect _damageEffect;
-    protected Material _mat;
-    protected UI_HPBar _hpBar;
-    protected Coroutine _hitCoroutine;
-
-    protected float _hitFlashTime;
-    protected string _flashAmountKey;
+    protected EntityDamageEffect _damageEffect;    
+    protected UI_HPBar _hpBar;    
 
     private void Awake()
     {
@@ -38,16 +34,13 @@ public abstract class Entity : MonoBehaviour
     {
         _anim = GetComponent<Animator>();
         _renderer = GetComponent<SpriteRenderer>();
-        _damageEffect = GetComponent<EntityDamageEffect>();
-        _mat = _renderer.material;
+        _damageEffect = GetComponent<EntityDamageEffect>();        
 
         _anim = GetComponent<Animator>();
         _renderer = GetComponent<SpriteRenderer>();
         _renderer.sortingOrder = Util.GetSortingOreder(Define.SpriteType.Weapon);
-
-        _hitFlashTime = Constants.HitFlashTime;
-        _flashAmountKey = Constants.HitFlashAmountShaderKey;
-
+        
+        _damageEffect.Init();
         AnimationHashInitialize();
     }
 
@@ -68,6 +61,7 @@ public abstract class Entity : MonoBehaviour
         CurrentEntitySO = _entitySODict[key] as T;
         HPBarPosition = Vector3.up * CurrentEntitySO.HPBarOffset;
 
+        _damageEffect.Setup(this);
         SetSpriteSortingOrder();
         SetHPBarUI();
     }
@@ -107,19 +101,14 @@ public abstract class Entity : MonoBehaviour
         _damageEffect.EffectDamaged();
         SetupDamageText(damage);
 
-        if (_hitCoroutine != null)
-            StopCoroutine(_hitCoroutine);
-        _hitCoroutine = StartCoroutine(Co_HitFlash());
-
         if (CurrentEntitySO.Hp.CurrentValue <= 0f)
             Dead();
     }
 
     protected virtual void Dead()
-    {        
-        _mat.SetFloat(_flashAmountKey, 0f);
+    {
         _hpBar.Close();
-        OnDead?.Invoke(this);
+        OnDead?.Invoke();
         OnDead = null;        
     }    
 
@@ -127,16 +116,10 @@ public abstract class Entity : MonoBehaviour
 
     public virtual void ResetEntity()
     {
-        _mat.SetFloat(_flashAmountKey, 0f);
+        
         _hpBar.Close();
     }
 
     public abstract void Dispose();
-
-    private IEnumerator Co_HitFlash()
-    {
-        _mat.SetFloat(_flashAmountKey, 0.7f);
-        yield return Util.GetCachedWaitForSeconds(_hitFlashTime);
-        _mat.SetFloat(_flashAmountKey, 0f);
-    }
+    
 }

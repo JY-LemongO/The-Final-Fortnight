@@ -14,6 +14,7 @@ public class Barricate : Entity
     {
         base.SetupEntity<T>(key);
         _currentBarricateSO = CurrentEntitySO as Barricate_SO;
+        _renderer.sprite = _currentBarricateSO.ObjectSprite;
     }
 
     public override void Dispose()

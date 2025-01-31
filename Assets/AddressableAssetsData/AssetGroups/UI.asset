@@ -33,6 +33,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Prefabs
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9014c4c58956ceb4eb73ea2b3e431ca5
+    m_Address: UI_BuildMode
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Prefabs
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f06a28c2e7a16f24997057d13b64a0cf
     m_Address: UI_SurvivorSelect
     m_ReadOnly: 0

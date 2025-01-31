@@ -70,9 +70,8 @@ public class SurvivorManager : SingletonBase<SurvivorManager>
     {
         string[] survivorSOKeys = Enum.GetNames(typeof(Define.SurvivorKeys));
 
-        foreach (var str in survivorSOKeys)
-        {
-            string key = str + ".asset";
+        foreach (var key in survivorSOKeys)
+        {            
             Survivor_SO survivoRO = ResourceManager.Instance.Load<Survivor_SO>(key);
 
             Survivor_SO survivor = survivoRO.Clone() as Survivor_SO;

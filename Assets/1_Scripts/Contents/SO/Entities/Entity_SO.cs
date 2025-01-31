@@ -16,4 +16,12 @@ public class Entity_SO : BaseSO
 
     public virtual void ResetStats()
         => Hp.ResetCurrentValue();
+
+    public override object Clone()
+    {
+        var entityClone = Instantiate(this);
+        entityClone.InitializeStats();
+
+        return entityClone;
+    }
 }

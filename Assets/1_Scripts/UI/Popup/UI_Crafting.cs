@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -53,7 +54,8 @@ public class UI_Crafting : UI_Popup
     }
 
     private void OnBarricateBuildBtn()
-    {
+    {        
+        BuildingSystem.Instance.EnterBuildMode(GetBarricateToStructureSO());
         Close();
     }
     #endregion
@@ -84,6 +86,17 @@ public class UI_Crafting : UI_Popup
     }
 
     #endregion   
+
+    private Structure_SO GetBarricateToStructureSO()
+    {
+        int barricateUpgradeTier = GameManager.Instance.CurrentBarricateUpgrade;
+        string key = Enum.GetNames(typeof(Define.BarricateTier))[barricateUpgradeTier];
+
+        return GetStructureSO(key);
+    }
+
+    private Structure_SO GetStructureSO(string key)
+        => ResourceManager.Instance.Load<Structure_SO>(key);
 
     private void ChangeViewPort(GameObject enableViewPort, GameObject disableViewPort1, GameObject disableViewPort2)
     {

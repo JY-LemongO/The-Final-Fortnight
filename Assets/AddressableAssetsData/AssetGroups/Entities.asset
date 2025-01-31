@@ -16,31 +16,43 @@ MonoBehaviour:
   m_GUID: f0c17a4b91e9a39438a3599abe9e46bb
   m_SerializeEntries:
   - m_GUID: 67dae1cb994e20c44994a7947c49e747
-    m_Address: SURVIVOR_SOLDIER_03.asset
+    m_Address: SURVIVOR_SOLDIER_03
     m_ReadOnly: 0
     m_SerializedLabels:
     - Entities
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 906d010652a65b94980e4ee4e6c1a4fc
-    m_Address: SURVIVOR_SOLDIER_01.asset
+    m_Address: SURVIVOR_SOLDIER_01
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Entities
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 908c91c3140a8ee4a9049a3b2f255dbc
+    m_Address: BARRICATE_LV1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Entities
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9c7479bd8c857ed44a5a209ae0f55553
+    m_Address: BARRICATE_LV2
     m_ReadOnly: 0
     m_SerializedLabels:
     - Entities
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c914483064a0c464c8ee8c0570db990c
-    m_Address: ZOMBIE_NORMAL_01.asset
+    m_Address: ZOMBIE_NORMAL_01
     m_ReadOnly: 0
     m_SerializedLabels:
     - Entities
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e1131e923eab0c94bbd649fe4ff4cbf4
-    m_Address: SURVIVOR_SOLDIER_02.asset
+    m_Address: SURVIVOR_SOLDIER_02
     m_ReadOnly: 0
     m_SerializedLabels:
     - Entities
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e20567e131425454f83439b013b5380f
-    m_Address: ZOMBIE_NORMAL_02.asset
+    m_Address: ZOMBIE_NORMAL_02
     m_ReadOnly: 0
     m_SerializedLabels:
     - Entities

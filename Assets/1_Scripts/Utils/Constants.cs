@@ -19,6 +19,7 @@ public static class Constants
     public const string Key_Weapon = "Weapon.prefab";
     public const string Key_Barricate = "Barricate.prefab";
     public const string Key_BulletShell = "BulletShell.prefab";
+    public const string Key_PreviewObject = "PreviewObject.prefab";
 
     // Effects
     public const string Key_Z_HitParticle = "FleshImpact_E.prefab";
@@ -29,10 +30,10 @@ public static class Constants
     public const string Key_HPBar = "HP_Bar.prefab";
 
     // Entities - Define으로 교체예정
-    public const string Key_S_Soldier_01 = "SURVIVOR_SOLDIER_01.asset";
-    public const string Key_S_Soldier_02 = "SURVIVOR_SOLDIER_02.asset";
-    public const string Key_Z_Normal_01 = "ZOMBIE_NORMAL_01.asset";
-    public const string Key_Z_Normal_02 = "ZOMBIE_NORMAL_02.asset";
+    public const string Key_S_Soldier_01 = "SURVIVOR_SOLDIER_01";
+    public const string Key_S_Soldier_02 = "SURVIVOR_SOLDIER_02";
+    public const string Key_Z_Normal_01 = "ZOMBIE_NORMAL_01";
+    public const string Key_Z_Normal_02 = "ZOMBIE_NORMAL_02";
 
     // Equipments
     public const string Key_W_Pistol_02 = "WEAPON_PISTOL_01.asset";
@@ -53,10 +54,10 @@ public static class Constants
 
     public const int Barricate_Buildable = 3;
 
-    public const float Min_Build_PosX = -2f;
-    public const float Max_Build_PosX = 0f;
+    public const float Min_Build_PosX = -3f;
+    public const float Max_Build_PosX = 5f;
 
-    public const float Min_Build_PosY = -2f;
+    public const float Min_Build_PosY = -2.5f;
     public const float Max_Build_PosY = 0f;    
     #endregion
 

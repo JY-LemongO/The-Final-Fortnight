@@ -5,7 +5,8 @@ using UnityEngine;
 public class InGameData
 {
     #region 게임 진행
-    public int Day;    
+    public int Day;
+    public int BarricateUpgrade;
     #endregion
 
     #region 인게임 재화
@@ -33,11 +34,13 @@ public class GameManager : SingletonBase<GameManager>
     public event Action<int> OnMoneyChanged;
     public event Action<int> OnScrapChanged;
     public event Action<int> OnBatteryChanged;
+    public event Action<int> OnBarricateUpgradChanged;
     public event Action OnRestartGame;
     #endregion
 
     private InGameData _inGameData = new();
 
+    #region GameDatas
     public int CurrentDay
     {
         get => _inGameData.Day;
@@ -77,6 +80,17 @@ public class GameManager : SingletonBase<GameManager>
             OnBatteryChanged?.Invoke(value);
         }
     }
+
+    public int CurrentBarricateUpgrade
+    {
+        get => _inGameData.BarricateUpgrade;
+        private set
+        {
+            _inGameData.BarricateUpgrade = value;
+            OnBarricateUpgradChanged?.Invoke(value);
+        }
+    }
+    #endregion
 
     public void StartGame()
     {        

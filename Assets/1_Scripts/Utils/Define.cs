@@ -28,6 +28,18 @@ public static class Define
         Grenade,
     }
 
+    public enum StructureType
+    {
+        Barricate,
+        Turret,
+    }
+
+    public enum BarricateTier
+    {
+        BARRICATE_LV1,
+        BARRICATE_LV2,        
+    }
+
     public enum SpriteType
     {
         Background,

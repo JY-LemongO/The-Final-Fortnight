@@ -86,7 +86,7 @@ public class UI_SurvivorSelect : UI_Popup
 
     private void OnSelectBtn()
     {
-        string survivorKey = Enum.GetNames(typeof(Define.SurvivorKeys))[_currentIndex] + ".asset";
+        string survivorKey = Enum.GetNames(typeof(Define.SurvivorKeys))[_currentIndex];
         SurvivorManager.Instance.SpawnSurvivor(survivorKey);
         GameManager.Instance.StartGame();
         Close();

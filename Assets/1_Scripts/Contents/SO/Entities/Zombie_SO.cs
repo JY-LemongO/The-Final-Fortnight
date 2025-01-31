@@ -40,11 +40,11 @@ public class Zombie_SO : Entity_SO
         AtkRate.ResetCurrentValue();
     }
 
-    public override object Clone()
-    {
-        var zombieClone = Instantiate(this);
-        zombieClone.InitializeStats();
+    //public override object Clone()
+    //{
+    //    var zombieClone = Instantiate(this);
+    //    zombieClone.InitializeStats();
 
-        return zombieClone;
-    }
+    //    return zombieClone;
+    //}
 }
