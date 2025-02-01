@@ -1649,9 +1649,21 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 642426600783756094, guid: d976de402be916e4295d0164ec5a99dc, type: 3}
+      propertyPath: m_Size.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 642426600783756094, guid: d976de402be916e4295d0164ec5a99dc, type: 3}
+      propertyPath: m_Size.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 642426600783756094, guid: d976de402be916e4295d0164ec5a99dc, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -4567666622362501603, guid: 72e7af36a211b9c4fb5ae3c43740499c, type: 3}
+    - target: {fileID: 642426600783756094, guid: d976de402be916e4295d0164ec5a99dc, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3328536278186228135, guid: d976de402be916e4295d0164ec5a99dc, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5
@@ -1692,6 +1704,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5188197097485436896, guid: d976de402be916e4295d0164ec5a99dc, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 4b36f757f74ee004a93db1c4648ab65e, type: 2}
     - target: {fileID: 6720922217125360486, guid: d976de402be916e4295d0164ec5a99dc, type: 3}
       propertyPath: m_Name
       value: Pistol_01

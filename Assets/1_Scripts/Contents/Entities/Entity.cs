@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -96,7 +95,7 @@ public abstract class Entity : MonoBehaviour
     {
         if (IsDead)
             return;
-
+        
         CurrentEntitySO.Hp.Consume(damage);
         _damageEffect.EffectDamaged();
         SetupDamageText(damage);

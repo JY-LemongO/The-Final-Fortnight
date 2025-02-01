@@ -12,12 +12,22 @@ public class BuildingSystem : SingletonBase<BuildingSystem>
     private List<Barricate> _barricates = new();
     private Structure_SO _currentStructure;
 
-    public void Build()
+    private UIBase _buildModeUI;
+
+    public void Build(Vector3 buildPosition)
     {
         if (_barricates.Count == Constants.Barricate_Buildable)
             return;
 
+        if (_buildModeUI != null)
+        {
+            _buildModeUI.Close();
+            _buildModeUI = null;
+        }            
+
         GameObject go = ResourceManager.Instance.Instantiate(Constants.Key_Barricate);
+        go.transform.position = buildPosition;
+
         switch (_currentStructure.StructureType)
         {
             case Define.StructureType.Barricate:
@@ -36,7 +46,7 @@ public class BuildingSystem : SingletonBase<BuildingSystem>
     {
         _currentStructure = structure;
 
-        UIManager.Instance.OpenPopupUI<UI_BuildMode>();
+        _buildModeUI = UIManager.Instance.OpenPopupUI<UI_BuildMode>();
         GameObject go = ResourceManager.Instance.Instantiate(Constants.Key_PreviewObject);
         go.GetComponent<PreviewObject>().SetPreview(_currentStructure.PreviewSprite);
         

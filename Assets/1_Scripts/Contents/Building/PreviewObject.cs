@@ -42,8 +42,8 @@ public class PreviewObject : MonoBehaviour
         if (IsBuildablePlace())
         {
             // To Do
-            BuildingSystem.Instance.Build();
-            PoolManager.Instance.Return(gameObject);
+            BuildingSystem.Instance.Build(transform.position);
+            PoolManager.Instance.Return(gameObject);            
         }            
         else
         {

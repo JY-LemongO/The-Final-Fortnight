@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Zombie : Entity
@@ -15,14 +14,22 @@ public class Zombie : Entity
     protected int _dieParamHash;
     #endregion
 
-    private Queue<Entity> _targetQueue = new();
-    private Zombie_SO _currentZombieSO;    
-    private Entity _currentTarget;    
+    [SerializeField] private LayerMask _targetLayer;
+    
+    private Zombie_SO _currentZombieSO;
+    private Entity _currentTarget;
+    private float _spriteHalfSize;
+
+    private void Update()
+    {
+        if (_currentTarget == null)
+            SearchTargetByRay();
+    }
 
     protected override void Init()
     {
         base.Init();
-        EntityType = Define.EntityType.Zombie;
+        EntityType = Define.EntityType.Zombie;        
     }
 
     public override void SetupEntity<T>(string key)
@@ -30,57 +37,51 @@ public class Zombie : Entity
         base.SetupEntity<T>(key);
         _currentZombieSO = CurrentEntitySO as Zombie_SO;
         _currentZombieSO.ResetStats();
-        _anim.runtimeAnimatorController = _currentZombieSO.AnimController;        
+        _anim.runtimeAnimatorController = _currentZombieSO.AnimController;
+        _spriteHalfSize = _renderer.sprite.textureRect.height / _renderer.sprite.pixelsPerUnit * 0.5f;
 
         Move();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (!collision.CompareTag(Constants.TARGET_TAG))
-            return;
-
-        _targetQueue.Enqueue(collision.GetComponent<Entity>());
-
-        if (_currentTarget == null)
-            Attack();
-    }
-
     private void Move()
-    {
-        StartCoroutine(Co_Move());        
-    }
+        => StartCoroutine(Co_Move());
 
     private void Attack()
-    {
-        _currentTarget = FindNextTarget();
-        _anim.SetBool(_attackParamHash, true);        
-    }
+        => _anim.SetBool(_attackParamHash, true);
 
-    private Entity FindNextTarget()
+    private void SearchTargetByRay()
     {
-        if (_targetQueue.Count <= 0)
-            return null;
+        Vector2 origin = (Vector2)transform.position + Vector2.down * _spriteHalfSize;
+        Vector2 direction = Vector2.left;
+        float distance = _currentZombieSO.Range.Value;
 
-        return _targetQueue.Peek();
+        RaycastHit2D hit = Physics2D.Raycast(origin, direction, distance, _targetLayer);
+        if (hit)
+        {
+            Entity target = hit.transform.GetComponent<Entity>();
+            if (target.IsDead)
+                return;
+
+            _currentTarget = target;
+            Attack();
+        }            
     }
 
     #region AnimationEventTrigger
     private void HandleAttackTarget()
     {
+        Debug.Log("Zombie가 공격");
         float damage = _currentZombieSO.Atk.Value;                
         _currentTarget.GetDamaged(this, damage);
     }
 
     private void HandleFindTarget()
-    {
+    {         
         if (_currentTarget.IsDead)
         {
-            _targetQueue.Dequeue();
-            _currentTarget = FindNextTarget();
-        }            
-        if (_currentTarget == null)
+            _currentTarget = null;
             Move();
+        }            
     }
 
     private void HandleDie()
@@ -128,7 +129,13 @@ public class Zombie : Entity
         StopAllCoroutines();
         _renderer.color = Color.white;
         _currentZombieSO = null;
-        _currentTarget = null;
-        _targetQueue.Clear();
+        _currentTarget = null;        
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Vector2 origin = (Vector2)transform.position + Vector2.down * _spriteHalfSize;        
+        Gizmos.DrawRay(origin, Vector3.left * _currentZombieSO.Range.Value);
     }
 }
