@@ -23,6 +23,12 @@ public class InGameData
     public int UsedMoneyAmount;
     public float AliveTime;
     #endregion
+
+    public InGameData()
+    {
+        Day = 1;
+        BarricateUpgrade = 0;
+    }
 }
 #endregion
 

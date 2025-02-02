@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,9 +18,15 @@ public class UI_Crafting : UI_Popup
 
     [SerializeField] private Button _buildBarricateBtn;
 
-    [Header("Images")]
-    [SerializeField] private Image _barricateImage;
+    [Header("Weapon")]
     [SerializeField] private Image _weaponImage;
+
+    [Header("Barricate")]
+    [SerializeField] private Image _barricateImage;
+    [SerializeField] private TMP_Text _barricateHPText;
+    [SerializeField] private TMP_Text _barricateBuildCostText;
+
+    [Header("Turret")]    
     [SerializeField] private Image _turretImage;
 
     protected override void Init()
@@ -50,7 +57,15 @@ public class UI_Crafting : UI_Popup
             return;
 
         ChangeViewPort(_barricateViewPort, _weaponViewPort, _turretViewPort);
+        UpdateBarricateInfo();
+    }
 
+    private void UpdateBarricateInfo()
+    {
+        Barricate_SO barricateInfo = BuildingSystem.Instance.GetBarricateInfo();
+        _barricateImage.sprite = barricateInfo.ObjectSprite;
+        _barricateHPText.text = barricateInfo.Hp.Value.ToString();
+        _barricateBuildCostText.text = barricateInfo.Cost.ToString();
     }
 
     private void OnBarricateBuildBtn()

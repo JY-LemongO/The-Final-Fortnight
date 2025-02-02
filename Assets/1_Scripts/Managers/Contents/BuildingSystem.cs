@@ -63,6 +63,13 @@ public class BuildingSystem : SingletonBase<BuildingSystem>
 
     }
 
+    public Barricate_SO GetBarricateInfo()
+    {
+        int tier = GameManager.Instance.CurrentBarricateUpgrade;
+        string key = Enum.GetNames(typeof(Define.BarricateTier))[tier];
+        return ResourceManager.Instance.Load<Barricate_SO>(key).Clone() as Barricate_SO;
+    }
+
     private void BuildBarricate(GameObject go)
     {
         Barricate barricate = go.GetComponent<Barricate>();

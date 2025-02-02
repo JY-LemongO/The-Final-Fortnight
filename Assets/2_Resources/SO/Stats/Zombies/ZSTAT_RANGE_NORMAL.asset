@@ -16,7 +16,8 @@ MonoBehaviour:
   _codeName: ZSTAT_ATK_NORMAL
   _displayName: 
   _displayDesc: 
+  _isConsumable: 0
   _isPercentage: 0
-  _minValue: 0
-  _maxValue: 3
-  _defaultValue: 3
+  _minValue: 0.5
+  _maxValue: 1
+  _defaultValue: 0.5
