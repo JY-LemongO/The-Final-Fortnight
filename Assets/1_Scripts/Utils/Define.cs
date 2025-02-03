@@ -56,6 +56,13 @@ public static class Define
         SURVIVOR_SOLDIER_03,
     }
 
+    public enum WeaponKeys
+    {
+        WEAPON_PISTOL_01,
+        WEAPON_SMG_01,
+        WEAPON_AR_01,
+    }
+
     public enum ZombieKeys
     {
         ZOMBIE_NORMAL_01,

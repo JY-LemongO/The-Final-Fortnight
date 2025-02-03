@@ -21,3 +21,4 @@ MonoBehaviour:
   _structureType: 0
   _objectSprite: {fileID: 21300000, guid: 3f0b5884309f1c242b8c98a1794957e3, type: 3}
   _previewSprite: {fileID: 21300000, guid: 7666acbcef5f3784297768fc38c8c433, type: 3}
+  _cost: 5

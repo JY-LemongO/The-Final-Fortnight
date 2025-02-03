@@ -6,6 +6,7 @@ public class UI_GameScene : UI_Scene
     [Header("Buttons")]
     [SerializeField] private Button _survivorsBtn;
     [SerializeField] private Button _craftingBtn;
+    [SerializeField] private Button _weaponBtn;
     [SerializeField] private Button _inventoryBtn;
     [SerializeField] private Button _radioBtn;
 
@@ -22,6 +23,7 @@ public class UI_GameScene : UI_Scene
 
         _survivorsBtn.onClick.AddListener(OnSurvivorsBtn);
         _craftingBtn.onClick.AddListener(OnCraftingBtn);
+        _weaponBtn.onClick.AddListener(OnWeaponBtn);
         _inventoryBtn.onClick.AddListener(OnInventoryBtn);
         _radioBtn.onClick.AddListener(OnRadioBtn);
 
@@ -41,7 +43,12 @@ public class UI_GameScene : UI_Scene
     private void OnCraftingBtn()
     {
         // To Do - 건축 목록 보여주기
-        UIManager.Instance.OpenPopupUI<UI_Crafting>();
+        UIManager.Instance.OpenPopupUI<UI_BuildStructure>();
+    }
+
+    private void OnWeaponBtn()
+    {
+        UIManager.Instance.OpenPopupUI<UI_Weapon>();
     }
 
     private void OnInventoryBtn()

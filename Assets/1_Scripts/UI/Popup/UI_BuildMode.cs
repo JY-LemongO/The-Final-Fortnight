@@ -15,6 +15,6 @@ public class UI_BuildMode : UI_Popup
     private void OnCancelBtn()
     {
         Close();
-        UIManager.Instance.OpenPopupUI<UI_Crafting>();
+        UIManager.Instance.OpenPopupUI<UI_BuildStructure>();
     }
 }

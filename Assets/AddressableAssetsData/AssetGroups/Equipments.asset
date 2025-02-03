@@ -16,19 +16,19 @@ MonoBehaviour:
   m_GUID: 6b0fac0cb811a2344a50ed140adaa9b0
   m_SerializeEntries:
   - m_GUID: 08ec24506b94ece4196c7c51bd3c0ce2
-    m_Address: WEAPON_AR_01.asset
+    m_Address: WEAPON_AR_01
     m_ReadOnly: 0
     m_SerializedLabels:
     - Equipments
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 535d3e891f5c4ad44afa0e6b30fe0d11
-    m_Address: WEAPON_SMG_01.asset
+    m_Address: WEAPON_SMG_01
     m_ReadOnly: 0
     m_SerializedLabels:
     - Equipments
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e9b104b1e8ff5544e81032b474d74cd7
-    m_Address: WEAPON_PISTOL_01.asset
+    m_Address: WEAPON_PISTOL_01
     m_ReadOnly: 0
     m_SerializedLabels:
     - Equipments

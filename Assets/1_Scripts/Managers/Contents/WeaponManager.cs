@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class WeaponManager : SingletonBase<WeaponManager>
 {
+    private Dictionary<string, Weapon_SO> _weaponDict = new();
     private List<Weapon_SO> _weaponInventory = new();
 
     public void CraftWeapon(string key)
@@ -24,6 +25,14 @@ public class WeaponManager : SingletonBase<WeaponManager>
     public void DisassembleWeapon(Weapon_SO weapon)
     {
         _weaponInventory.Remove(weapon);
+    }
+
+    public Weapon_SO GetWeaponSO(string key)
+    {
+        if (!_weaponDict.ContainsKey(key))
+            _weaponDict[key] = ResourceManager.Instance.Load<Weapon_SO>(key).Clone() as Weapon_SO;
+
+        return _weaponDict[key];
     }
 
     protected override void InitChild()

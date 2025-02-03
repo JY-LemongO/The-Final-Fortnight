@@ -3,38 +3,32 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UI_Crafting : UI_Popup
+public class UI_BuildStructure : UI_Popup
 {
     [Header("ViewPorts")]
     [SerializeField] private GameObject _barricateViewPort;
-    [SerializeField] private GameObject _weaponViewPort;
     [SerializeField] private GameObject _turretViewPort;
 
-    [Header("Buttons")]
+    [Header("CraftUI Buttons")]
     [SerializeField] private Button _barricateBtn;
-    [SerializeField] private Button _weaponBtn;
     [SerializeField] private Button _turretBtn;
     [SerializeField] private Button _closeBtn;
 
+    [Header("Barricate")]
     [SerializeField] private Button _buildBarricateBtn;
 
-    [Header("Weapon")]
-    [SerializeField] private Image _weaponImage;
-
-    [Header("Barricate")]
     [SerializeField] private Image _barricateImage;
     [SerializeField] private TMP_Text _barricateHPText;
     [SerializeField] private TMP_Text _barricateBuildCostText;
 
-    [Header("Turret")]    
+    [Header("Turret")]
     [SerializeField] private Image _turretImage;
 
     protected override void Init()
     {
         base.Init();
 
-        _barricateViewPort.SetActive(true);
-        _weaponViewPort.SetActive(false);
+        _barricateViewPort.SetActive(true);        
         _turretViewPort.SetActive(false);
 
         ButtonsAddListener();
@@ -43,7 +37,7 @@ public class UI_Crafting : UI_Popup
     private void ButtonsAddListener()
     {
         _barricateBtn.onClick.AddListener(OnBarricateBtn);
-        _weaponBtn.onClick.AddListener(OnWeaponBtn);
+        
         _turretBtn.onClick.AddListener(OnTurretBtn);
         _closeBtn.onClick.AddListener(Close);
 
@@ -56,7 +50,7 @@ public class UI_Crafting : UI_Popup
         if (_barricateViewPort.activeSelf)
             return;
 
-        ChangeViewPort(_barricateViewPort, _weaponViewPort, _turretViewPort);
+        ChangeViewPort(_barricateViewPort, _turretViewPort);
         UpdateBarricateInfo();
     }
 
@@ -69,24 +63,9 @@ public class UI_Crafting : UI_Popup
     }
 
     private void OnBarricateBuildBtn()
-    {        
+    {
         BuildingSystem.Instance.EnterBuildMode(GetBarricateToStructureSO());
         Close();
-    }
-    #endregion
-
-    #region Weapon
-    private void OnWeaponBtn()
-    {
-        if (_weaponViewPort.activeSelf)
-            return;
-
-        ChangeViewPort(_weaponViewPort, _barricateViewPort, _turretViewPort);
-    }
-
-    private void OnWeaponAssembleBtn()
-    {
-
     }
     #endregion
 
@@ -96,10 +75,9 @@ public class UI_Crafting : UI_Popup
         if (_turretViewPort.activeSelf)
             return;
 
-        ChangeViewPort(_turretViewPort, _barricateViewPort, _weaponViewPort);
+        ChangeViewPort(_turretViewPort, _barricateViewPort);
 
     }
-
     #endregion   
 
     private Structure_SO GetBarricateToStructureSO()
@@ -113,10 +91,9 @@ public class UI_Crafting : UI_Popup
     private Structure_SO GetStructureSO(string key)
         => ResourceManager.Instance.Load<Structure_SO>(key);
 
-    private void ChangeViewPort(GameObject enableViewPort, GameObject disableViewPort1, GameObject disableViewPort2)
+    private void ChangeViewPort(GameObject enableViewPort, GameObject disableViewPort)
     {
         enableViewPort.SetActive(true);
-        disableViewPort1.SetActive(false);
-        disableViewPort2.SetActive(false);
+        disableViewPort.SetActive(false);        
     }
 }
