@@ -1,15 +1,19 @@
+using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class WeaponManager : SingletonBase<WeaponManager>
 {
-    private Dictionary<string, Weapon_SO> _weaponDict = new();
+    #region Events
+    public event Action<Weapon_SO> OnWeaponCreated;
+    #endregion
+
     private List<Weapon_SO> _weaponInventory = new();
 
-    public void CraftWeapon(string key)
-    {        
-        Weapon_SO weapon = ResourceManager.Instance.Load<Weapon_SO>(key);
-        _weaponInventory.Add(weapon.Clone() as Weapon_SO);
+    public void CraftWeapon(Weapon_SO originWeaponData)
+    {
+        Weapon_SO weapon = originWeaponData.Clone() as Weapon_SO;
+        _weaponInventory.Add(weapon);
+        OnWeaponCreated?.Invoke(weapon);
     }
 
     public void SortInventoryByEquipment()
@@ -27,16 +31,18 @@ public class WeaponManager : SingletonBase<WeaponManager>
         _weaponInventory.Remove(weapon);
     }
 
-    public Weapon_SO GetWeaponSO(string key)
-    {
-        if (!_weaponDict.ContainsKey(key))
-            _weaponDict[key] = ResourceManager.Instance.Load<Weapon_SO>(key).Clone() as Weapon_SO;
-
-        return _weaponDict[key];
-    }
+    public List<Weapon_SO> GetAllWeapons()
+        => _weaponInventory;
 
     protected override void InitChild()
     {
         _isDontDestroy = false;
+    }
+
+    public override void Dispose()
+    {
+        _weaponInventory.Clear();
+        OnWeaponCreated = null;        
+        base.Dispose();
     }
 }

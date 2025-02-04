@@ -16,13 +16,25 @@ MonoBehaviour:
   m_GUID: 86896cbe65caef84b87a3e73e41e34ba
   m_SerializeEntries:
   - m_GUID: 35988dc0331e7544c80da5d458d84691
-    m_Address: UI_Crafting
+    m_Address: UI_BuildStructure
     m_ReadOnly: 0
     m_SerializedLabels:
     - Prefabs
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4318069e921d43e418f1ea530332e4f6
     m_Address: UI_GameOver
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Prefabs
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 471eb97dcd6cf1c40b477b8222120e49
+    m_Address: UI_InventorySlot
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Prefabs
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 811aa4396b888ca4f83c5e548d356bd0
+    m_Address: UI_Backpack
     m_ReadOnly: 0
     m_SerializedLabels:
     - Prefabs

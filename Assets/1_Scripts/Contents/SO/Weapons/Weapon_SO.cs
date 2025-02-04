@@ -15,7 +15,15 @@ public class Weapon_SO : BaseSO
     [SerializeField] private Sprite _profileSprite;
     [SerializeField] private Vector2 _weaponPosition;
     [SerializeField] private Vector2 _bulletShellPosition;
+    
+    #region Read Only Property
+    public Stat_SO DamageSO => _damageSO;
+    public Stat_SO MagazineSO => _magazineSO;
+    public Stat_SO FireRateSO => _fireRateSO;
+    public Stat_SO FireRangeSO => _fireRangeSO;
+    #endregion
 
+    #region Clone 후 실제 Stats
     private Stat_SO _statDamage;
     private Stat_SO _statMagazine;
     private Stat_SO _statFireRate;
@@ -25,6 +33,7 @@ public class Weapon_SO : BaseSO
     public Stat_SO Magazine => _statMagazine;
     public Stat_SO FireRate => _statFireRate;
     public Stat_SO FireRange => _statFireRange;
+    #endregion
 
     public RuntimeAnimatorController AnimController => _animController;
     public Sprite ProfileSprite => _profileSprite;

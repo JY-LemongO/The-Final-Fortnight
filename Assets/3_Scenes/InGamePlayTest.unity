@@ -711,7 +711,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1000
-  m_Sprite: {fileID: 21300000, guid: bba50f3708cb1b745ace74b3f3094b99, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f442c76b48d978747ad4a77951d2253e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1100,6 +1100,7 @@ GameObject:
   - component: {fileID: 2119303865}
   - component: {fileID: 2119303867}
   - component: {fileID: 2119303868}
+  - component: {fileID: 2119303869}
   m_Layer: 0
   m_Name: Square
   m_TagString: HumanSideEntity
@@ -1240,6 +1241,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a07a239ea4d1bf14aabb4b0bd1e25045, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2119303869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2119303864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed26c362cad110943a020d9b56712107, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _entityType: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

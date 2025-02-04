@@ -13,6 +13,7 @@ public static class Define
         Scene,
         Popup,
         World,
+        Item,
     }
 
     public enum EntityType
@@ -61,6 +62,7 @@ public static class Define
         WEAPON_PISTOL_01,
         WEAPON_SMG_01,
         WEAPON_AR_01,
+        Count,
     }
 
     public enum ZombieKeys

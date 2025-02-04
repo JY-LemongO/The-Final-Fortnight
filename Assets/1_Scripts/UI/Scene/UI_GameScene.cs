@@ -53,7 +53,7 @@ public class UI_GameScene : UI_Scene
 
     private void OnInventoryBtn()
     {
-        // 총기 목록 보여주기
+        UIManager.Instance.OpenPopupUI<UI_Backpack>();
     }
 
     private void OnRadioBtn()
