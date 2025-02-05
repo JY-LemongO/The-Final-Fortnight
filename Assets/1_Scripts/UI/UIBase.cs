@@ -12,8 +12,6 @@ public abstract class UIBase : MonoBehaviour
 
     protected virtual void Init() { }
 
-    public virtual void Setup() { }
-
     public virtual void Close()
         => UIManager.Instance.CloseUI(this);
 

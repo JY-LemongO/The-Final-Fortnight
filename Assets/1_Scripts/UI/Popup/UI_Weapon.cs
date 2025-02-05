@@ -23,13 +23,28 @@ public class UI_Weapon : UI_Popup
     [SerializeField] private TMP_Text _fireRateValueText;
     [SerializeField] private TMP_Text _rangeValueText;
 
+    [Header("Results")]
+    [SerializeField] private GameObject _resultObject;
+
+    [SerializeField] private TMP_Text _atkResultText;
+    [SerializeField] private TMP_Text _magazineResultText;
+    [SerializeField] private TMP_Text _fireRateResultText;
+    [SerializeField] private TMP_Text _rangeResultText;
+    [Space(10)]
+    [SerializeField] private TMP_Text _atkResultValueText;
+    [SerializeField] private TMP_Text _magazineResultValueText;
+    [SerializeField] private TMP_Text _fireRateResultValueText;
+    [SerializeField] private TMP_Text _rangeResultValueText;
+
     private Weapon_SO _currentWeapon;
-    private int _weaponIndex;
+    private string[] _weaponKeys;
+    private int _weaponIndex;    
 
     protected override void Init()
     {
         base.Init();
-        _currentWeapon = ResourceManager.Instance.Load<Weapon_SO>(Define.WeaponKeys.WEAPON_PISTOL_01.ToString());
+        _weaponKeys = Enum.GetNames(typeof(Define.WeaponKeys));
+        _currentWeapon = ResourceManager.Instance.Load<Weapon_SO>(_weaponKeys[0]);
 
         ButtonsAddListener();
         UpdateWeaponInfo();
@@ -45,24 +60,41 @@ public class UI_Weapon : UI_Popup
 
     private void OnCreateWeaponBtn()
     {
-        //WeaponManager.Instance.CraftWeapon();
+        WeaponManager.Instance.CraftWeapon(_currentWeapon);
+        ShowCreateResult();
     }
 
     private void OnPrevOrNextWeaponBtn(int value)
     {
-        _weaponIndex += value;
-        string key = Enum.GetNames(typeof(Define.WeaponKeys))[_weaponIndex];
-
-        _currentWeapon = ResourceManager.Instance.Load<Weapon_SO>(key);
+        int prev = _weaponIndex;
+        _weaponIndex = Mathf.Clamp(_weaponIndex + value, 0, (int)Define.WeaponKeys.Count - 1);
+        
+        if (prev == _weaponIndex)
+            return;
+        
+        _currentWeapon = ResourceManager.Instance.Load<Weapon_SO>(_weaponKeys[_weaponIndex]);
         UpdateWeaponInfo();
     }
 
     private void UpdateWeaponInfo()
     {
+        _weaponImage.sprite = _currentWeapon.ProfileSprite;
         _weaponDescValueText.text = _currentWeapon.DisplayDesc;
-        _atkValueText.text = $"{(int)_currentWeapon.Damage.Value}";
-        _magazineValueText.text = $"{(int)_currentWeapon.Magazine.Value}";
-        _fireRateValueText.text = $"{(int)_currentWeapon.FireRate.Value}";
-        _rangeValueText.text = $"{(int)_currentWeapon.FireRange.Value}";
+        _atkValueText.text = $"{(int)_currentWeapon.DamageSO.Value}";
+        _magazineValueText.text = $"{(int)_currentWeapon.MagazineSO.Value}";
+        _fireRateValueText.text = $"{(int)_currentWeapon.FireRateSO.Value}";
+        _rangeValueText.text = $"{(int)_currentWeapon.FireRangeSO.Value}";
+    }
+
+    private void ShowCreateResult()
+    {
+        _resultObject.SetActive(true);
+        //To Do - 실제 랜덤 수치 입히면서 Info Text 갱신
+    }
+
+    public override void Close()
+    {
+        _resultObject.SetActive(false);
+        base.Close();
     }
 }

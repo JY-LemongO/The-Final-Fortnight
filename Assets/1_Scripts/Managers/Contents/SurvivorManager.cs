@@ -58,11 +58,6 @@ public class SurvivorManager : SingletonBase<SurvivorManager>
         }
     }
 
-    public void UpgradeWeapon(string weaponSOKey)
-    {
-
-    }
-
     public Survivor_SO GetSelectableSurvivor(int index)
         => SelectableSurvivorList[index];
 

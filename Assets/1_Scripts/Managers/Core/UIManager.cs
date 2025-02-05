@@ -127,8 +127,12 @@ public class UIManager : SingletonBase<UIManager>
 
     public T CreateItemUI<T>(Transform parent, string path = null) where T : UIBase
     {
-        T item = null;
+        if(string.IsNullOrEmpty(path))
+            path = typeof(T).Name;
 
+        GameObject go = ResourceManager.Instance.Instantiate(path, parent, false);
+
+        T item = go.GetComponent<T>();
         return item;
     }
 

@@ -58,8 +58,8 @@ public static class Constants
     public const float Max_Build_PosX = 5f;
 
     public const float Min_Build_PosY = -2.5f;
-    public const float Max_Build_PosY = 0f;    
+    public const float Max_Build_PosY = 0f;
+
+    public const int InventorySlotCount = 36;
     #endregion
-
-
 }
