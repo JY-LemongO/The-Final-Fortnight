@@ -34,7 +34,7 @@ MonoBehaviour:
     - Prefabs
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 811aa4396b888ca4f83c5e548d356bd0
-    m_Address: UI_Backpack
+    m_Address: UI_WeaponCase
     m_ReadOnly: 0
     m_SerializedLabels:
     - Prefabs

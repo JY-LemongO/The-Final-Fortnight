@@ -39,8 +39,6 @@ public class BulletShell : MonoBehaviour
     private void Update()
     {
         // Test
-        if (Input.GetMouseButtonDown(0))
-            StartCoroutine(Co_ShellMove());
     }
 #endif
 

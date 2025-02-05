@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UI_Backpack : UI_Popup
+public class UI_WeaponCase : UI_Popup
 {
     [SerializeField] private Button _closeBtn;
 

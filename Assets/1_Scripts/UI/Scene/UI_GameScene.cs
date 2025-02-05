@@ -53,7 +53,7 @@ public class UI_GameScene : UI_Scene
 
     private void OnInventoryBtn()
     {
-        UIManager.Instance.OpenPopupUI<UI_Backpack>();
+        UIManager.Instance.OpenPopupUI<UI_WeaponCase>();
     }
 
     private void OnRadioBtn()
