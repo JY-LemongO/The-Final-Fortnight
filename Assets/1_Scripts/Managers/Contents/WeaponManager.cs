@@ -9,11 +9,13 @@ public class WeaponManager : SingletonBase<WeaponManager>
 
     private List<Weapon_SO> _weaponInventory = new();
 
-    public void CraftWeapon(Weapon_SO originWeaponData)
+    public Weapon_SO CraftWeapon(Weapon_SO originWeaponData)
     {
         Weapon_SO weapon = originWeaponData.Clone() as Weapon_SO;
         _weaponInventory.Add(weapon);
         OnWeaponCreated?.Invoke(weapon);
+
+        return weapon;
     }
 
     public void SortInventoryByEquipment()

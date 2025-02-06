@@ -20,7 +20,7 @@ public class Survivor : Entity
     public Weapon Weapon { get; private set; }
     public Zombie Target { get; private set; }
 
-    private Survivor_SO _currentSurvivorSO;
+    private Survivor_SO _currentsurvivorSO => CurrentEntitySO as Survivor_SO;
     private Coroutine _targetSearchCoroutine;
 
     protected override void Init()
@@ -29,15 +29,19 @@ public class Survivor : Entity
         EntityType = Define.EntityType.Survivor;
     }
 
-    public override void SetupEntity<T>(string key)
+    public override void SetupEntity<T>(T entityClone)
     {
-        base.SetupEntity<T>(key);
-        _currentSurvivorSO = CurrentEntitySO as Survivor_SO;
-        _anim.runtimeAnimatorController = _currentSurvivorSO.AnimController;
-        
-        SetWeapon(_currentSurvivorSO.DefaultWeapon);
+        if (entityClone is not Survivor_SO)
+        {
+            Debug.LogError($"SetupEntity: 잘못된 Entity_SO 타입입니다. {typeof(T)}");
+            return;
+        }
+
+        base.SetupEntity(entityClone);                
+        _anim.runtimeAnimatorController = _currentsurvivorSO.AnimController;
+
         SetBulletUI();
-        SearchTarget();        
+        SearchTarget();
     }
 
     public void SearchTarget()
@@ -71,14 +75,10 @@ public class Survivor : Entity
         return false;
     }
 
-    /// <summary>
-    /// 사용 할 Weapon 셋팅. 매개변수로 클론화 하지 않은 Weapon_SO 전달.
-    /// </summary>    
     public void SetWeapon(Weapon_SO weaponSO)
-    {
-        Weapon_SO weaponSOClone = weaponSO.Clone() as Weapon_SO;        
-        Weapon.SetWeapon(this, weaponSOClone);
-        Weapon.transform.localPosition = weaponSOClone.WeaponPosition;
+    {           
+        Weapon.SetWeapon(this, weaponSO);
+        Weapon.transform.localPosition = weaponSO.WeaponPosition;
     }
 
     private void SetBulletUI()
@@ -139,8 +139,7 @@ public class Survivor : Entity
 
     public override void Dispose()
     {
-        StopAllCoroutines();
-        _currentSurvivorSO = null;
+        StopAllCoroutines();        
         Target = null;        
         _targetSearchCoroutine = null;
     }

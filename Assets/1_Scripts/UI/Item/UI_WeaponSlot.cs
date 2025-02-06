@@ -1,10 +1,15 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class UI_InventorySlot : UI_Item
+public class UI_WeaponSlot : UI_Item
 {
+    #region Events
+    public static event Action<Weapon_SO> OnWeaponSelected;
+    #endregion
+
     [SerializeField] private Image _icon;
     [SerializeField] private Image _equipmentImage;
     [SerializeField] private Image _highLight;
@@ -12,9 +17,13 @@ public class UI_InventorySlot : UI_Item
 
     public bool IsSetup { get; private set; } = false;
 
-    private static UI_InventorySlot _selectedSlot;
+    private static UI_WeaponSlot _selectedSlot;
+    public static void SetSelectable(UI_WeaponSlot slot)
+    {
+        _selectedSlot = slot;
+        OnWeaponSelected?.Invoke(slot._weapon);
+    }
 
-    // 일단은 무기 전용으로
     private Weapon_SO _weapon;
     private RectTransform _rect;
 
@@ -65,7 +74,7 @@ public class UI_InventorySlot : UI_Item
         {
             if (_selectedSlot != null)
                 _selectedSlot.SetHighLight(false);
-            _selectedSlot = this;
+            SetSelectable(this);
             // To Do - 현재 아이템 정보 좌측에 띄우기
         }
         else

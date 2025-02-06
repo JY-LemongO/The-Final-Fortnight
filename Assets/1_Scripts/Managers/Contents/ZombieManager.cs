@@ -20,7 +20,7 @@ public class ZombieManager : SingletonBase<ZombieManager>
         go.transform.position = new Vector2(_spawnPositionX, Random.Range(_minPositionY, _maxPositionY));
 
         Zombie zombie = go.GetComponent<Zombie>();
-        zombie.SetupEntity<Zombie_SO>(key);
+        //zombie.SetupEntity<Zombie_SO>(key);
         ZombiesList.Add(zombie);
     }
 

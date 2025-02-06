@@ -16,7 +16,7 @@ public class Zombie : Entity
 
     [SerializeField] private LayerMask _targetLayer;
     
-    private Zombie_SO _currentZombieSO;
+    private Zombie_SO _currentZombieSO => CurrentEntitySO as Zombie_SO;
     private Entity _currentTarget;
     private float _spriteHalfSize;
 
@@ -32,10 +32,15 @@ public class Zombie : Entity
         EntityType = Define.EntityType.Zombie;        
     }
 
-    public override void SetupEntity<T>(string key)
+    public override void SetupEntity<T>(T entityClone)
     {
-        base.SetupEntity<T>(key);
-        _currentZombieSO = CurrentEntitySO as Zombie_SO;
+        if(entityClone is not Zombie_SO)
+        {
+            Debug.LogError($"SetupEntity: 잘못된 Entity_SO 타입입니다. {typeof(T)}");
+            return;
+        }
+
+        base.SetupEntity(entityClone);        
         _currentZombieSO.ResetStats();
         _anim.runtimeAnimatorController = _currentZombieSO.AnimController;
         _spriteHalfSize = _renderer.sprite.textureRect.height / _renderer.sprite.pixelsPerUnit * 0.5f;
@@ -127,8 +132,7 @@ public class Zombie : Entity
     public override void Dispose()
     {
         StopAllCoroutines();
-        _renderer.color = Color.white;
-        _currentZombieSO = null;
+        _renderer.color = Color.white;        
         _currentTarget = null;        
     }
 

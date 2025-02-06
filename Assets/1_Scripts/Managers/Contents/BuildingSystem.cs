@@ -73,7 +73,7 @@ public class BuildingSystem : SingletonBase<BuildingSystem>
     private void BuildBarricate(GameObject go)
     {
         Barricate barricate = go.GetComponent<Barricate>();
-        barricate.SetupEntity<Barricate_SO>(_currentStructure.CodeName);
+        //barricate.SetupEntity<Barricate_SO>(_currentStructure.CodeName);
     }
 
     private void BuildTurret(GameObject go)

@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(EntityDamageEffect))]
@@ -18,8 +17,6 @@ public abstract class Entity : MonoBehaviour
     public Define.EntityType EntityType { get; protected set; }
     public Vector3 HPBarPosition { get; protected set; }
     public bool IsDead => CurrentEntitySO.Hp.CurrentValue <= 0f;
-
-    protected Dictionary<string, Entity_SO> _entitySODict = new();
     
     protected EntityDamageEffect _damageEffect;    
     protected UI_HPBar _hpBar;    
@@ -43,33 +40,16 @@ public abstract class Entity : MonoBehaviour
         AnimationHashInitialize();
     }
 
-    protected Entity_SO GetEntitySO => CurrentEntitySO;
-
-    public virtual void SetupEntity<T>(string key) where T : Entity_SO
+    public virtual void SetupEntity<T>(T entityClone) where T : Entity_SO
     {
-        if (!_entitySODict.ContainsKey(key))
-        {
-            T entityClone = GetEntitySOClone<T>(key);
-            if (entityClone == null)
-            {
-                Debug.LogError($"Key-{key}에 해당하는 Entity_SO가 없습니다.");
-                return;
-            }
-            _entitySODict.Add(key, entityClone);
-        }
-        CurrentEntitySO = _entitySODict[key] as T;
+        string key = entityClone.CodeName;
+
+        CurrentEntitySO = entityClone;
         HPBarPosition = Vector3.up * CurrentEntitySO.HPBarOffset;
 
         _damageEffect.Setup(this);
         SetSpriteSortingOrder();
         SetHPBarUI();
-    }
-
-    private T GetEntitySOClone<T>(string key) where T : Entity_SO
-    {
-        T entitySO = ResourceManager.Instance.Load<T>(key);
-
-        return entitySO.Clone() as T;
     }
 
     private void SetHPBarUI()
@@ -114,11 +94,10 @@ public abstract class Entity : MonoBehaviour
     protected virtual void AnimationHashInitialize() { }
 
     public virtual void ResetEntity()
-    {
-        
+    {        
         _hpBar.Close();
+        CurrentEntitySO = null;
     }
 
-    public abstract void Dispose();
-    
+    public abstract void Dispose();    
 }

@@ -186,8 +186,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a19b2b07f97e432448f38004978d3f9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _closeBtn: {fileID: 6632104559065979153}
   _contentsTrs: {fileID: 8609316420190773474}
+  _closeBtn: {fileID: 6632104559065979153}
+  _icon: {fileID: 934234375277302334}
+  _weaponNameText: {fileID: 1234520175744381265}
+  _damageValueText: {fileID: 2744548994249452989}
+  _magazineValueText: {fileID: 8777109216997517876}
+  _fireRateValueText: {fileID: 1466117220299128956}
+  _rangeValueText: {fileID: 6944738424101300381}
 --- !u!1 &568819280140918273
 GameObject:
   m_ObjectHideFlags: 0

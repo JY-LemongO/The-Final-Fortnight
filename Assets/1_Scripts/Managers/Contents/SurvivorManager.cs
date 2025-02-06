@@ -28,13 +28,9 @@ public class SurvivorManager : SingletonBase<SurvivorManager>
         go.transform.position = _spawnPosition;
 
         Survivor survivor = go.GetComponent<Survivor>();
-        survivor.SetupEntity<Survivor_SO>(survivorSOKey);
+        //survivor.SetupEntity<Survivor_SO>(survivorSOKey);
 
-        string survivorCodeName = survivor.CurrentEntitySO.CodeName;
-        if (!_spawnedSurvivorDict.ContainsKey(survivorCodeName))
-            _spawnedSurvivorDict.Add(survivorCodeName, new List<Survivor>());
-        _spawnedSurvivorDict[survivorCodeName].Add(survivor);
-
+        RegisterSurvivor(survivor);
         OnSurvivorsCountChanged?.Invoke(survivor, prevSurvivorsCount, GetSurvivorsCount());
     }
 
@@ -67,13 +63,10 @@ public class SurvivorManager : SingletonBase<SurvivorManager>
 
         foreach (var key in survivorSOKeys)
         {            
-            Survivor_SO survivoRO = ResourceManager.Instance.Load<Survivor_SO>(key);
+            Survivor_SO survivorRO = ResourceManager.Instance.Load<Survivor_SO>(key);                        
 
-            Survivor_SO survivor = survivoRO.Clone() as Survivor_SO;
-            Weapon_SO weapon = survivoRO.DefaultWeapon.Clone() as Weapon_SO;
-
-            SelectableSurvivorList.Add(survivor);
-            SelectableSurvivorsWeaponList.Add(weapon);
+            SelectableSurvivorList.Add(survivorRO);
+            SelectableSurvivorsWeaponList.Add(survivorRO.DefaultWeapon);
         }
     }
 
@@ -83,6 +76,15 @@ public class SurvivorManager : SingletonBase<SurvivorManager>
         _spawnedSurvivorDict = new();
         // Temp
         _spawnPosition = GameObject.Find(SURVIVOR_SPAWN_MARKER).transform.position;
+    }
+
+    private void RegisterSurvivor(Survivor survivor)
+    {
+        string key = survivor.CurrentEntitySO.CodeName;
+
+        if (!_spawnedSurvivorDict.ContainsKey(key))
+            _spawnedSurvivorDict.Add(key, new List<Survivor>());
+        _spawnedSurvivorDict[key].Add(survivor);
     }
 
     private void OnRestartGame()
