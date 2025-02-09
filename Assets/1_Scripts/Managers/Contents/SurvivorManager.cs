@@ -22,22 +22,27 @@ public class SurvivorManager : SingletonBase<SurvivorManager>
 
     public void SpawnSurvivor(string survivorSOKey)
     {
-        int prevSurvivorsCount = GetSurvivorsCount();
+        Survivor_SO survivoSO = ResourceManager.Instance.Load<Survivor_SO>(survivorSOKey);
+        Survivor survivor = NewSurvivor();             
+        survivor.Setup(survivoSO);
 
+        int prevSurvivorsCount = GetSurvivorsCount();
+        RegisterSurvivor(survivor);
+        OnSurvivorsCountChanged?.Invoke(survivor, prevSurvivorsCount, GetSurvivorsCount());
+    }
+
+    private Survivor NewSurvivor()
+    {
         GameObject go = ResourceManager.Instance.Instantiate(_survivorPrefabKey);
         go.transform.position = _spawnPosition;
 
-        Survivor survivor = go.GetComponent<Survivor>();
-        //survivor.SetupEntity<Survivor_SO>(survivorSOKey);
-
-        RegisterSurvivor(survivor);
-        OnSurvivorsCountChanged?.Invoke(survivor, prevSurvivorsCount, GetSurvivorsCount());
+        return go.GetComponent<Survivor>();
     }
 
     public void DispawnSurvivor(Survivor dispawnSurvivor)
     {
         int prevSurvivorsCount = GetSurvivorsCount();
-        string key = dispawnSurvivor.CurrentEntitySO.CodeName;
+        string key = dispawnSurvivor.SurvivorStatus.CodeName;
 
         if (!_spawnedSurvivorDict.ContainsKey(key))
             return;
@@ -62,8 +67,8 @@ public class SurvivorManager : SingletonBase<SurvivorManager>
         string[] survivorSOKeys = Enum.GetNames(typeof(Define.SurvivorKeys));
 
         foreach (var key in survivorSOKeys)
-        {            
-            Survivor_SO survivorRO = ResourceManager.Instance.Load<Survivor_SO>(key);                        
+        {
+            Survivor_SO survivorRO = ResourceManager.Instance.Load<Survivor_SO>(key);
 
             SelectableSurvivorList.Add(survivorRO);
             SelectableSurvivorsWeaponList.Add(survivorRO.DefaultWeapon);
@@ -80,7 +85,7 @@ public class SurvivorManager : SingletonBase<SurvivorManager>
 
     private void RegisterSurvivor(Survivor survivor)
     {
-        string key = survivor.CurrentEntitySO.CodeName;
+        string key = survivor.SurvivorStatus.CodeName;
 
         if (!_spawnedSurvivorDict.ContainsKey(key))
             _spawnedSurvivorDict.Add(key, new List<Survivor>());
@@ -95,10 +100,10 @@ public class SurvivorManager : SingletonBase<SurvivorManager>
             {
                 survivor.ResetEntity();
                 PoolManager.Instance.Return(survivor.gameObject);
-            }                
-        }            
+            }
+        }
         _spawnedSurvivorDict.Clear();
-    }        
+    }
 
     private int GetSurvivorsCount()
     {

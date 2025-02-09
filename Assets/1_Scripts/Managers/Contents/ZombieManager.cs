@@ -14,13 +14,12 @@ public class ZombieManager : SingletonBase<ZombieManager>
 
     public ZombieManager() => _isDontDestroy = false;
 
-    public void SpawnZombie(string key)
+    public void SpawnZombie(string zombieSOKey)
     {
-        GameObject go = ResourceManager.Instance.Instantiate(KEY_ZOMBIE_PREFAB);
-        go.transform.position = new Vector2(_spawnPositionX, Random.Range(_minPositionY, _maxPositionY));
+        Zombie_SO zombieSO = ResourceManager.Instance.Load<Zombie_SO>(zombieSOKey);
+        Zombie zombie = NewZombie();
+        zombie.Setup(zombieSO);
 
-        Zombie zombie = go.GetComponent<Zombie>();
-        //zombie.SetupEntity<Zombie_SO>(key);
         ZombiesList.Add(zombie);
     }
 
@@ -29,6 +28,14 @@ public class ZombieManager : SingletonBase<ZombieManager>
         ZombiesList.Remove(zombie);
         PoolManager.Instance.Return(zombie.gameObject);
     }    
+
+    private Zombie NewZombie()
+    {
+        GameObject go = ResourceManager.Instance.Instantiate(KEY_ZOMBIE_PREFAB);
+        go.transform.position = new Vector2(_spawnPositionX, Random.Range(_minPositionY, _maxPositionY));
+
+        return go.GetComponent<Zombie>();
+    }
 
     private void OnRestartGame()
     {

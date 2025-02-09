@@ -24,7 +24,7 @@ public class UI_HPBar : UI_World
     private void LateUpdate()
     {
         if (_entity != null)
-            transform.position = _entity.transform.position + _entity.HPBarPosition;
+            transform.position = _entity.transform.position + Vector3.up * _entity.Status.HPBarOffset;
     }
 
     public void SetEntity(Entity entity)
@@ -36,7 +36,7 @@ public class UI_HPBar : UI_World
             gameObject.SetActive(true);
 
         _entity = entity;
-        _entity.CurrentEntitySO.Hp.OnStatCurrentValueChanged += HandleHPSliderValueChange;
+        //_entity.OnStatCurrentValueChanged += HandleHPSliderValueChange;
     }
 
     private void HandleHPSliderValueChange(float currentValue, float totalValue)
@@ -77,7 +77,7 @@ public class UI_HPBar : UI_World
 
         StopAllCoroutines();
         _isDisappearing = true;
-        _entity.CurrentEntitySO.Hp.OnStatCurrentValueChanged -= HandleHPSliderValueChange;
+        //_entity.CurrentEntitySO.Hp.OnStatCurrentValueChanged -= HandleHPSliderValueChange;
         _entity = null;
         base.Dispose();
     }

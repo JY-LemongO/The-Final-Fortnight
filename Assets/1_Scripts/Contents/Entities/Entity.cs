@@ -1,61 +1,64 @@
 using System;
 using UnityEngine;
 
-[RequireComponent(typeof(EntityDamageEffect))]
 public abstract class Entity : MonoBehaviour
 {
-    #region Renderer
-    protected Animator _anim;
-    protected SpriteRenderer _renderer;
-    #endregion
-
     #region Events
+    public event Action<float> OnDamaged;
     public event Action OnDead;
     #endregion
 
-    public Entity_SO CurrentEntitySO { get; protected set; }
-    public Define.EntityType EntityType { get; protected set; }
-    public Vector3 HPBarPosition { get; protected set; }
-    public bool IsDead => CurrentEntitySO.Hp.CurrentValue <= 0f;
-    
-    protected EntityDamageEffect _damageEffect;    
-    protected UI_HPBar _hpBar;    
-
-    private void Awake()
+    [field: SerializeField] public Define.EntityType EntityType { get; protected set; }
+    public bool IsDead
     {
-        Init();
+        get => _isDead;
+        protected set
+        {
+            _isDead = value;
+            OnDead?.Invoke();
+        }
+    }
+
+    public EntityStatus Status => _status;
+    protected EntityStatus _status;
+    protected SpriteRenderer _renderer;
+
+    private bool _isDead;
+    private bool _isInit;
+
+    public virtual void Setup(Entity_SO so)
+    {
+        if (!_isInit)
+            Init();
+        _status.SetupStatus(so);
+
+        if (this is IAnimatedObject animatedEntity && so.AnimatorController != null)
+            animatedEntity.SetAnimatorController(so.AnimatorController);
+    }
+
+    public virtual void GetDamaged(float damage)
+    {
+        if (IsDead)
+            return;
+
+        _status.GetDamaged(damage);
+        if (_status.Hp <= 0)
+            IsDead = true;
     }
 
     protected virtual void Init()
     {
-        _anim = GetComponent<Animator>();
-        _renderer = GetComponent<SpriteRenderer>();
-        _damageEffect = GetComponent<EntityDamageEffect>();        
+        _isInit = true;
+        _status = CreateStatusInstance();
 
-        _anim = GetComponent<Animator>();
+        ComponenetsSetting();        
+        SetSpriteSortingOrder();
+    }
+
+    protected virtual void ComponenetsSetting()
+    {
         _renderer = GetComponent<SpriteRenderer>();
         _renderer.sortingOrder = Util.GetSortingOreder(Define.SpriteType.Weapon);
-        
-        _damageEffect.Init();
-        AnimationHashInitialize();
-    }
-
-    public virtual void SetupEntity<T>(T entityClone) where T : Entity_SO
-    {
-        string key = entityClone.CodeName;
-
-        CurrentEntitySO = entityClone;
-        HPBarPosition = Vector3.up * CurrentEntitySO.HPBarOffset;
-
-        _damageEffect.Setup(this);
-        SetSpriteSortingOrder();
-        SetHPBarUI();
-    }
-
-    private void SetHPBarUI()
-    {
-        _hpBar = UIManager.Instance.CreateWorldUI<UI_HPBar>();
-        _hpBar.SetEntity(this);
     }
 
     private void SetSpriteSortingOrder()
@@ -64,40 +67,6 @@ public abstract class Entity : MonoBehaviour
         _renderer.sortingOrder = Util.GetSortingOreder(Define.SpriteType.Entity) + sortingOrderOffsetByPositionY;
     }
 
-    private void SetupDamageText(float damage)
-    {
-        GameObject damageText = ResourceManager.Instance.Instantiate(Constants.Key_DamageText);
-        damageText.transform.position = transform.position + Vector3.up * CurrentEntitySO.HPBarOffset;
-        damageText.GetComponent<DamageText>().SetDamageText(damage);
-    }
-
-    public void GetDamaged(Entity attacker, float damage)
-    {
-        if (IsDead)
-            return;
-        
-        CurrentEntitySO.Hp.Consume(damage);
-        _damageEffect.EffectDamaged();
-        SetupDamageText(damage);
-
-        if (CurrentEntitySO.Hp.CurrentValue <= 0f)
-            Dead();
-    }
-
-    protected virtual void Dead()
-    {
-        _hpBar.Close();
-        OnDead?.Invoke();
-        OnDead = null;        
-    }    
-
-    protected virtual void AnimationHashInitialize() { }
-
-    public virtual void ResetEntity()
-    {        
-        _hpBar.Close();
-        CurrentEntitySO = null;
-    }
-
-    public abstract void Dispose();    
+    public abstract void ResetEntity();
+    protected abstract EntityStatus CreateStatusInstance();    
 }

@@ -14,12 +14,12 @@ public class AnimationTestScene : MonoBehaviour
     public void OnAnimFire()
     {
         foreach (var weapon in _weapons)
-            weapon.AnimForTest.SetTrigger("Fire");
+            weapon.Animator.SetTrigger("Fire");
     }
 
     public void OnAnimReload()
     {
         foreach (var weapon in _weapons)
-            weapon.AnimForTest.SetTrigger("Reload");
+            weapon.Animator.SetTrigger("Reload");
     }
 }

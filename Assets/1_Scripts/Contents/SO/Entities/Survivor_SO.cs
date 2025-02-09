@@ -12,18 +12,4 @@ public class Survivor_SO : Entity_SO
     public Weapon_SO DefaultWeapon => _defaultWeaponSO;
     public RuntimeAnimatorController AnimController => _animController;
     public Sprite ProfileSprite => _profileSprite;
-
-    public override void InitializeStats()
-    {
-        base.InitializeStats();
-        _defaultWeaponSO.Clone();
-    }        
-
-    public override object Clone()
-    {
-        var survivorClone = Instantiate(this);
-        survivorClone.InitializeStats();
-
-        return survivorClone;
-    }
 }

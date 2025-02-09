@@ -1,34 +1,32 @@
+using System;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour
+public class Weapon : MonoBehaviour, IAnimatedObject
 {
-    #region renderer
+    #region Events
+    public event Action<int, int> OnMagazineValueChanged;
+    #endregion
+
+    #region Renderer
     [Header("AnimationData")]
     [SerializeField] private string _fireParamName;
     [SerializeField] private string _reloadParamName;
 
-    public Animator AnimForTest => _anim;
-
-    private SpriteRenderer _renderer;
-    private Animator _anim;
     private int _fireParamHash;
     private int _reloadParamHash;
     #endregion
 
-    public Weapon_SO WeaponData => _currentWeapon;
-    private Weapon_SO _currentWeapon;
+    public Animator Animator { get; private set; }
+    public WeaponStatus WeaponStatus { get; private set; }
+
+    private SpriteRenderer _renderer;
     private Survivor _context;
 
     private float _currentCooldown;
 
-
     private void Awake()
     {
-        _anim = GetComponent<Animator>();
-        _renderer = GetComponent<SpriteRenderer>();
-        _renderer.sortingOrder = Util.GetSortingOreder(Define.SpriteType.Weapon);
-
-        AnimationHashInitialize();
+        Init();
     }
 
     private void Update()
@@ -39,41 +37,55 @@ public class Weapon : MonoBehaviour
         HandleGunFireTimer();
     }
 
-    public void SetWeapon(Survivor context, Weapon_SO weapon)
+    public void InitWeapon(Survivor context, Weapon_SO weapon)
     {
         _context = context;
-        _currentWeapon = weapon;
-        _anim.runtimeAnimatorController = weapon.AnimController;
-
-        _currentWeapon.OnReloadWeapon += Reload;
+        ChangeWeapon(weapon);
     }
 
     public void ChangeWeapon(Weapon_SO newWeapon)
-        => _currentWeapon = newWeapon;
+    {
+        transform.position = newWeapon.WeaponPosition;
+        Animator.runtimeAnimatorController = newWeapon.AnimController;
+        WeaponStatus.Setup(newWeapon);
+    }        
 
     public void Fire()
-        => _anim.SetTrigger(_fireParamHash);
+        => Animator.SetTrigger(_fireParamHash);
 
     private void Reload()
-        => _anim.SetTrigger(_reloadParamHash);
+        => Animator.SetTrigger(_reloadParamHash);
+
+    private void Init()
+    {
+        ComponentsSetting();
+        AnimationHashInitialize();
+    }
+
+    private void ComponentsSetting()
+    {
+        Animator = GetComponent<Animator>();
+        _renderer = GetComponent<SpriteRenderer>();
+        _renderer.sortingOrder = Util.GetSortingOreder(Define.SpriteType.Weapon);
+    }
 
     private void SpawnBulletShell()
     {
         GameObject go = ResourceManager.Instance.Instantiate(Constants.Key_BulletShell);
         BulletShell shell = go.GetComponent<BulletShell>();
-        Vector3 shellPos = transform.position + _currentWeapon.BulletShellPosition;
+        Vector3 shellPos = transform.position + WeaponStatus.BulletShellPosition;
         shell.Setup(shellPos);
     }
 
     private void HandleGunFireTimer()
     {
-        if (_currentCooldown < _currentWeapon.FireRate.Value)
+        if (_currentCooldown < WeaponStatus.FireRate)
             _currentCooldown += Time.deltaTime;
         else
         {
             if (_context.Target == null)
                 return;
-            if (_currentWeapon.Magazine.CurrentValue <= 0)
+            if (WeaponStatus.Magazine <= 0)
                 return;
 
             Fire();
@@ -90,15 +102,20 @@ public class Weapon : MonoBehaviour
 
     private void HandleAttackTarget()
     {
-        if (!_context.CheckTargetIsDead())
-            _context.AttackTarget(_currentWeapon.Damage.Value);
-        _currentWeapon.Fire();
+        if (!_context.Controller.CheckTargetIsDead())
+            _context.Controller.AttackTarget(WeaponStatus.Damage);
+        WeaponStatus.Fire();
         SpawnBulletShell();
     }
 
     private void HandleReload()
     {
-        _currentWeapon.Reload();
+        WeaponStatus.Reload();
+    }
+
+    public void SetAnimatorController(RuntimeAnimatorController controller)
+    {
+        throw new System.NotImplementedException();
     }
     #endregion
 }

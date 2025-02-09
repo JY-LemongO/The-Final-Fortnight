@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class EntityDamageEffect : MonoBehaviour
 {
-    [SerializeField] private Define.EntityType _entityType;
-
     private Entity _context;
     private Material _mat;
 
@@ -31,7 +29,7 @@ public class EntityDamageEffect : MonoBehaviour
             StopCoroutine(_hitCoroutine);
         _hitCoroutine = StartCoroutine(Co_HitFlash());
 
-        switch (_entityType)
+        switch (_context.EntityType)
         {
             case Define.EntityType.Survivor:
                 break;

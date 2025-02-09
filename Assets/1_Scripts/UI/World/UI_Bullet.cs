@@ -18,14 +18,14 @@ public class UI_Bullet : UI_World
             gameObject.SetActive(true);
 
         _survivor = survivor;
-        _survivor.Weapon.WeaponData.Magazine.OnStatCurrentValueChanged += OnBulletUpdate;
-        _bulletText.text = _survivor.Weapon.WeaponData.Magazine.CurrentValue.ToString();
+        _survivor.Weapon.OnMagazineValueChanged += OnBulletUpdate;
+        _bulletText.text = _survivor.Weapon.WeaponStatus.Magazine.ToString();
     }
 
-    private void OnBulletUpdate(float current, float total)
+    private void OnBulletUpdate(int current, int total)
     {
-        _bulletImage.fillAmount = current / total;
-        _bulletText.text = current > 0 ? $"{(int)current}" : "재장전";
+        _bulletImage.fillAmount = current / (float)total;
+        _bulletText.text = current > 0 ? $"{current}" : "재장전";
     }
 
     protected override void Dispose()
@@ -33,7 +33,7 @@ public class UI_Bullet : UI_World
         if (!gameObject.activeSelf)
             return;
 
-        _survivor.Weapon.WeaponData.Magazine.OnStatCurrentValueChanged -= OnBulletUpdate;
+        _survivor.Weapon.OnMagazineValueChanged -= OnBulletUpdate;
         _survivor = null;
         base.Dispose();
     }

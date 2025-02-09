@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8909006142745523330}
   - component: {fileID: 619945311840321188}
   - component: {fileID: 1431554217594062338}
+  - component: {fileID: 2707691184264077496}
   - component: {fileID: -6392227404906287342}
   - component: {fileID: 7170782875357700418}
   m_Layer: 0
@@ -167,12 +168,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ef7c376ff4c44a48b790cd18ceb2889, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <EntityType>k__BackingField: 1
   _walkParamName: Walk
   _attackParamName: Attack
   _dieParamName: Die
   _targetLayer:
     serializedVersion: 2
     m_Bits: 192
+--- !u!114 &2707691184264077496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3177769178206297276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64bc458bb0ad20646b31b641f6c7c5fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &-6392227404906287342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,7 +199,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed26c362cad110943a020d9b56712107, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _entityType: 1
 --- !u!95 &7170782875357700418
 Animator:
   serializedVersion: 7
