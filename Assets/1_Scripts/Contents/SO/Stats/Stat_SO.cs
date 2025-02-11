@@ -80,11 +80,4 @@ public class Stat_SO : BaseSO
 
     public void ResetCurrentValue()
         => CurrentValue = Value;
-
-    public override object Clone()
-    {
-        var clone = Instantiate(this);
-        clone.CurrentValue = DefaultValue;
-        return clone;
-    }
 }

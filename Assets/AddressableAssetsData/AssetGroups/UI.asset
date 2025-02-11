@@ -28,7 +28,7 @@ MonoBehaviour:
     - Prefabs
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 471eb97dcd6cf1c40b477b8222120e49
-    m_Address: UI_InventorySlot
+    m_Address: UI_WeaponSlot
     m_ReadOnly: 0
     m_SerializedLabels:
     - Prefabs

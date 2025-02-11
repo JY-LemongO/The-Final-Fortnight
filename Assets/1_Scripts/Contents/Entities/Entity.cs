@@ -1,30 +1,17 @@
 using System;
 using UnityEngine;
 
+[RequireComponent(typeof(EntityDamageEffect))]
 public abstract class Entity : MonoBehaviour
 {
-    #region Events
-    public event Action<float> OnDamaged;
-    public event Action OnDead;
-    #endregion
-
-    [field: SerializeField] public Define.EntityType EntityType { get; protected set; }
-    public bool IsDead
-    {
-        get => _isDead;
-        protected set
-        {
-            _isDead = value;
-            OnDead?.Invoke();
-            DebugUtility.Log($"[Entity] IsDead = {_isDead}");
-        }
-    }
+    [field: SerializeField] public Define.EntityType EntityType { get; protected set; }    
 
     public EntityStatus Status => _status;
     protected EntityStatus _status;
+    protected EntityDamageEffect _damageEffect;
     protected SpriteRenderer _renderer;
-
-    private bool _isDead;
+    protected UI_HPBar _hpBar;
+    
     private bool _isInit;
 
     public virtual void Setup(Entity_SO so)
@@ -32,6 +19,7 @@ public abstract class Entity : MonoBehaviour
         if (!_isInit)
             Init();
         _status.SetupStatus(so);
+        SetHPBarUI();
 
         if (this is IAnimatedObject animatedEntity && so.AnimatorController != null)
             animatedEntity.SetAnimatorController(so.AnimatorController);
@@ -39,12 +27,25 @@ public abstract class Entity : MonoBehaviour
 
     public virtual void GetDamaged(float damage)
     {
-        if (IsDead)
+        if (_status.IsDead)
             return;
 
         _status.GetDamaged(damage);
-        if (_status.Hp <= 0)
-            IsDead = true;
+        _damageEffect.EffectDamaged();
+        SetDamageTextUI(damage);
+    }
+
+    public virtual void SetHPBarUI()
+    {
+        _hpBar = UIManager.Instance.CreateWorldUI<UI_HPBar>();
+        _hpBar.SetEntity(this);
+    }        
+
+    public virtual void SetDamageTextUI(float damage)
+    {
+        GameObject damageText = ResourceManager.Instance.Instantiate(Constants.Key_DamageText);
+        damageText.transform.position = transform.position + Vector3.up * Status.HPBarOffset;
+        damageText.GetComponent<DamageText>().SetDamageText(damage);
     }
 
     protected virtual void Init()
@@ -58,6 +59,8 @@ public abstract class Entity : MonoBehaviour
 
     protected virtual void ComponenetsSetting()
     {
+        _damageEffect = GetComponent<EntityDamageEffect>();
+        _damageEffect.Setup(this);
         _renderer = GetComponent<SpriteRenderer>();
         _renderer.sortingOrder = Util.GetSortingOreder(Define.SpriteType.Weapon);
     }

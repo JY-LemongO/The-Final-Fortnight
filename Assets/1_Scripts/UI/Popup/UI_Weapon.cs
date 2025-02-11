@@ -80,10 +80,10 @@ public class UI_Weapon : UI_Popup
     {
         _weaponImage.sprite = _currentWeapon.ProfileSprite;
         _weaponDescValueText.text = _currentWeapon.DisplayDesc;
-        _atkValueText.text = $"{(int)_currentWeapon.DamageSO.Value}";
-        _magazineValueText.text = $"{(int)_currentWeapon.MagazineSO.Value}";
-        _fireRateValueText.text = $"{(int)_currentWeapon.FireRateSO.Value}";
-        _rangeValueText.text = $"{(int)_currentWeapon.FireRangeSO.Value}";
+        _atkValueText.text = $"{(int)_currentWeapon.Damage}";
+        _magazineValueText.text = $"{_currentWeapon.Magazine}";
+        _fireRateValueText.text = $"{(int)_currentWeapon.FireRate}";
+        _rangeValueText.text = $"{(int)_currentWeapon.FireRange}";
     }
 
     private void ShowCreateResult()

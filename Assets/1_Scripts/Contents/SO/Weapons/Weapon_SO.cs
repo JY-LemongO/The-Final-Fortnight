@@ -1,25 +1,23 @@
-using System;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Weapon/New Weapon", fileName = "WEAPON_")]
 public class Weapon_SO : BaseSO
 {
-    [SerializeField] private Stat_SO _damageSO;
-    [SerializeField] private Stat_SO _magazineSO;
-    [SerializeField] private Stat_SO _fireRateSO;
-    [SerializeField] private Stat_SO _fireRangeSO;
+    [Header("Weapon Stats")]
+    [SerializeField] private float _damage;    
+    [SerializeField] private float _fireRate;
+    [SerializeField] private float _fireRange;
+    [SerializeField] private int _magazine;
     [Header("Visual")]
     [SerializeField] private RuntimeAnimatorController _animController;
     [SerializeField] private Sprite _profileSprite;
     [SerializeField] private Vector2 _weaponPosition;
     [SerializeField] private Vector2 _bulletShellPosition;
-    
-    #region Read Only Property
-    public Stat_SO DamageSO => _damageSO;
-    public Stat_SO MagazineSO => _magazineSO;
-    public Stat_SO FireRateSO => _fireRateSO;
-    public Stat_SO FireRangeSO => _fireRangeSO;
-    #endregion
+        
+    public float Damage => _damage;    
+    public float FireRate => _fireRate;
+    public float FireRange => _fireRange;
+    public int Magazine => _magazine;    
 
     public RuntimeAnimatorController AnimController => _animController;
     public Sprite ProfileSprite => _profileSprite;

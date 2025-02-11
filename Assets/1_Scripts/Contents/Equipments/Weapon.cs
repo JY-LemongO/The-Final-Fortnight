@@ -3,10 +3,6 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour, IAnimatedObject
 {
-    #region Events
-    public event Action<int, int> OnMagazineValueChanged;
-    #endregion
-
     #region Animation
     [Header("AnimationData")]
     [SerializeField] private string _fireParamName;
@@ -34,18 +30,32 @@ public class Weapon : MonoBehaviour, IAnimatedObject
             DebugUtility.LogError("[Weapon] WeaponOwner가 없습니다.");
             return;
         }
-        WeaponController.UseWeapon();
+        WeaponController.HandleGunFireTimer();
     }
 
-    public void InitWeapon(Survivor owner, WeaponStatus weapon)
+    public void Fire()
+        => Animator.SetTrigger(FireParamHash);
+
+    public void Reload()
+        => Animator.SetTrigger(ReloadParamHash);
+
+    public void SetupWeapon(Survivor owner, WeaponStatus weapon)
     {
         WeaponOwner = owner;
-        ChangeWeapon(weapon);
+        ChangeWeapon(weapon);        
     }
 
     public void ChangeWeapon(WeaponStatus newWeapon)
     {
+        if (WeaponStatus != null)
+        {
+            WeaponStatus.OnReload -= Reload;
+            WeaponStatus.Unequip();
+        }            
         WeaponStatus = newWeapon;
+        WeaponStatus.OnReload += Reload;
+        WeaponStatus.Equip();
+
         transform.position = newWeapon.WeaponPosition;
         SetAnimatorController(newWeapon.AnimController);
     }
@@ -63,9 +73,8 @@ public class Weapon : MonoBehaviour, IAnimatedObject
     {
         Animator = GetComponent<Animator>();
         WeaponController = GetComponent<WeaponController>();
-        Renderer = GetComponent<SpriteRenderer>();
-
         WeaponController.Setup(this);
+        Renderer = GetComponent<SpriteRenderer>();        
         Renderer.sortingOrder = Util.GetSortingOreder(Define.SpriteType.Weapon);
     }
 

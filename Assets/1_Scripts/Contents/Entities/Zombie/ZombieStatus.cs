@@ -9,10 +9,9 @@ public class ZombieStatus : EntityGenericStatus<Zombie_SO>
 
     protected override void ApplyUniqueStats(Zombie_SO so)
     {
-        // To Do - so의 StatSO 로직 갈아 엎을 예정
-        MoveSpeed = so.MoveSpeed.Value;
-        Range = so.Range.Value;
-        Attack = so.Atk.Value;
-        AttackRate = so.AtkRate.Value;
+        MoveSpeed = so.MoveSpeed;
+        Range = so.Range;
+        Attack = so.Atk;
+        AttackRate = so.AtkRate;
     }
 }

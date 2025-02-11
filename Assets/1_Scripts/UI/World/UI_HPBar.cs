@@ -36,7 +36,7 @@ public class UI_HPBar : UI_World
             gameObject.SetActive(true);
 
         _entity = entity;
-        //_entity.OnStatCurrentValueChanged += HandleHPSliderValueChange;
+        _entity.Status.OnHPValueChanged += HandleHPSliderValueChange;
     }
 
     private void HandleHPSliderValueChange(float currentValue, float totalValue)

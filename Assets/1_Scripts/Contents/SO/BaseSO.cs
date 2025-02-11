@@ -1,7 +1,6 @@
-using System;
 using UnityEngine;
 
-public class BaseSO : ScriptableObject, ICloneable
+public class BaseSO : ScriptableObject
 {
     [Header("Dev")]
     [SerializeField] private int _id;
@@ -15,9 +14,5 @@ public class BaseSO : ScriptableObject, ICloneable
     public string CodeName => _codeName;
 
     public string DisplayName => _displayName;
-    public string DisplayDesc => _displayDesc;
-
-    public virtual object Clone() => Instantiate(this);
-
-    public virtual void Dispose() { }
+    public string DisplayDesc => _displayDesc;    
 }

@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 public class Zombie : Entity, IAnimatedObject
@@ -37,6 +36,7 @@ public class Zombie : Entity, IAnimatedObject
 
     public override void GetDamaged(float damage)
     {
+        base.GetDamaged(damage);
         DebugUtility.Log($"[Zombie] GetDamaged 오버라이드 함수 내부");
     }
 
@@ -45,8 +45,7 @@ public class Zombie : Entity, IAnimatedObject
 
     public override void ResetEntity()
     {
-        StopAllCoroutines();
-        _renderer.color = Color.white;
+        StopAllCoroutines();        
         Target = null;
     }
 
@@ -55,7 +54,7 @@ public class Zombie : Entity, IAnimatedObject
         base.Init();
         EntityType = Define.EntityType.Zombie;
         ZombieStatus = _status as ZombieStatus;
-        SpriteHalfSize = _renderer.sprite.textureRect.height / _renderer.sprite.pixelsPerUnit * 0.5f;
+        SpriteHalfSize = _renderer.sprite.textureRect.height / _renderer.sprite.pixelsPerUnit * 0.5f;        
         AnimationHashInitialize();
     }
 

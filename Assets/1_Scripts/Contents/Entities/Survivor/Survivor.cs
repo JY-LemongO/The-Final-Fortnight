@@ -17,7 +17,17 @@ public class Survivor : Entity, IAnimatedObject
     public SurvivorController Controller { get; private set; }
     public SurvivorStatus SurvivorStatus { get; private set; }    
     public Weapon Weapon { get; private set; }
-    public Zombie Target { get; private set; }         
+    public Zombie Target
+    {
+        get => _target; 
+        private set
+        {
+            _target = value;
+            if (_target == null)
+                Controller.SearchTarget();
+        }
+    }
+    private Zombie _target;
 
     protected override void Init()
     {
@@ -38,12 +48,20 @@ public class Survivor : Entity, IAnimatedObject
             Weapon = go.GetComponent<Weapon>();
         }            
 
-        Weapon.InitWeapon(this, weapon);
+        Weapon.SetupWeapon(this, weapon);
         Weapon.transform.localPosition = weapon.WeaponPosition;
+        Controller.SearchTarget();
+    }
+
+    public void SetBulletUI()
+    {
+        UI_Bullet ui = UIManager.Instance.CreateWorldUI<UI_Bullet>();
+        ui.SetSurvivor(this);
+        ui.transform.position = transform.position + Vector3.up * 1.2f;
     }
 
     public void SetTarget(Zombie zombie)
-        => Target = zombie;    
+        => Target = zombie;
 
     private void AnimationHashInitialize()
     {
@@ -57,13 +75,7 @@ public class Survivor : Entity, IAnimatedObject
         base.ComponenetsSetting();
         Animator = GetComponent<Animator>();
         Controller = GetComponent<SurvivorController>();
-    }
-
-    private void SetBulletUI()
-    {
-        UI_Bullet ui = UIManager.Instance.CreateWorldUI<UI_Bullet>();
-        ui.SetSurvivor(this);
-        ui.transform.position = transform.position + Vector3.up * 1.2f;
+        Controller.Setup(this);
     }
 
     public override void ResetEntity()
@@ -73,6 +85,7 @@ public class Survivor : Entity, IAnimatedObject
 
     public override void GetDamaged(float damage)
     {
+        base.GetDamaged(damage);
         DebugUtility.Log($"[Survivor] GetDamaged 오버라이드 함수 내부");
     }
 

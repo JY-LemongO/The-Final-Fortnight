@@ -188,6 +188,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _contentsTrs: {fileID: 8609316420190773474}
   _closeBtn: {fileID: 6632104559065979153}
+  _equipBtn: {fileID: 4126079889215153600}
+  _upgradeBtn: {fileID: 8411201092835612640}
   _icon: {fileID: 934234375277302334}
   _weaponNameText: {fileID: 1234520175744381265}
   _damageValueText: {fileID: 2744548994249452989}

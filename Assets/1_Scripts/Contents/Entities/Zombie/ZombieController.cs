@@ -8,13 +8,10 @@ public class ZombieController : MonoBehaviour
     private Zombie _context;    
 
     public void Setup(Zombie context)
-        => _context = context;
-
-    public void Move()
-        => StartCoroutine(Co_Move());
-
-    public void Attack()
-        => _context.Animator.SetBool(_context.AttackParamHash, true);
+    {
+        _context = context;
+        _context.Status.OnDead += Dead;
+    }        
 
     public void SearchTargetByRay()
     {
@@ -26,13 +23,22 @@ public class ZombieController : MonoBehaviour
         if (hit)
         {
             Entity target = hit.transform.GetComponent<Entity>();
-            if (target.IsDead)
+            if (target.Status.IsDead)
                 return;
 
             _context.SetTarget(target);
             Attack();
         }
     }
+
+    public void Move()
+        => StartCoroutine(Co_Move());
+
+    public void Attack()
+        => _context.Animator.SetBool(_context.AttackParamHash, true);
+
+    public void Dead()
+        => _context.Animator.SetTrigger(_context.DieParamHash);
 
     #region AnimationEventTrigger
     private void HandleAttackTarget()
@@ -44,7 +50,7 @@ public class ZombieController : MonoBehaviour
 
     private void HandleFindTarget()
     {
-        if (_context.Target.IsDead)
+        if (_context.Target.Status.IsDead)
         {
             _context.SetTarget(null);
             Move();
@@ -63,7 +69,7 @@ public class ZombieController : MonoBehaviour
         _context.Animator.SetBool(_context.WalkParamHash, true);
         while (true)
         {
-            if (_context.IsDead) break;
+            if (_context.Status.IsDead) break;
             if (_context.Target != null) break;
 
             transform.position += Vector3.left * _context.ZombieStatus.MoveSpeed * Time.deltaTime;

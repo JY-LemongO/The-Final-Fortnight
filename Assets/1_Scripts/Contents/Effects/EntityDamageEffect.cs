@@ -10,7 +10,7 @@ public class EntityDamageEffect : MonoBehaviour
     private string _flashAmountKey;
     private Coroutine _hitCoroutine;
 
-    public void Init()
+    private void Awake()
     {
         _mat = GetComponent<SpriteRenderer>().material;
         _hitFlashTime = Constants.HitFlashTime;
@@ -20,7 +20,7 @@ public class EntityDamageEffect : MonoBehaviour
     public void Setup(Entity context)
     {
         _context = context;
-        _context.OnDead += ResetEffect;
+        _context.Status.OnDead += ResetEffect;
     }
 
     public void EffectDamaged()
@@ -59,7 +59,7 @@ public class EntityDamageEffect : MonoBehaviour
 
     private void ResetEffect()
     {
-
+        _mat.SetFloat(_flashAmountKey, 0f);
     }
 
     private IEnumerator Co_HitFlash()

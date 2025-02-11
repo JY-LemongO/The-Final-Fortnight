@@ -4,16 +4,13 @@ using UnityEngine;
 public class Zombie_SO : Entity_SO
 {
     [Header("Zombie Stats")]
-    [SerializeField] private Stat_SO _moveSpeedSO;
-    [SerializeField] private Stat_SO _rangeSO;
-    [SerializeField] private Stat_SO _atkSO;
-    [SerializeField] private Stat_SO _atkRateSO;
-    [Header("Visual")]
-    [SerializeField] private RuntimeAnimatorController _animController;
+    [SerializeField] private float _moveSpeed;
+    [SerializeField] private float _range;
+    [SerializeField] private float _atk;
+    [SerializeField] private float _atkRate;    
 
-    public Stat_SO MoveSpeed => _moveSpeedSO;
-    public Stat_SO Range => _rangeSO;
-    public Stat_SO Atk => _atkSO;
-    public Stat_SO AtkRate => _atkRateSO;
-    public RuntimeAnimatorController AnimController => _animController;
+    public float MoveSpeed => _moveSpeed;
+    public float Range => _range;
+    public float Atk => _atk;
+    public float AtkRate => _atkRate;    
 }

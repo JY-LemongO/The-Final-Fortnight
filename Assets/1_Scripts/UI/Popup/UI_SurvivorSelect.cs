@@ -45,29 +45,23 @@ public class UI_SurvivorSelect : UI_Popup
     #region Profile
     private void OnUpdateProfile(Survivor_SO survivor)
     {
-        Survivor_SO statInitializedSurvivor = survivor.Clone() as Survivor_SO;
-        Weapon_SO statInitializedWeapon = survivor.DefaultWeapon.Clone() as Weapon_SO;
+        _survivorImage.sprite = survivor.ProfileSprite;
+        _weaponImage.sprite = survivor.DefaultWeapon.ProfileSprite;
 
-        _survivorImage.sprite = statInitializedSurvivor.ProfileSprite;
-        _weaponImage.sprite = statInitializedWeapon.ProfileSprite;
-
-        _survivornameText.text = statInitializedSurvivor.DisplayName;
-        _weaponNameText.text = statInitializedWeapon.DisplayName;
-        _descriptionText.text = statInitializedSurvivor.DisplayDesc;
+        _survivornameText.text = survivor.DisplayName;
+        _weaponNameText.text = survivor.DefaultWeapon.DisplayName;
+        _descriptionText.text = survivor.DisplayDesc;
     }
     #endregion
 
     #region Stats
     private void OnUpdateStatsValue(Survivor_SO survivor)
     {
-        Survivor_SO statInitializedSurvivor = survivor.Clone() as Survivor_SO;
-        Weapon_SO statInitializedWeapon = survivor.DefaultWeapon.Clone() as Weapon_SO;
-
-        _hpValueText.text = statInitializedSurvivor.Hp.Value.ToString();
-        _damageValueText.text = statInitializedWeapon.DamageSO.Value.ToString();
-        _magazineValueText.text = statInitializedWeapon.MagazineSO.Value.ToString();
-        _fireRateValueText.text = statInitializedWeapon.FireRateSO.Value.ToString();
-        _RangeValueText.text = statInitializedWeapon.FireRangeSO.Value.ToString();
+        _hpValueText.text = survivor.Hp.ToString();
+        _damageValueText.text = survivor.DefaultWeapon.Damage.ToString();
+        _magazineValueText.text = survivor.DefaultWeapon.Magazine.ToString();
+        _fireRateValueText.text = survivor.DefaultWeapon.FireRate.ToString();
+        _RangeValueText.text = survivor.DefaultWeapon.FireRange.ToString();
     }
     #endregion
 

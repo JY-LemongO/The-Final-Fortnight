@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Mono.Cecil;
 using UnityEngine;
 
 public class SurvivorManager : SingletonBase<SurvivorManager>
@@ -29,6 +28,7 @@ public class SurvivorManager : SingletonBase<SurvivorManager>
         
         WeaponStatus craftedWeapon = WeaponManager.Instance.CraftWeapon(survivorSO.DefaultWeapon);
         survivor.SetWeapon(craftedWeapon);
+        survivor.SetBulletUI();
 
         int prevSurvivorsCount = GetSurvivorsCount();
         RegisterSurvivor(survivor);

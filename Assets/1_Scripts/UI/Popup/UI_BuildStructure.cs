@@ -58,7 +58,7 @@ public class UI_BuildStructure : UI_Popup
     {
         Barricate_SO barricateInfo = BuildingSystem.Instance.GetBarricateInfo();
         _barricateImage.sprite = barricateInfo.ObjectSprite;
-        _barricateHPText.text = barricateInfo.Hp.Value.ToString();
+        _barricateHPText.text = barricateInfo.Hp.ToString();
         _barricateBuildCostText.text = barricateInfo.Cost.ToString();
     }
 

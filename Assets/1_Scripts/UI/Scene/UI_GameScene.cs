@@ -24,7 +24,7 @@ public class UI_GameScene : UI_Scene
         _survivorsBtn.onClick.AddListener(OnSurvivorsBtn);
         _craftingBtn.onClick.AddListener(OnCraftingBtn);
         _weaponBtn.onClick.AddListener(OnWeaponBtn);
-        _inventoryBtn.onClick.AddListener(OnInventoryBtn);
+        _inventoryBtn.onClick.AddListener(OnWeaponCaseBtn);
         _radioBtn.onClick.AddListener(OnRadioBtn);
 
         HandleFadeIn();
@@ -51,7 +51,7 @@ public class UI_GameScene : UI_Scene
         UIManager.Instance.OpenPopupUI<UI_Weapon>();
     }
 
-    private void OnInventoryBtn()
+    private void OnWeaponCaseBtn()
     {
         UIManager.Instance.OpenPopupUI<UI_WeaponCase>();
     }

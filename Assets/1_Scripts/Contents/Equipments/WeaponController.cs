@@ -7,23 +7,30 @@ public class WeaponController : MonoBehaviour
 
     public void Setup(Weapon context)
     {
-        _context = context;
+        _context = context;        
     }
 
-    public void UseWeapon()
-        => HandleGunFireTimer();
+    public void HandleGunFireTimer()
+    {
+        if (_currentCooldown < _context.WeaponStatus.FireRate)
+            _currentCooldown += Time.deltaTime;
+        else
+        {
+            if (_context.WeaponOwner.Target == null)
+                return;
+            if (_context.WeaponStatus.Magazine <= 0)
+                return;
 
-    public void Fire()
-        => _context.Animator.SetTrigger(_context.FireParamHash);
-
-    public void Reload()
-        => _context.Animator.SetTrigger(_context.ReloadParamHash);
+            _context.Fire();
+            _currentCooldown = 0f;
+        }
+    }
 
     private bool CheckTargetIsDead()
     {
         if (_context.WeaponOwner.Target == null)
             return true;
-        return _context.WeaponOwner.Target.IsDead;
+        return _context.WeaponOwner.Target.Status.IsDead;
     }
 
     private void SpawnBulletShell()
@@ -37,26 +44,13 @@ public class WeaponController : MonoBehaviour
     #region AnimationEventTrigger
     private void HandleAttackTarget()
     {
-        if (!CheckTargetIsDead())
-            _context.WeaponOwner.Target.GetDamaged(_context.WeaponStatus.Damage);
-        _context.WeaponStatus.Fire();
+        DebugUtility.Log($"[WeaponController] 좀비 공격 - {_context.WeaponOwner.Target.name}");
+        _context.WeaponOwner.Target.GetDamaged(_context.WeaponStatus.Damage);
+        _context.WeaponStatus.UseBullet();
         SpawnBulletShell();
-    }
 
-    private void HandleGunFireTimer()
-    {
-        if (_currentCooldown < _context.WeaponStatus.FireRate)
-            _currentCooldown += Time.deltaTime;
-        else
-        {
-            if (_context.WeaponOwner.Target == null)
-                return;
-            if (_context.WeaponStatus.Magazine <= 0)
-                return;
-
-            Fire();
-            _currentCooldown = 0f;
-        }
+        if (CheckTargetIsDead())
+            _context.WeaponOwner.SetTarget(null);
     }
 
     private void HandleReload()

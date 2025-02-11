@@ -7,6 +7,9 @@ public class SurvivorController : MonoBehaviour
     private Survivor _context;
     private Coroutine _targetSearchCoroutine;
 
+    public void Setup(Survivor context)
+        => _context = context;
+
     public void SearchTarget()
     {
         if (_context.Target != null)
@@ -17,39 +20,19 @@ public class SurvivorController : MonoBehaviour
         _targetSearchCoroutine = StartCoroutine(Co_SearchTarget());
     }
 
-    public void AttackTarget(float damage)
-    {
-        if (_context.Target == null)
-            return;
-
-        Debug.Log("Attack Target");
-        _context.Target.GetDamaged(damage);
-        CheckTargetIsDead();
-    }
-
-    public bool CheckTargetIsDead()
-    {
-        if (_context.Target != null && _context.Target.IsDead)
-        {            
-            SearchTarget();
-            return true;
-        }
-        return false;
-    }
-
     private IEnumerator Co_SearchTarget()
     {
         float serachingDelay = Constants.SearchingDelay;
-        float fireRange = _context.Weapon.WeaponStatus.FireRange;
-        List<Zombie> zombies = ZombieManager.Instance.ZombiesList;
+        float fireRange = _context.Weapon.WeaponStatus.FireRange;        
         while (_context.Target == null)
         {
+            List<Zombie> zombies = ZombieManager.Instance.ZombiesList;
             if (zombies.Count != 0)
             {
                 float closestDistance = float.MaxValue;
                 foreach (Zombie zombie in zombies)
                 {
-                    if (zombie.IsDead)
+                    if (zombie.Status.IsDead)
                         continue;
 
                     float distance = Vector2.Distance(transform.position, zombie.transform.position);
@@ -63,6 +46,7 @@ public class SurvivorController : MonoBehaviour
                     }
                 }
             }
+
             yield return Util.GetCachedWaitForSeconds(serachingDelay);
         }
     }

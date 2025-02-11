@@ -1,5 +1,6 @@
 using System;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -17,10 +18,12 @@ public class UI_WeaponSlot : UI_Item
 
     public bool IsSetup { get; private set; } = false;
 
+    // static이라 이거 에디터 플레이모드 종료될 때 밀어버려야 함.
     private static UI_WeaponSlot _selectedSlot;
     public static void SetSelectable(UI_WeaponSlot slot)
     {
         _selectedSlot = slot;
+        slot.SetHighLight(true);
         OnWeaponSelected?.Invoke(slot._weapon);
     }
 
@@ -32,6 +35,17 @@ public class UI_WeaponSlot : UI_Item
         base.Init();
         _rect = GetComponent<RectTransform>();
         EmptySlot();
+
+#if UNITY_EDITOR
+        EditorApplication.playModeStateChanged += state =>
+        {
+            if (state == PlayModeStateChange.ExitingPlayMode)
+            {
+                _selectedSlot = null;
+                OnWeaponSelected = null;
+            }                
+        };
+#endif
     }
 
     public void Setup(WeaponStatus weapon)
@@ -40,6 +54,7 @@ public class UI_WeaponSlot : UI_Item
         _weapon = weapon;
         _icon.sprite = weapon.ProfileSprite;
         _icon.gameObject.SetActive(true);
+        _equipmentImage.gameObject.SetActive(weapon.IsEquiped);
     }
 
     public void EmptySlot()
