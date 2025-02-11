@@ -9,6 +9,8 @@ public class UI_WeaponCase : UI_Popup
 
     [Header("Buttons")]
     [SerializeField] private Button _closeBtn;
+    [SerializeField] private Button _equipBtn;
+    [SerializeField] private Button _upgradeBtn;
 
     [Header("Infos")]
     [SerializeField] private Image _icon;
@@ -24,10 +26,16 @@ public class UI_WeaponCase : UI_Popup
     {
         base.Init();
         BackpackInitialize();
+        ButtonsAddListener();
+
         WeaponManager.Instance.OnWeaponCreated += SetupWeaponUI;
         UI_WeaponSlot.OnWeaponSelected += UpdateWeaponInfo;
+    }
 
+    private void ButtonsAddListener()
+    {
         _closeBtn.onClick.AddListener(Close);
+        _equipBtn.onClick.AddListener(OnEquipWeapon);
     }
 
     private void OnEnable()
@@ -41,14 +49,14 @@ public class UI_WeaponCase : UI_Popup
             UI_WeaponSlot.SetSelectable(_slots[0]);
     }       
 
-    private void UpdateWeaponInfo(Weapon_SO weapon)
+    private void UpdateWeaponInfo(WeaponStatus weapon)
     {
         _icon.sprite = weapon.ProfileSprite;
         _weaponNameText.text = weapon.DisplayName;
-        _damageValueText.text = weapon.DamageSO.Value.ToString();
-        _magazineValueText.text = weapon.MagazineSO.Value.ToString();
-        _fireRateValueText.text = weapon.FireRateSO.Value.ToString();
-        _rangeValueText.text = weapon.FireRangeSO.Value.ToString();
+        _damageValueText.text = weapon.Damage.ToString();
+        _magazineValueText.text = weapon.MaxMagazine.ToString();
+        _fireRateValueText.text = weapon.FireRate.ToString();
+        _rangeValueText.text = weapon.FireRange.ToString();
     }
 
     private void BackpackInitialize()
@@ -62,7 +70,7 @@ public class UI_WeaponCase : UI_Popup
             SetupWeaponUI(weapon);
     }
 
-    private void SetupWeaponUI(Weapon_SO weapon)
+    private void SetupWeaponUI(WeaponStatus weapon)
     {
         foreach (UI_WeaponSlot slot in _slots)
         {
@@ -72,5 +80,10 @@ public class UI_WeaponCase : UI_Popup
                 break;
             }
         }
+    }
+
+    private void OnEquipWeapon()
+    {
+
     }
 }

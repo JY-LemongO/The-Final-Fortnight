@@ -64,10 +64,10 @@ public class UI_SurvivorSelect : UI_Popup
         Weapon_SO statInitializedWeapon = survivor.DefaultWeapon.Clone() as Weapon_SO;
 
         _hpValueText.text = statInitializedSurvivor.Hp.Value.ToString();
-        _damageValueText.text = statInitializedWeapon.Damage.Value.ToString();
-        _magazineValueText.text = statInitializedWeapon.Magazine.Value.ToString();
-        _fireRateValueText.text = statInitializedWeapon.FireRate.Value.ToString();
-        _RangeValueText.text = statInitializedWeapon.FireRange.Value.ToString();
+        _damageValueText.text = statInitializedWeapon.DamageSO.Value.ToString();
+        _magazineValueText.text = statInitializedWeapon.MagazineSO.Value.ToString();
+        _fireRateValueText.text = statInitializedWeapon.FireRateSO.Value.ToString();
+        _RangeValueText.text = statInitializedWeapon.FireRangeSO.Value.ToString();
     }
     #endregion
 

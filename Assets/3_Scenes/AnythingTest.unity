@@ -11771,10 +11771,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 029aefd8699bb8e40ab688a7a7935796, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <EntityType>k__BackingField: 0
   _walkParamName: 
   _attackParamName: 
   _dieParamName: 
-  <Weapon>k__BackingField: {fileID: 0}
 --- !u!114 &7126819142063122728
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11801,7 +11801,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed26c362cad110943a020d9b56712107, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _entityType: 0
 --- !u!1001 &8235250099900804472
 PrefabInstance:
   m_ObjectHideFlags: 0

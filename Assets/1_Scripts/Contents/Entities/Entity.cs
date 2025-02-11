@@ -16,6 +16,7 @@ public abstract class Entity : MonoBehaviour
         {
             _isDead = value;
             OnDead?.Invoke();
+            DebugUtility.Log($"[Entity] IsDead = {_isDead}");
         }
     }
 

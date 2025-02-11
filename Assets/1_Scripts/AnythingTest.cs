@@ -21,7 +21,7 @@ public class AnythingTest : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            survivor.Weapon.Fire();
+            //survivor.Weapon.Fire();
         }
     }
 }

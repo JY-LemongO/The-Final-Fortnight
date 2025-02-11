@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class UI_WeaponSlot : UI_Item
 {
     #region Events
-    public static event Action<Weapon_SO> OnWeaponSelected;
+    public static event Action<WeaponStatus> OnWeaponSelected;
     #endregion
 
     [SerializeField] private Image _icon;
@@ -24,7 +24,7 @@ public class UI_WeaponSlot : UI_Item
         OnWeaponSelected?.Invoke(slot._weapon);
     }
 
-    private Weapon_SO _weapon;
+    private WeaponStatus _weapon;
     private RectTransform _rect;
 
     protected override void Init()
@@ -34,7 +34,7 @@ public class UI_WeaponSlot : UI_Item
         EmptySlot();
     }
 
-    public void Setup(Weapon_SO weapon)
+    public void Setup(WeaponStatus weapon)
     {
         IsSetup = true;
         _weapon = weapon;
@@ -75,7 +75,7 @@ public class UI_WeaponSlot : UI_Item
             if (_selectedSlot != null)
                 _selectedSlot.SetHighLight(false);
             SetSelectable(this);
-            // To Do - 현재 아이템 정보 좌측에 띄우기
+            // To Do - 현재 아이템 정보 띄우기
         }
         else
             SetHighLight(false);

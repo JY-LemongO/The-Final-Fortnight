@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Mono.Cecil;
 using UnityEngine;
 
 public class SurvivorManager : SingletonBase<SurvivorManager>
@@ -22,9 +23,12 @@ public class SurvivorManager : SingletonBase<SurvivorManager>
 
     public void SpawnSurvivor(string survivorSOKey)
     {
-        Survivor_SO survivoSO = ResourceManager.Instance.Load<Survivor_SO>(survivorSOKey);
-        Survivor survivor = NewSurvivor();             
-        survivor.Setup(survivoSO);
+        Survivor_SO survivorSO = ResourceManager.Instance.Load<Survivor_SO>(survivorSOKey);
+        Survivor survivor = NewSurvivor();
+        survivor.Setup(survivorSO);
+        
+        WeaponStatus craftedWeapon = WeaponManager.Instance.CraftWeapon(survivorSO.DefaultWeapon);
+        survivor.SetWeapon(craftedWeapon);
 
         int prevSurvivorsCount = GetSurvivorsCount();
         RegisterSurvivor(survivor);

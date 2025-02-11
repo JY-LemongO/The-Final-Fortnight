@@ -4,14 +4,16 @@ using System.Collections.Generic;
 public class WeaponManager : SingletonBase<WeaponManager>
 {
     #region Events
-    public event Action<Weapon_SO> OnWeaponCreated;
+    public event Action<WeaponStatus> OnWeaponCreated;
     #endregion
 
-    private List<Weapon_SO> _weaponInventory = new();
+    private List<WeaponStatus> _weaponInventory = new();
 
-    public Weapon_SO CraftWeapon(Weapon_SO originWeaponData)
+    public WeaponStatus CraftWeapon(Weapon_SO originWeaponData)
     {
-        Weapon_SO weapon = originWeaponData.Clone() as Weapon_SO;
+        WeaponStatus weapon = new WeaponStatus();
+        weapon.Setup(originWeaponData);
+
         _weaponInventory.Add(weapon);
         OnWeaponCreated?.Invoke(weapon);
 
@@ -28,12 +30,12 @@ public class WeaponManager : SingletonBase<WeaponManager>
         // To Do - 장착 여부에 상관없이 희귀도 순으로 정렬
     }
 
-    public void DisassembleWeapon(Weapon_SO weapon)
+    public void DisassembleWeapon(WeaponStatus weapon)
     {
         _weaponInventory.Remove(weapon);
     }
 
-    public List<Weapon_SO> GetAllWeapons()
+    public List<WeaponStatus> GetAllWeapons()
         => _weaponInventory;
 
     protected override void InitChild()

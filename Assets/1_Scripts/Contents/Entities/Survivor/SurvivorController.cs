@@ -59,7 +59,7 @@ public class SurvivorController : MonoBehaviour
                     if (distance < closestDistance)
                     {
                         closestDistance = distance;
-                        // To Do - Target 원래 여기서 정했었는데 없앴음.
+                        _context.SetTarget(zombie);
                     }
                 }
             }

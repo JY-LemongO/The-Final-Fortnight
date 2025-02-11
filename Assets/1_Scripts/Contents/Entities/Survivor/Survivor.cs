@@ -29,14 +29,21 @@ public class Survivor : Entity, IAnimatedObject
         AnimationHashInitialize();
     }
 
-    public void SetWeapon(Weapon_SO weaponSO)
+    public void SetWeapon(WeaponStatus weapon)
     {
         if (Weapon == null)
-            Weapon = ResourceManager.Instance.Instantiate(Constants.Key_Weapon).GetComponent<Weapon>();
+        {
+            GameObject go = ResourceManager.Instance.Instantiate(Constants.Key_Weapon);
+            go.transform.SetParent(transform);
+            Weapon = go.GetComponent<Weapon>();
+        }            
 
-        Weapon.InitWeapon(this, weaponSO);
-        Weapon.transform.localPosition = weaponSO.WeaponPosition;
+        Weapon.InitWeapon(this, weapon);
+        Weapon.transform.localPosition = weapon.WeaponPosition;
     }
+
+    public void SetTarget(Zombie zombie)
+        => Target = zombie;    
 
     private void AnimationHashInitialize()
     {

@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3328536278186228135}
   - component: {fileID: 642426600783756094}
-  - component: {fileID: 5188197097485436896}
   - component: {fileID: 7126819143675429369}
+  - component: {fileID: 5287840300206324978}
+  - component: {fileID: 5188197097485436896}
   m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
@@ -86,9 +87,35 @@ SpriteRenderer:
   m_Size: {x: 2, y: 2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &7126819143675429369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6720922217125360486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 267d7d897733a0a419b0787a84238967, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _fireParamName: Fire
+  _reloadParamName: Reload
+--- !u!114 &5287840300206324978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6720922217125360486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9167e41e0133cbd4f90741aa42b325ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!95 &5188197097485436896
 Animator:
   serializedVersion: 7
@@ -111,17 +138,3 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &7126819143675429369
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6720922217125360486}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 267d7d897733a0a419b0787a84238967, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _fireParamName: Fire
-  _reloadParamName: Reload

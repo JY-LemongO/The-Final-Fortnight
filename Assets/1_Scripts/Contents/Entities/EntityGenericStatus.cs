@@ -1,4 +1,4 @@
-using UnityEngine;
+
 
 public abstract class EntityGenericStatus<T> : EntityStatus where T : Entity_SO
 {
@@ -10,7 +10,7 @@ public abstract class EntityGenericStatus<T> : EntityStatus where T : Entity_SO
             ApplyUniqueStats(typeSO);
         }
         else
-            Debug.LogError($"[EntityGenericStatus] InValid SO Type. Expected{typeof(T)}, but got {so.GetType()}");
+            DebugUtility.LogError($"[EntityGenericStatus] InValid SO Type. Expected{typeof(T)}, but got {so.GetType()}");
     }
 
     protected abstract void ApplyUniqueStats(T so);
