@@ -36,7 +36,10 @@ public class UI_SurvivorSelect : UI_Popup
 
         OnUpdateProfile(initSurvivor);
         OnUpdateStatsValue(initSurvivor);
+    }
 
+    protected override void ButtonsAddListener()
+    {
         _prevBtn.onClick.AddListener(() => OnPrevOrNextBtn(-1));
         _nextBtn.onClick.AddListener(() => OnPrevOrNextBtn(1));
         _selectBtn.onClick.AddListener(OnSelectBtn);

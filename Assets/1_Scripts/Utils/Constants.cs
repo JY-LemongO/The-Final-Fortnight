@@ -61,5 +61,6 @@ public static class Constants
     public const float Max_Build_PosY = 0f;
 
     public const int InventorySlotCount = 28;
+    public const int SurvivorSlotCount = 5;
     #endregion
 }

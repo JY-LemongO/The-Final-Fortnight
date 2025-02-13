@@ -5,10 +5,8 @@ public class UI_BuildMode : UI_Popup
 {
     [SerializeField] private Button _cancelBtn;
 
-    protected override void Init()
+    protected override void ButtonsAddListener()
     {
-        base.Init();
-
         _cancelBtn.onClick.AddListener(OnCancelBtn);
     }
 

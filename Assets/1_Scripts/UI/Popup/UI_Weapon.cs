@@ -45,12 +45,11 @@ public class UI_Weapon : UI_Popup
         base.Init();
         _weaponKeys = Enum.GetNames(typeof(Define.WeaponKeys));
         _currentWeapon = ResourceManager.Instance.Load<Weapon_SO>(_weaponKeys[0]);
-
-        ButtonsAddListener();
+        
         UpdateWeaponInfo();
     }
 
-    private void ButtonsAddListener()
+    protected override void ButtonsAddListener()
     {
         _closeBtn.onClick.AddListener(Close);
         _createWeaponBtn.onClick.AddListener(OnCreateWeaponBtn);

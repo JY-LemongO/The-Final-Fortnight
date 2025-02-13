@@ -30,14 +30,12 @@ public class UI_BuildStructure : UI_Popup
 
         _barricateViewPort.SetActive(true);        
         _turretViewPort.SetActive(false);
-
-        ButtonsAddListener();
     }
 
-    private void ButtonsAddListener()
+    protected override void ButtonsAddListener()
     {
         _barricateBtn.onClick.AddListener(OnBarricateBtn);
-        
+
         _turretBtn.onClick.AddListener(OnTurretBtn);
         _closeBtn.onClick.AddListener(Close);
 

@@ -33,6 +33,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Prefabs
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 53abd9ade7211ea419a0d39df0d82bbd
+    m_Address: UI_Weapon
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Prefabs
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 811aa4396b888ca4f83c5e548d356bd0
     m_Address: UI_WeaponCase
     m_ReadOnly: 0
@@ -40,7 +46,7 @@ MonoBehaviour:
     - Prefabs
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 8363ec245981cba4ea68c6dd3d3796cf
-    m_Address: UI_Weapon
+    m_Address: UI_WeaponEquip
     m_ReadOnly: 0
     m_SerializedLabels:
     - Prefabs
@@ -53,6 +59,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 9014c4c58956ceb4eb73ea2b3e431ca5
     m_Address: UI_BuildMode
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Prefabs
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e7d5f226c1381bc44acd237705c11052
+    m_Address: UI_EquipModeSurvivor
     m_ReadOnly: 0
     m_SerializedLabels:
     - Prefabs

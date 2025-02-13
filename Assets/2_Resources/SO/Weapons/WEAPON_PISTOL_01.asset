@@ -16,9 +16,11 @@ MonoBehaviour:
   _codeName: WEAPON_PISTOL_01
   _displayName: "\uAD8C\uCD1D"
   _displayDesc: "\uAD8C\uCD1D\uC785\uB2C8\uB2E4."
-  _damageSO: {fileID: 11400000, guid: f704337d35f57e74aa5d04ddb8c51018, type: 2}
-  _magazineSO: {fileID: 11400000, guid: 3be0b5c3c446c1b45af10bea2d25209e, type: 2}
-  _fireRateSO: {fileID: 11400000, guid: 2e754ef7a5f06b041915d47e1fc8cb8e, type: 2}
-  _fireRangeSO: {fileID: 11400000, guid: c3dabbdaa5a7d464aaa538aa576855df, type: 2}
+  _damage: 2
+  _fireRate: 1
+  _fireRange: 8
+  _magazine: 12
   _animController: {fileID: 9100000, guid: 4b36f757f74ee004a93db1c4648ab65e, type: 2}
   _profileSprite: {fileID: 21300000, guid: 718f46f6345e2144d8324e47a4e18317, type: 3}
+  _weaponPosition: {x: 0, y: 0}
+  _bulletShellPosition: {x: 0, y: 0}

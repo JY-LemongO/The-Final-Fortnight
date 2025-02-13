@@ -35,7 +35,7 @@ public class WeaponManager : SingletonBase<WeaponManager>
         _weaponInventory.Remove(weapon);
     }
 
-    public List<WeaponStatus> GetAllWeapons()
+    public List<WeaponStatus> GetWeaponsList()
         => _weaponInventory;
 
     protected override void InitChild()

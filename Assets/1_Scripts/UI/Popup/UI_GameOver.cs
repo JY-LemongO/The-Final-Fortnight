@@ -5,10 +5,8 @@ public class UI_GameOver : UI_Popup
 {    
     [SerializeField] private Button _retryBtn;    
 
-    protected override void Init()
+    protected override void ButtonsAddListener()
     {
-        base.Init();
-
         _retryBtn.onClick.AddListener(OnRetryBtn);
     }
 

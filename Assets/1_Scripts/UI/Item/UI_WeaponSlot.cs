@@ -14,26 +14,22 @@ public class UI_WeaponSlot : UI_Item
     [SerializeField] private Image _icon;
     [SerializeField] private Image _equipmentImage;
     [SerializeField] private Image _highLight;
-    [SerializeField] private TMP_Text _amountText;
-
-    public bool IsSetup { get; private set; } = false;
-
-    // static이라 이거 에디터 플레이모드 종료될 때 밀어버려야 함.
-    private static UI_WeaponSlot _selectedSlot;
+    [SerializeField] private TMP_Text _amountText;    
+    
+    public static UI_WeaponSlot SelectedSlot { get; private set; }
     public static void SetSelectable(UI_WeaponSlot slot)
     {
-        _selectedSlot = slot;
+        SelectedSlot = slot;
         slot.SetHighLight(true);
-        OnWeaponSelected?.Invoke(slot._weapon);
+        OnWeaponSelected?.Invoke(slot.Weapon);
     }
-
-    private WeaponStatus _weapon;
-    private RectTransform _rect;
+    
+    public WeaponStatus Weapon { get; private set; }
+    public bool IsSetup { get; private set; } = false;
 
     protected override void Init()
     {
-        base.Init();
-        _rect = GetComponent<RectTransform>();
+        base.Init();        
         EmptySlot();
 
 #if UNITY_EDITOR
@@ -41,7 +37,7 @@ public class UI_WeaponSlot : UI_Item
         {
             if (state == PlayModeStateChange.ExitingPlayMode)
             {
-                _selectedSlot = null;
+                SelectedSlot = null;
                 OnWeaponSelected = null;
             }                
         };
@@ -51,7 +47,7 @@ public class UI_WeaponSlot : UI_Item
     public void Setup(WeaponStatus weapon)
     {
         IsSetup = true;
-        _weapon = weapon;
+        Weapon = weapon;
         _icon.sprite = weapon.ProfileSprite;
         _icon.gameObject.SetActive(true);
         _equipmentImage.gameObject.SetActive(weapon.IsEquiped);
@@ -60,7 +56,7 @@ public class UI_WeaponSlot : UI_Item
     public void EmptySlot()
     {
         IsSetup = false;
-        _weapon = null;
+        Weapon = null;
         _icon.gameObject.SetActive(false);
         _highLight.gameObject.SetActive(false);
         _equipmentImage.gameObject.SetActive(false);
@@ -73,7 +69,7 @@ public class UI_WeaponSlot : UI_Item
 
     public override void OnPointerDown(PointerEventData eventData)
     {
-        if (_weapon == null || _selectedSlot == this)
+        if (Weapon == null || SelectedSlot == this)
             return;
 
         SetHighLight(true);
@@ -81,14 +77,14 @@ public class UI_WeaponSlot : UI_Item
 
     public override void OnPointerUp(PointerEventData eventData)
     {
-        if (_weapon == null || _selectedSlot == this)
+        if (Weapon == null || SelectedSlot == this)
             return;
 
         bool isInRect = RectTransformUtility.RectangleContainsScreenPoint(_rect, eventData.position);
         if (isInRect)
         {
-            if (_selectedSlot != null)
-                _selectedSlot.SetHighLight(false);
+            if (SelectedSlot != null)
+                SelectedSlot.SetHighLight(false);
             SetSelectable(this);
             // To Do - 현재 아이템 정보 띄우기
         }

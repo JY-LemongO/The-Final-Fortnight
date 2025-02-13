@@ -25,14 +25,13 @@ public class UI_WeaponCase : UI_Popup
     protected override void Init()
     {
         base.Init();
-        BackpackInitialize();
-        ButtonsAddListener();
+        BackpackInitialize();        
 
         WeaponManager.Instance.OnWeaponCreated += SetupWeaponUI;
         UI_WeaponSlot.OnWeaponSelected += UpdateWeaponInfo;
     }
 
-    private void ButtonsAddListener()
+    protected override void ButtonsAddListener()
     {
         _closeBtn.onClick.AddListener(Close);
         _equipBtn.onClick.AddListener(OnEquipWeapon);
@@ -66,7 +65,7 @@ public class UI_WeaponCase : UI_Popup
             _slots.Add(UIManager.Instance.CreateItemUI<UI_WeaponSlot>(_contentsTrs));
         }            
 
-        foreach(var weapon in WeaponManager.Instance.GetAllWeapons())
+        foreach(var weapon in WeaponManager.Instance.GetWeaponsList())
             SetupWeaponUI(weapon);
     }
 
@@ -84,6 +83,7 @@ public class UI_WeaponCase : UI_Popup
 
     private void OnEquipWeapon()
     {
-
+        UIManager.Instance.OpenPopupUI<UI_WeaponEquip>();
+        Close();
     }
 }
