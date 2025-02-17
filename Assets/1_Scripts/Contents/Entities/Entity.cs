@@ -53,11 +53,11 @@ public abstract class Entity : MonoBehaviour
         _isInit = true;
         _status = CreateStatusInstance();
 
-        ComponenetsSetting();        
+        ComponentsSetting();        
         SetSpriteSortingOrder();
     }
 
-    protected virtual void ComponenetsSetting()
+    protected virtual void ComponentsSetting()
     {
         _damageEffect = GetComponent<EntityDamageEffect>();
         _damageEffect.Setup(this);

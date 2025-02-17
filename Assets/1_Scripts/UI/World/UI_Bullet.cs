@@ -17,9 +17,13 @@ public class UI_Bullet : UI_World
         if (!gameObject.activeSelf)
             gameObject.SetActive(true);
 
-        _survivor = survivor;
-        _survivor.Weapon.WeaponStatus.OnMagazineValueChanged += OnBulletUpdate;
-        _bulletText.text = _survivor.Weapon.WeaponStatus.Magazine.ToString();
+        _survivor = survivor;        
+    }
+
+    public void SetupBulletUI()
+    {
+        _survivor.Weapon.OnMagazineValueChanged += OnBulletUpdate;
+        _bulletText.text = _survivor.Weapon.WeaponStatus.MaxMagazine.ToString();
     }
 
     private void OnBulletUpdate(int current, int total)
@@ -33,7 +37,7 @@ public class UI_Bullet : UI_World
         if (!gameObject.activeSelf)
             return;
 
-        _survivor.Weapon.WeaponStatus.OnMagazineValueChanged -= OnBulletUpdate;
+        _survivor.Weapon.OnMagazineValueChanged -= OnBulletUpdate;
         _survivor = null;
         base.Dispose();
     }

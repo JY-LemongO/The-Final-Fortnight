@@ -28,6 +28,7 @@ public class UI_WeaponCase : UI_Popup
         BackpackInitialize();        
 
         WeaponManager.Instance.OnWeaponCreated += SetupWeaponUI;
+        WeaponManager.Instance.OnEquipmentChanged += OnWeaponEquipmentChange;
         UI_WeaponSlot.OnWeaponSelected += UpdateWeaponInfo;
     }
 
@@ -45,7 +46,10 @@ public class UI_WeaponCase : UI_Popup
     private void ResetSelectableWeapon()
     {
         if (_slots.Count > 0)
+        {
             UI_WeaponSlot.SetSelectable(_slots[0]);
+            UpdateWeaponInfo(UI_WeaponSlot.SelectedSlot.Weapon);
+        }            
     }       
 
     private void UpdateWeaponInfo(WeaponStatus weapon)
@@ -76,9 +80,26 @@ public class UI_WeaponCase : UI_Popup
             if (!slot.IsSetup)
             {
                 slot.Setup(weapon);
+                if (WeaponManager.Instance.IsEquippedWeapon(weapon))
+                    slot.ChangeEquipmentState(true);
                 break;
             }
         }
+    }
+
+    private void OnWeaponEquipmentChange(WeaponStatus weapon, bool state)
+    {
+        foreach(var slot in _slots)
+        {
+            if (slot.Weapon == null)
+                continue;
+
+            if (slot.Weapon == weapon)
+            {
+                slot.ChangeEquipmentState(state);
+                break;
+            }                
+        }            
     }
 
     private void OnEquipWeapon()

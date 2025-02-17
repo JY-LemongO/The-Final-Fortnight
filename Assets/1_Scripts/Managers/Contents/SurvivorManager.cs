@@ -27,11 +27,14 @@ public class SurvivorManager : SingletonBase<SurvivorManager>
         survivor.Setup(survivorSO);
 
         WeaponStatus craftedWeapon = WeaponManager.Instance.CraftWeapon(survivorSO.DefaultWeapon);
-        survivor.SetWeapon(craftedWeapon);
-        survivor.SetBulletUI();
+        WeaponManager.Instance.EquipWeapon(survivor, craftedWeapon);        
 
         RegisterSurvivor(survivor);
         OnSurvivorListChanged?.Invoke(survivor);
+
+        // Test Code
+        if(_spawnedSurvivorList.Count == 1)
+            GameManager.Instance.StartGame();
     }
 
     public void DispawnSurvivor(Survivor dispawnSurvivor)
@@ -79,6 +82,7 @@ public class SurvivorManager : SingletonBase<SurvivorManager>
     {
         GameObject go = ResourceManager.Instance.Instantiate(_survivorPrefabKey);
         go.transform.position = _spawnPosition;
+        _spawnPosition += Vector2.up * 1f;
 
         return go.GetComponent<Survivor>();
     }

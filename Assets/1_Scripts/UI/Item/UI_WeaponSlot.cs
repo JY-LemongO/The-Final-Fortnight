@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(UIHighlightEffect))]
 public class UI_WeaponSlot : UI_Item
 {
     #region Events
@@ -12,25 +13,29 @@ public class UI_WeaponSlot : UI_Item
     #endregion
 
     [SerializeField] private Image _icon;
-    [SerializeField] private Image _equipmentImage;
-    [SerializeField] private Image _highLight;
+    [SerializeField] private Image _equipmentImage;    
     [SerializeField] private TMP_Text _amountText;    
     
     public static UI_WeaponSlot SelectedSlot { get; private set; }
     public static void SetSelectable(UI_WeaponSlot slot)
     {
+        if (SelectedSlot != null)
+            SelectedSlot.SetHighLight(false);
+
         SelectedSlot = slot;
-        slot.SetHighLight(true);
-        OnWeaponSelected?.Invoke(slot.Weapon);
+        slot.SetHighLight(true);        
     }
     
     public WeaponStatus Weapon { get; private set; }
     public bool IsSetup { get; private set; } = false;
 
+    private UIHighlightEffect _highlightEffect;
+
     protected override void Init()
     {
-        base.Init();        
-        EmptySlot();
+        base.Init();
+        _highlightEffect = GetComponent<UIHighlightEffect>();
+        EmptySlot();        
 
 #if UNITY_EDITOR
         EditorApplication.playModeStateChanged += state =>
@@ -50,22 +55,24 @@ public class UI_WeaponSlot : UI_Item
         Weapon = weapon;
         _icon.sprite = weapon.ProfileSprite;
         _icon.gameObject.SetActive(true);
-        _equipmentImage.gameObject.SetActive(weapon.IsEquiped);
     }
+
+    public void ChangeEquipmentState(bool state)
+        => _equipmentImage.gameObject.SetActive(state);
 
     public void EmptySlot()
     {
         IsSetup = false;
         Weapon = null;
-        _icon.gameObject.SetActive(false);
-        _highLight.gameObject.SetActive(false);
+        _icon.gameObject.SetActive(false);        
         _equipmentImage.gameObject.SetActive(false);
         _amountText.text = string.Empty;
         _amountText.gameObject.SetActive(false);
+        SetHighLight(false);
     }
 
     public void SetHighLight(bool isOn)
-        => _highLight.gameObject.SetActive(isOn);
+        => _highlightEffect.SetHighlight(isOn);
 
     public override void OnPointerDown(PointerEventData eventData)
     {
@@ -83,10 +90,8 @@ public class UI_WeaponSlot : UI_Item
         bool isInRect = RectTransformUtility.RectangleContainsScreenPoint(_rect, eventData.position);
         if (isInRect)
         {
-            if (SelectedSlot != null)
-                SelectedSlot.SetHighLight(false);
             SetSelectable(this);
-            // To Do - 현재 아이템 정보 띄우기
+            OnWeaponSelected?.Invoke(Weapon);
         }
         else
             SetHighLight(false);

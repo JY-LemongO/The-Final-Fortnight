@@ -58,9 +58,9 @@ public class Zombie : Entity, IAnimatedObject
         AnimationHashInitialize();
     }
 
-    protected override void ComponenetsSetting()
+    protected override void ComponentsSetting()
     {
-        base.ComponenetsSetting();
+        base.ComponentsSetting();
         ZombieController = GetComponent<ZombieController>();
         Animator = GetComponent<Animator>();
 

@@ -16,10 +16,10 @@ MonoBehaviour:
   _codeName: ZOMBIE_NORMAL_02
   _displayName: "\uC77C\uBC18 \uC880\uBE44"
   _displayDesc: "\uC77C\uBC18 \uC880\uBE44\uC785\uB2C8\uB2E4."
-  _hpSO: {fileID: 11400000, guid: e7f83e7f024691b47a04e616462797f7, type: 2}
+  _hp: 15
   _hpBarOffset: 1
-  _moveSpeedSO: {fileID: 11400000, guid: e0aca2574cb22704589d2c040d085d66, type: 2}
-  _rangeSO: {fileID: 11400000, guid: 37f43a3819f46eb47b9f3514a2e17c24, type: 2}
-  _atkSO: {fileID: 11400000, guid: 97f339119891fe9439f3a25c45e8c24c, type: 2}
-  _atkRateSO: {fileID: 11400000, guid: 338158ce63702ac48a6c8e6eb18bb2f9, type: 2}
   _animController: {fileID: 22100000, guid: 12d2fa435c840db4a8ba103a3b0a3e55, type: 2}
+  _moveSpeed: 2
+  _range: 1
+  _atk: 1
+  _atkRate: 1

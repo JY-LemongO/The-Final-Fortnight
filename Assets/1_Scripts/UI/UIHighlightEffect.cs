@@ -7,4 +7,7 @@ public class UIHighlightEffect : MonoBehaviour
 
     public void SetHighlight(bool enable)
         => _highlightImage.gameObject.SetActive(enable);
+
+    public void SetHighlight(bool enable, GameObject highlightObject)
+        => highlightObject.SetActive(enable);
 }

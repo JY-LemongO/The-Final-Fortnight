@@ -186,6 +186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 992559495f205584892c0f3047653a2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _blindCloser: {fileID: 7209754945642688818}
   _createWeaponBtn: {fileID: 8161566596389288071}
   _nextWeaponBtn: {fileID: 4891995837288646486}
   _prevWeaponBtn: {fileID: 5094085874472952405}
@@ -2017,6 +2018,7 @@ GameObject:
   - component: {fileID: 3209645980715842909}
   - component: {fileID: 2698201482305332278}
   - component: {fileID: 3345110739846005243}
+  - component: {fileID: 7209754945642688818}
   m_Layer: 5
   m_Name: Blind_BG
   m_TagString: Untagged
@@ -2081,6 +2083,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &7209754945642688818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2851535390029275976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c4384f76c5a2e84d80a4d5c4edfb325, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2916724086854650234
 GameObject:
   m_ObjectHideFlags: 0

@@ -85,7 +85,7 @@ public class UI_SurvivorSelect : UI_Popup
     {
         string survivorKey = Enum.GetNames(typeof(Define.SurvivorKeys))[_currentIndex];
         SurvivorManager.Instance.SpawnSurvivor(survivorKey);
-        GameManager.Instance.StartGame();
+        //GameManager.Instance.StartGame();
         Close();
     }
 

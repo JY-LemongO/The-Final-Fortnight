@@ -6213,7 +6213,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1339202889}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: BulletShellPosition
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -6228,7 +6228,7 @@ Transform:
   m_GameObject: {fileID: 1339202888}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.099, y: 0.192, z: 0}
+  m_LocalPosition: {x: -0.082, y: 0.12, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11460,7 +11460,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -4576248161068963089, guid: 5a69add2d60356e4faa8a9c1a8380e19, type: 3}
+  m_Sprite: {fileID: -4567666622362501603, guid: 72e7af36a211b9c4fb5ae3c43740499c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -11502,7 +11502,7 @@ Transform:
   m_GameObject: {fileID: 6720922216589138871}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.428, y: -0.297, z: 0}
+  m_LocalPosition: {x: 0.646, y: -0.135, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -11634,7 +11634,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1001 &6098205755740262944
 PrefabInstance:
   m_ObjectHideFlags: 0

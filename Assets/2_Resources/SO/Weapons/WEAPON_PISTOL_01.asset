@@ -22,5 +22,5 @@ MonoBehaviour:
   _magazine: 12
   _animController: {fileID: 9100000, guid: 4b36f757f74ee004a93db1c4648ab65e, type: 2}
   _profileSprite: {fileID: 21300000, guid: 718f46f6345e2144d8324e47a4e18317, type: 3}
-  _weaponPosition: {x: 0, y: 0}
-  _bulletShellPosition: {x: 0, y: 0}
+  _weaponPosition: {x: 0.646, y: -0.135}
+  _bulletShellPosition: {x: -0.082, y: 0.12}

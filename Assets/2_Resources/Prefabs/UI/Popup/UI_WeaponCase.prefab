@@ -186,6 +186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a19b2b07f97e432448f38004978d3f9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _blindCloser: {fileID: 8796221806129104134}
   _contentsTrs: {fileID: 8609316420190773474}
   _closeBtn: {fileID: 6632104559065979153}
   _equipBtn: {fileID: 4126079889215153600}
@@ -740,6 +741,7 @@ GameObject:
   - component: {fileID: 3209645980715842909}
   - component: {fileID: 2698201482305332278}
   - component: {fileID: 3345110739846005243}
+  - component: {fileID: 8796221806129104134}
   m_Layer: 5
   m_Name: Blind_BG
   m_TagString: Untagged
@@ -804,6 +806,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &8796221806129104134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2851535390029275976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c4384f76c5a2e84d80a4d5c4edfb325, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3215774743003965180
 GameObject:
   m_ObjectHideFlags: 0

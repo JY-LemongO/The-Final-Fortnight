@@ -179,7 +179,7 @@ public class UIManager : SingletonBase<UIManager>
                 _frontUI = null;
         }
     }
-
+     
     public void CloseAllUI()
     {
         foreach (var ui in _openedUIList)

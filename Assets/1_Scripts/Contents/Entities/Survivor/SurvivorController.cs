@@ -7,47 +7,52 @@ public class SurvivorController : MonoBehaviour
     private Survivor _context;
     private Coroutine _targetSearchCoroutine;
 
-    public void Setup(Survivor context)
-        => _context = context;
-
-    public void SearchTarget()
+    private void Awake()
     {
-        if (_context.Target != null)
-            return;
-
-        if (_targetSearchCoroutine != null)
-            StopCoroutine(_targetSearchCoroutine);
-        _targetSearchCoroutine = StartCoroutine(Co_SearchTarget());
+        _context = GetComponent<Survivor>();
     }
 
-    private IEnumerator Co_SearchTarget()
+    public void SearchTarget(float searchRange)
     {
-        float serachingDelay = Constants.SearchingDelay;
-        float fireRange = _context.Weapon.WeaponStatus.FireRange;        
-        while (_context.Target == null)
+        if (_targetSearchCoroutine != null)
+            StopCoroutine(_targetSearchCoroutine);
+        _targetSearchCoroutine = StartCoroutine(Co_SearchTarget(searchRange));
+    }
+
+    private IEnumerator Co_SearchTarget(float searchRange)
+    {
+        float serachingDelay = Constants.SearchingDelay;        
+        while (true)
         {
             List<Zombie> zombies = ZombieManager.Instance.ZombiesList;
             if (zombies.Count != 0)
             {
                 float closestDistance = float.MaxValue;
+                Zombie closestZombie = null;
                 foreach (Zombie zombie in zombies)
                 {
                     if (zombie.Status.IsDead)
                         continue;
 
                     float distance = Vector2.Distance(transform.position, zombie.transform.position);
-                    if (distance > fireRange)
+                    if (distance > searchRange)
                         continue;
 
                     if (distance < closestDistance)
                     {
                         closestDistance = distance;
-                        _context.SetTarget(zombie);
+                        closestZombie = zombie;                                
                     }
                 }
-            }
 
+                if(closestZombie != null)
+                {
+                    _context.SetTarget(closestZombie);
+                    break;
+                }                
+            }
             yield return Util.GetCachedWaitForSeconds(serachingDelay);
         }
+        _targetSearchCoroutine = null;
     }
 }

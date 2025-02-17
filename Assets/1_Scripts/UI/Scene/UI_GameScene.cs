@@ -1,3 +1,4 @@
+using System.Reflection;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -27,6 +28,7 @@ public class UI_GameScene : UI_Scene
         _inventoryBtn.onClick.AddListener(OnWeaponCaseBtn);
         _radioBtn.onClick.AddListener(OnRadioBtn);
 
+        _blinder.SetActive(true);
         HandleFadeIn();
         GameManager.Instance.OnRestartGame += () =>
         {
@@ -37,6 +39,9 @@ public class UI_GameScene : UI_Scene
 
     private void OnSurvivorsBtn()
     {
+        // Test Code
+        UIManager.Instance.OpenPopupUI<UI_SurvivorSelect>();
+
         // To Do - 현재 가지고있는 생존자 리스트 보여주기
     }
 

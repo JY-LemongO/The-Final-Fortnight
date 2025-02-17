@@ -1,18 +1,37 @@
 using System;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(UIHighlightEffect))]
-public class UI_EquipModeSurvivor : UI_Item
+public class UI_EquipModeSurvivorSlot : UI_Item
 {
     #region Event
     public static event Action<Survivor> OnSurvivorSelected;
     #endregion
 
-    [SerializeField] private Image _profileImage;    
+    [SerializeField] private Image _profileImage;
+    [SerializeField] private GameObject _equippedMark;
 
-    public static UI_EquipModeSurvivor SelectedSurvivorSlot { get; private set; }
+    public static UI_EquipModeSurvivorSlot SelectedSurvivorSlot
+    {
+        get => _selectedSurvivorSlot;
+        private set
+        {
+            if (_selectedSurvivorSlot != null)
+                _selectedSurvivorSlot.SetHighlight(false);
+            _selectedSurvivorSlot = value;
+
+            if (value == null)
+                return;
+
+            _selectedSurvivorSlot.SetHighlight(true);
+            OnSurvivorSelected?.Invoke(value.Survivor);
+        }
+    }    
+    private static UI_EquipModeSurvivorSlot _selectedSurvivorSlot;
+
     public Survivor Survivor {  get; private set; }
     public bool IsSetup { get; private set; }
 
@@ -23,6 +42,17 @@ public class UI_EquipModeSurvivor : UI_Item
         base.Init();
         _highlightEffect = GetComponent<UIHighlightEffect>();
         EmptySlot();
+
+#if UNITY_EDITOR
+        EditorApplication.playModeStateChanged += state =>
+        {
+            if (state == PlayModeStateChange.ExitingPlayMode)
+            {
+                SelectedSurvivorSlot = null;
+                OnSurvivorSelected = null;
+            }
+        };
+#endif
     }
 
     public void Setup(Survivor survivor)
@@ -38,18 +68,19 @@ public class UI_EquipModeSurvivor : UI_Item
     {
         IsSetup = false;
         Survivor = null;
-        _highlightEffect.SetHighlight(false);
+        SetHighlight(false);
+        SetEquippedMark(false);
         _profileImage.gameObject.SetActive(false);
     }
 
-    public void SetSelectedSurvivor(UI_EquipModeSurvivor slot)
+    public void SetSelectedSurvivor(UI_EquipModeSurvivorSlot slot)
         => SelectedSurvivorSlot = slot;
 
-    public void SetHighLight(bool isHightLight)
-        => _highlightEffect.SetHighlight(isHightLight);
+    public void SetEquippedMark(bool enable)
+        => _highlightEffect.SetHighlight(enable, _equippedMark);
 
-    public override void OnPointerDown(PointerEventData eventData)
-        => _highlightEffect.SetHighlight(true);
+    public void SetHighlight(bool enable)
+        => _highlightEffect.SetHighlight(enable);
 
     public override void OnPointerUp(PointerEventData eventData)
     {
@@ -59,13 +90,8 @@ public class UI_EquipModeSurvivor : UI_Item
 
         bool isInRect = RectTransformUtility.RectangleContainsScreenPoint(_rect, eventData.position);
         if (isInRect)
-        {
-            if (SelectedSurvivorSlot != null)
-                SelectedSurvivorSlot.SetHighLight(false);
             SetSelectedSurvivor(this);
-            // To Do - 현재 아이템 정보 띄우기
-        }
         else
-            SetHighLight(false);
+            SetHighlight(false);
     }
 }

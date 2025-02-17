@@ -63,8 +63,14 @@ MonoBehaviour:
     m_SerializedLabels:
     - Prefabs
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e09db2d8c9a4f5148ba65014a4e986bf
+    m_Address: UI_FindSurvivor
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Prefabs
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e7d5f226c1381bc44acd237705c11052
-    m_Address: UI_EquipModeSurvivor
+    m_Address: UI_EquipModeSurvivorSlot
     m_ReadOnly: 0
     m_SerializedLabels:
     - Prefabs
