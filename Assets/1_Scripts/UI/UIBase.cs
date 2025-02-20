@@ -9,7 +9,7 @@ public abstract class UIBase : MonoBehaviour
         Init();
     }
 
-    protected virtual void Init() { }
+    protected virtual void Init() { }    
 
     public virtual void Close()
         => UIManager.Instance.CloseUI(this);

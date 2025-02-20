@@ -13,7 +13,7 @@ public class UI_SurvivorSelect : UI_Popup
     [SerializeField] private TMP_Text _descriptionText;
 
     [Header("Stats")]
-    [SerializeField] private TMP_Text _hpValueText;
+    //[SerializeField] private TMP_Text _hpValueText;
     [SerializeField] private TMP_Text _damageValueText;
     [SerializeField] private TMP_Text _magazineValueText;
     [SerializeField] private TMP_Text _fireRateValueText;
@@ -60,7 +60,7 @@ public class UI_SurvivorSelect : UI_Popup
     #region Stats
     private void OnUpdateStatsValue(Survivor_SO survivor)
     {
-        _hpValueText.text = survivor.Hp.ToString();
+        //_hpValueText.text = survivor.Hp.ToString();
         _damageValueText.text = survivor.DefaultWeapon.Damage.ToString();
         _magazineValueText.text = survivor.DefaultWeapon.Magazine.ToString();
         _fireRateValueText.text = survivor.DefaultWeapon.FireRate.ToString();

@@ -3,6 +3,7 @@ using UnityEngine.EventSystems;
 
 public abstract class UI_Popup : UIBase
 {
+    [Header("없어도 됨")]
     [SerializeField] private UIBlindCloser _blindCloser;
 
     protected override void Init()

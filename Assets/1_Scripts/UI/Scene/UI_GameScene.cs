@@ -1,9 +1,11 @@
-using System.Reflection;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UI_GameScene : UI_Scene
 {
+    [SerializeField] private GameObject _hudObject;    
+
     [Header("Buttons")]
     [SerializeField] private Button _survivorsBtn;
     [SerializeField] private Button _craftingBtn;
@@ -11,6 +13,12 @@ public class UI_GameScene : UI_Scene
     [SerializeField] private Button _inventoryBtn;
     [SerializeField] private Button _radioBtn;
 
+    [Header("In-Game Infos")]
+    [SerializeField] private TMP_Text _dayText;
+    [SerializeField] private TMP_Text _moneyText;
+    [SerializeField] private TMP_Text _batteryText;
+    [SerializeField] private TMP_Text _batterRequireValueText;
+    
     [Header("Blinder")]
     [SerializeField] private GameObject _blinder;
 
@@ -20,21 +28,40 @@ public class UI_GameScene : UI_Scene
     {
         base.Init();
 
-        _blinderAnim = GetComponent<Animator>();
+        InitializeButtonListeners();
+        SubscribeEvents();
 
+        _batterRequireValueText.text = $"{GachaManager.Instance.ExecuteRequirement}";
+
+        _blinderAnim = GetComponent<Animator>();
+        _blinder.SetActive(true);
+        HandleFadeIn();
+        
+    }
+
+    private void SubscribeEvents()
+    {
+        GameManager.Instance.OnRestartGame += () =>
+        {
+            _hudObject.SetActive(false);
+            _blinder.SetActive(true);
+            _blinderAnim.SetTrigger("FadeOut");
+        };
+        GameManager.Instance.OnDayChanged += (day) => _dayText.text = $"{day}";
+        GameManager.Instance.OnBatteryChanged += (battery) => _batteryText.text = $"{battery}";
+        GameManager.Instance.OnMoneyChanged += (money) => _moneyText.text = $"{money}";
+        GameManager.Instance.OnStartGame += () => _hudObject.SetActive(true);
+
+        GachaManager.Instance.OnExecuteGacha += (require) => _batterRequireValueText.text = $"{require}";
+    }
+    
+    private void InitializeButtonListeners()
+    {
         _survivorsBtn.onClick.AddListener(OnSurvivorsBtn);
         _craftingBtn.onClick.AddListener(OnCraftingBtn);
         _weaponBtn.onClick.AddListener(OnWeaponBtn);
         _inventoryBtn.onClick.AddListener(OnWeaponCaseBtn);
         _radioBtn.onClick.AddListener(OnRadioBtn);
-
-        _blinder.SetActive(true);
-        HandleFadeIn();
-        GameManager.Instance.OnRestartGame += () =>
-        {
-            _blinder.SetActive(true);
-            _blinderAnim.SetTrigger("FadeOut");
-        };
     }
 
     private void OnSurvivorsBtn()
@@ -63,7 +90,7 @@ public class UI_GameScene : UI_Scene
 
     private void OnRadioBtn()
     {
-        // 랜덤 생존자 가챠
+        GachaManager.Instance.Execute();
     }
 
     private void HandleFadeIn()

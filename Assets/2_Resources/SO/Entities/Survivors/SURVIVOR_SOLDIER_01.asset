@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: SURVIVOR_SOLDIER_01
   m_EditorClassIdentifier: 
   _id: 0
-  _codeName: SURVIVOR_SOLDIER
+  _codeName: SURVIVOR_SOLDIER_01
   _displayName: "\uAD70\uC778"
   _displayDesc: "\uCD1D\uAE30\uB97C \uC798 \uB2E4\uB8F8"
-  _hpSO: {fileID: 11400000, guid: 697325a351d685a448f51589d5074df0, type: 2}
+  _hp: 0
   _hpBarOffset: 1
-  _defaultWeaponSO: {fileID: 11400000, guid: 535d3e891f5c4ad44afa0e6b30fe0d11, type: 2}
   _animController: {fileID: 9100000, guid: ce56de0ff320f494e9063e26cdc8e310, type: 2}
+  _defaultWeaponSO: {fileID: 11400000, guid: 535d3e891f5c4ad44afa0e6b30fe0d11, type: 2}
   _profileSprite: {fileID: 21300000, guid: 27de56fcdd871574381845664e898cd1, type: 3}

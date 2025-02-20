@@ -20,7 +20,7 @@ public class Weapon : MonoBehaviour, IAnimatedObject
     public Animator Animator { get; private set; }
     public WeaponStatus WeaponStatus { get; private set; }
     public SpriteRenderer Renderer { get; private set; }
-    public Zombie CurrentTarget;
+    public Zombie CurrentTarget { get; private set; }
 
     public int CurrentMagazine
     {
@@ -94,9 +94,10 @@ public class Weapon : MonoBehaviour, IAnimatedObject
     #region Animation Triggers
     private void HandleAttackTarget()
     {
-        DebugUtility.Log($"[WeaponController] 좀비 공격 - {CurrentTarget.name}");
-
         CurrentMagazine--;
+        if (CurrentTarget == null)
+            return;
+                
         CurrentTarget.GetDamaged(WeaponStatus.Damage);
         SpawnBulletShell();
     }

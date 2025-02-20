@@ -11,7 +11,7 @@ public class BaseSO : ScriptableObject
     [SerializeField][TextArea] private string _displayDesc;
 
     public int Id => _id;
-    public string CodeName => _codeName;
+    public string CodeName => _codeName; // CodeName == SO Key
 
     public string DisplayName => _displayName;
     public string DisplayDesc => _displayDesc;    

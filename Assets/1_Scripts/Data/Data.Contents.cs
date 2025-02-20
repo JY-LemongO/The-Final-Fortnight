@@ -46,5 +46,25 @@ namespace Data
             };
         }
     }
+
+    [Serializable]
+    public class GachaData : IConvertRowData<GachaData>
+    {
+        public int Id => id;
+
+        public int id;
+        public string survivorKey;
+        public float weight;        
+
+        public GachaData ConvertRow(List<string> row)
+        {
+            return new GachaData
+            {
+                id = int.Parse(row[0]),
+                survivorKey = row[1],
+                weight = float.Parse(row[2]),
+            };
+        }
+    }
 }
 

@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 #region InGameData[일회성]
 public class InGameData
@@ -23,12 +24,6 @@ public class InGameData
     public int UsedMoneyAmount;
     public float AliveTime;
     #endregion
-
-    public InGameData()
-    {
-        Day = 1;
-        BarricateUpgrade = 0;
-    }
 }
 #endregion
 
@@ -42,6 +37,7 @@ public class GameManager : SingletonBase<GameManager>
     public event Action<int> OnBatteryChanged;
     public event Action<int> OnBarricateUpgradChanged;
     public event Action OnRestartGame;
+    public event Action OnStartGame;
     #endregion
 
     private InGameData _inGameData = new();
@@ -96,11 +92,13 @@ public class GameManager : SingletonBase<GameManager>
             OnBarricateUpgradChanged?.Invoke(value);
         }
     }
-    #endregion
+    #endregion    
 
     public void StartGame()
-    {        
-        WaveManager.Instance.StartWave(1);
+    {
+        ResetInGameData();
+        WaveManager.Instance.StartWave(CurrentDay);
+        OnStartGame?.Invoke();
     }
 
     public void ResumeGame()
@@ -117,12 +115,25 @@ public class GameManager : SingletonBase<GameManager>
 
     public void Restart()
     {
-        CurrentDay = 1;
-        CurrentMoney = 0;
-        CurrentScrap = 0;
-        CurrentBattery = 0;
-
+        ResetInGameData();
         OnRestartGame?.Invoke();        
+    }
+
+    private void ResetInGameData()
+    {
+        CurrentDay = 1;
+        CurrentMoney = 100;
+        CurrentScrap = 100;
+        CurrentBattery = 5;        
+    }
+
+    public bool UseBattery(int value)
+    {
+        if (CurrentBattery < value)
+            return false;
+
+        CurrentBattery -= value;
+        return true;
     }
 
     protected override void InitChild()
@@ -137,6 +148,7 @@ public class GameManager : SingletonBase<GameManager>
         OnScrapChanged = null;
         OnBatteryChanged = null;
         OnRestartGame = null;
+        OnStartGame = null;
 
         base.Dispose();
     }

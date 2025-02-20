@@ -19,10 +19,12 @@ public interface IConvertRowData<TData>
 public class DataManager : SingletonBase<DataManager>
 {
     public Dictionary<int, WaveData> WaveData = new();
+    public Dictionary<int, GachaData> GachaData = new();
 
     public async Task DataInit()
     {
         WaveData = await LoadJson<GenericLoader<WaveData>, int, WaveData>("WaveData!A2:F");
+        GachaData = await LoadJson<GenericLoader<GachaData>, int, GachaData>("GachaData!A2:D");
 
         Debug.Log("Data Init Completed.");
     }

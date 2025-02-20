@@ -62,5 +62,9 @@ public static class Constants
 
     public const int InventorySlotCount = 28;
     public const int SurvivorSlotCount = 5;
+
+    public const int ExecuteGachaInitCost = 2;
+    public const int RerollGachaInitCost = 1;
+    public const int GachaCostIncrease = 1;
     #endregion
 }

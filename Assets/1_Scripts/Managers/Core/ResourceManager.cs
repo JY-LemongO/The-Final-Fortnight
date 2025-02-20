@@ -12,6 +12,8 @@ public class ResourceManager : SingletonBase<ResourceManager>
     {
         if (_resourcesDict.TryGetValue(key, out UnityEngine.Object obj))
             return obj as T;
+
+        DebugUtility.LogError($"[ResourceManager] Key: {key}에 해당하는 {typeof(T)} 없습니다.");
         return null;
     }
 
