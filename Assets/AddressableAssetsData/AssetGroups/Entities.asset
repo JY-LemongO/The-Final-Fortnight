@@ -15,6 +15,12 @@ MonoBehaviour:
   m_GroupName: Entities
   m_GUID: f0c17a4b91e9a39438a3599abe9e46bb
   m_SerializeEntries:
+  - m_GUID: 094e25d71ed657940b45091fd322172c
+    m_Address: BARRICATE_MAIN
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Entities
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 67dae1cb994e20c44994a7947c49e747
     m_Address: SURVIVOR_SOLDIER_03
     m_ReadOnly: 0

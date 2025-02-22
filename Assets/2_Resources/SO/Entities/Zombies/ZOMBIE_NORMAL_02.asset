@@ -18,6 +18,7 @@ MonoBehaviour:
   _displayDesc: "\uC77C\uBC18 \uC880\uBE44\uC785\uB2C8\uB2E4."
   _hp: 15
   _hpBarOffset: 1
+  _hpBarWidth: 5
   _animController: {fileID: 22100000, guid: 12d2fa435c840db4a8ba103a3b0a3e55, type: 2}
   _moveSpeed: 2
   _range: 1

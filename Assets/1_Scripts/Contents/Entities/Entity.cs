@@ -39,6 +39,7 @@ public abstract class Entity : MonoBehaviour
     {
         _hpBar = UIManager.Instance.CreateWorldUI<UI_HPBar>();
         _hpBar.SetEntity(this);
+        _hpBar.SetHPBarWidth(_status.HPBarWidth);
     }        
 
     public virtual void SetDamageTextUI(float damage)
@@ -55,6 +56,11 @@ public abstract class Entity : MonoBehaviour
 
         ComponentsSetting();        
         SetSpriteSortingOrder();
+        _status.OnDead += () =>
+        {
+            if (EntityType == Define.EntityType.MainBarricate)
+                GameManager.Instance.GameOver();
+        };
     }
 
     protected virtual void ComponentsSetting()

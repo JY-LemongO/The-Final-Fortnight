@@ -25,6 +25,9 @@ public class EntityDamageEffect : MonoBehaviour
 
     public void EffectDamaged()
     {
+        if (_context.Status.IsDead)
+            return;
+
         if (_hitCoroutine != null)
             StopCoroutine(_hitCoroutine);
         _hitCoroutine = StartCoroutine(Co_HitFlash());

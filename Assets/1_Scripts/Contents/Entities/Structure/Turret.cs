@@ -20,8 +20,5 @@ public class Turret : Entity, IAnimatedObject
     }
 
     protected override EntityStatus CreateStatusInstance()
-    {
-        // To Do - Status 인스턴스 만들기
-        return null;
-    }
+        => new TurretStatus();    
 }

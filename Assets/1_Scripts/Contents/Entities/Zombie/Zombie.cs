@@ -45,8 +45,9 @@ public class Zombie : Entity, IAnimatedObject
 
     public override void ResetEntity()
     {
-        StopAllCoroutines();        
+        StopAllCoroutines();
         Target = null;
+        PoolManager.Instance.Return(gameObject);
     }
 
     protected override void Init()

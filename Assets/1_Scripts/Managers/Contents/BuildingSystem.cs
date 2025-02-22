@@ -11,8 +11,7 @@ public class BuildingSystem : SingletonBase<BuildingSystem>
 
     private List<Barricate> _barricates = new();
     private Structure_SO _currentStructure;
-
-    private UIBase _buildModeUI;
+    private UIBase _buildModeUI;   
 
     public void Build(Vector3 buildPosition)
     {
@@ -44,7 +43,7 @@ public class BuildingSystem : SingletonBase<BuildingSystem>
 
     public void EnterBuildMode(Structure_SO structure)
     {
-        _currentStructure = structure;
+        _currentStructure = structure;        
 
         _buildModeUI = UIManager.Instance.OpenPopupUI<UI_BuildMode>();
         GameObject go = ResourceManager.Instance.Instantiate(Constants.Key_PreviewObject);
@@ -72,8 +71,9 @@ public class BuildingSystem : SingletonBase<BuildingSystem>
 
     private void BuildBarricate(GameObject go)
     {
+        Barricate_SO barricateSO = ResourceManager.Instance.Load<Barricate_SO>(_currentStructure.CodeName);
         Barricate barricate = go.GetComponent<Barricate>();
-        //barricate.SetupEntity<Barricate_SO>(_currentStructure.CodeName);
+        barricate.Setup(barricateSO);
     }
 
     private void BuildTurret(GameObject go)

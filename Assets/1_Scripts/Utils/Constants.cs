@@ -30,6 +30,7 @@ public static class Constants
     public const string Key_HPBar = "HP_Bar.prefab";
 
     // Entities - Define으로 교체예정
+    public const string Key_MainBarricate = "BARRICATE_MAIN";
     public const string Key_S_Soldier_01 = "SURVIVOR_SOLDIER_01";
     public const string Key_S_Soldier_02 = "SURVIVOR_SOLDIER_02";
     public const string Key_Z_Normal_01 = "ZOMBIE_NORMAL_01";

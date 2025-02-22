@@ -12,6 +12,7 @@ public abstract class EntityStatus
     public float MaxHp { get; protected set; }
     public float Hp { get; protected set; }
     public float HPBarOffset { get; protected set; }
+    public float HPBarWidth { get; protected set; }
 
     public bool IsDead
     {
@@ -31,6 +32,7 @@ public abstract class EntityStatus
         MaxHp = so.Hp;
         Hp = so.Hp;
         HPBarOffset = so.HPBarOffset;
+        HPBarWidth = so.HPBarWidth;
     }
 
     public virtual void GetDamaged(float damage)

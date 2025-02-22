@@ -37,12 +37,22 @@ public class UI_HPBar : UI_World
 
         _entity = entity;
         _entity.Status.OnHPValueChanged += HandleHPSliderValueChange;
+        _entity.Status.OnDead += OnDisappearImmediately;
+    }
+
+    public void SetHPBarWidth(float width)
+    {
+        RectTransform rect = GetComponent<RectTransform>();
+        rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, width);
     }
 
     private void HandleHPSliderValueChange(float currentValue, float totalValue)
     {
         if (Mathf.Approximately(currentValue, totalValue))
             return;
+
+        if (!gameObject.activeSelf)
+            gameObject.SetActive(true);
 
         _hpSlider.value = currentValue / totalValue;
         _currentFadeTimer = 0f;
@@ -53,6 +63,15 @@ public class UI_HPBar : UI_World
             StartCoroutine(Co_FadeOut());
         }
     }
+
+    private void OnDisappearImmediately()
+    {
+        _isDisappearing = false;
+        HandleDisappear();
+    }
+
+    private void HandleDisappear()
+        => gameObject.SetActive(false);    
 
     private IEnumerator Co_FadeOut()
     {
@@ -77,7 +96,8 @@ public class UI_HPBar : UI_World
 
         StopAllCoroutines();
         _isDisappearing = true;
-        //_entity.CurrentEntitySO.Hp.OnStatCurrentValueChanged -= HandleHPSliderValueChange;
+        _entity.Status.OnHPValueChanged -= HandleHPSliderValueChange;
+        _entity.Status.OnDead -= OnDisappearImmediately;
         _entity = null;
         base.Dispose();
     }

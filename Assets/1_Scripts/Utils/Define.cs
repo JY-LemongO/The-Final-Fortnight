@@ -21,6 +21,7 @@ public static class Define
         Survivor,
         Zombie,
         Structure,
+        MainBarricate,
     }
 
     public enum WeaponType
@@ -38,7 +39,7 @@ public static class Define
     public enum BarricateTier
     {
         BARRICATE_LV1,
-        BARRICATE_LV2,        
+        BARRICATE_LV2,
     }
 
     public enum SpriteType
