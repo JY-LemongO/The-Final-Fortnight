@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Data;
 
 public class WeaponManager : SingletonBase<WeaponManager>
 {
@@ -11,14 +12,29 @@ public class WeaponManager : SingletonBase<WeaponManager>
     private Dictionary<WeaponStatus, Survivor> _equippedWeaponDict = new();
     private List<WeaponStatus> _weaponInventory = new();
 
-    public WeaponStatus CraftWeapon(Weapon_SO originWeaponData)
+    public WeaponStatus CraftWeaponBySO(Weapon_SO originWeaponData)
     {
         WeaponStatus weapon = new WeaponStatus(originWeaponData);
-
-        _weaponInventory.Add(weapon);
-        OnWeaponCreated?.Invoke(weapon);
-
+        CraftWeapon(weapon);
         return weapon;
+    }
+
+    public WeaponStatus CraftWeaponByData(int weaponId)
+    {
+        WeaponData weaponData = GetWeaponData(weaponId);
+        WeaponStatus weapon = new WeaponStatus(weaponData);
+        CraftWeapon(weapon);
+        return weapon;
+    }
+
+    public WeaponData GetWeaponData(int id)
+    {
+        if (!DataManager.Instance.WeaponData.TryGetValue(id, out WeaponData weaponData))
+        {
+            DebugUtility.LogError($"[WeaponManager] {id}에 해당하는 WeaponData가 존재하지 않습니다.");
+            return null;
+        }
+        return weaponData;
     }
 
     public void RegisterWeapon(Survivor survivor, WeaponStatus weapon)
@@ -39,7 +55,13 @@ public class WeaponManager : SingletonBase<WeaponManager>
             _equippedWeaponDict[weapon] = survivor;
             survivor.SetWeapon(weapon);
             OnEquipmentChanged?.Invoke(weapon, true);
-        }        
+        }
+    }
+
+    private void CraftWeapon(WeaponStatus weapon)
+    {
+        _weaponInventory.Add(weapon);
+        OnWeaponCreated?.Invoke(weapon);
     }
 
     private void UnequipWeapon(Survivor survivor)
@@ -47,7 +69,7 @@ public class WeaponManager : SingletonBase<WeaponManager>
         WeaponStatus prevWeapon = survivor.Weapon.WeaponStatus;
         _equippedWeaponDict.Remove(prevWeapon);
         OnEquipmentChanged?.Invoke(prevWeapon, false);
-    }        
+    }
 
     private void SwapWeapon(Survivor survivor, WeaponStatus weapon)
     {

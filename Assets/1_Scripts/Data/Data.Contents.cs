@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Data
 {
     [Serializable]
-    public class GenericLoader<TValue> : ILoader<int, TValue> where TValue : IConvertRowData<TValue>
+    public class GenericLoader<TValue> : ILoader<int, TValue> where TValue : IConvertRowData
     {
         public List<TValue> rows = new();
 
@@ -12,7 +13,7 @@ namespace Data
         {
             Dictionary<int, TValue> dict = new();
 
-            foreach(TValue row in rows)
+            foreach (TValue row in rows)
             {
                 int key = row.Id;
                 dict[key] = row;
@@ -22,7 +23,116 @@ namespace Data
     }
 
     [Serializable]
-    public class WaveData : IConvertRowData<WaveData>
+    public abstract class CommonObjectData : IConvertRowData
+    {
+        public int Id => id;
+
+        public int id;
+        public string codeName;
+        public string displayName;
+        public string displayDesc;
+
+        public virtual void ConvertRow(List<string> row)
+        {
+            id = int.Parse(row[0]);
+            codeName = row[1];
+            displayName = row[2];
+            displayDesc = row[3];
+        }
+    }
+
+    [Serializable]
+    public abstract class CommonEntityData : CommonObjectData
+    {
+        public float hp;
+        public float hpBarOffset;
+        public float hpBarWidth;
+        public string animControllerKey;
+
+        public override void ConvertRow(List<string> row)
+        {
+            base.ConvertRow(row);
+            hp = float.Parse(row[4]);
+            hpBarOffset = float.Parse(row[5]);
+            hpBarWidth = float.Parse(row[6]);
+            animControllerKey = row[7];
+        }
+    }
+
+    [Serializable]
+    public class SurvivorData : CommonEntityData
+    {
+        public int defaultWeaponId;
+        public string profileSpriteKey;
+
+        public override void ConvertRow(List<string> row)
+        {
+            base.ConvertRow(row);
+            defaultWeaponId = int.Parse(row[8]);
+            profileSpriteKey = row[9];
+        }
+    }
+
+    [Serializable]
+    public class ZombieData : CommonEntityData
+    {
+        public float moveSpeed;
+        public float range;
+        public float attack;
+        public float attackRate;
+
+        public override void ConvertRow(List<string> row)
+        {
+            base.ConvertRow(row);
+            moveSpeed = float.Parse(row[8]);
+            range = float.Parse(row[9]);
+            attack = float.Parse(row[10]);
+            attackRate = float.Parse(row[11]);
+        }
+    }
+
+    [Serializable]
+    public class WeaponData : CommonObjectData
+    {
+        public float damage;
+        public int magazine;
+        public float fireRange;
+        public float fireRate;
+        public string animControllerKey;
+        public string profileSpriteKey;
+        public Vector2 weaponPosition;
+        public Vector2 bulletShellPosition;
+
+        public override void ConvertRow(List<string> row)
+        {
+            float weaponPosX = float.Parse(row[10]);
+            float weaponPosY = float.Parse(row[11]);
+            float bulletShellPosX = float.Parse(row[12]);
+            float bulletShellPosY = float.Parse(row[13]);
+
+            base.ConvertRow(row);
+            damage = float.Parse(row[4]);
+            magazine = int.Parse(row[5]);
+            fireRange = float.Parse(row[6]);
+            fireRate = float.Parse(row[7]);
+            animControllerKey = row[8];
+            profileSpriteKey = row[9];
+            weaponPosition = new Vector2(weaponPosX, weaponPosY);
+            bulletShellPosition = new Vector2(bulletShellPosX, bulletShellPosY);
+        }
+    }
+
+    [Serializable]
+    public class StructureData : CommonEntityData
+    {
+        public override void ConvertRow(List<string> row)
+        {
+            base.ConvertRow(row);            
+        }
+    }
+
+    [Serializable]
+    public class WaveData : IConvertRowData
     {
         public int Id => id;
 
@@ -33,37 +143,31 @@ namespace Data
         public float spawnInterval;
         public int spawnCount;
 
-        public WaveData ConvertRow(List<string> row)
+        public void ConvertRow(List<string> row)
         {
-            return new WaveData
-            {
-                id = int.Parse(row[0]),
-                wave = int.Parse(row[1]),
-                zombieKey = row[2],
-                waitTime = float.Parse(row[3]),
-                spawnInterval = float.Parse(row[4]),
-                spawnCount = int.Parse(row[5])
-            };
+            id = int.Parse(row[0]);
+            wave = int.Parse(row[1]);
+            zombieKey = row[2];
+            waitTime = float.Parse(row[3]);
+            spawnInterval = float.Parse(row[4]);
+            spawnCount = int.Parse(row[5]);
         }
     }
 
     [Serializable]
-    public class GachaData : IConvertRowData<GachaData>
+    public class GachaData : IConvertRowData
     {
         public int Id => id;
 
         public int id;
         public string survivorKey;
-        public float weight;        
+        public float weight;
 
-        public GachaData ConvertRow(List<string> row)
+        public void ConvertRow(List<string> row)
         {
-            return new GachaData
-            {
-                id = int.Parse(row[0]),
-                survivorKey = row[1],
-                weight = float.Parse(row[2]),
-            };
+            id = int.Parse(row[0]);
+            survivorKey = row[1];
+            weight = float.Parse(row[2]);
         }
     }
 }

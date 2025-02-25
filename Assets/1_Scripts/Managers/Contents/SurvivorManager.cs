@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using Data;
 using UnityEngine;
 
 public class SurvivorManager : SingletonBase<SurvivorManager>
@@ -20,20 +22,41 @@ public class SurvivorManager : SingletonBase<SurvivorManager>
     private const string SURVIVOR_SPAWN_MARKER = "SurvivorSpawnPoint";
     #endregion
 
-    public void SpawnSurvivor(string survivorSOKey)
+    public void SpawnSurvivorBySO(string survivorSOKey)
     {
         Survivor_SO survivorSO = ResourceManager.Instance.Load<Survivor_SO>(survivorSOKey);
         Survivor survivor = NewSurvivor();
         survivor.Setup(survivorSO);
 
-        WeaponStatus craftedWeapon = WeaponManager.Instance.CraftWeapon(survivorSO.DefaultWeapon);
-        WeaponManager.Instance.EquipWeapon(survivor, craftedWeapon);        
+        WeaponStatus craftedWeapon = WeaponManager.Instance.CraftWeaponBySO(survivorSO.DefaultWeapon);
+        WeaponManager.Instance.EquipWeapon(survivor, craftedWeapon);
 
+        SpawnSurvivor(survivor);
+    }
+
+    public void SpawnSurvivorByData(int id)
+    {
+        if (!DataManager.Instance.SurvivorData.TryGetValue(id, out SurvivorData data))
+        {
+            DebugUtility.LogError($"[SurvivorManager] {id}에 해당하는 SurvivorData가 존재하지 않습니다.");
+            return;
+        }
+        Survivor survivor = NewSurvivor();
+        survivor.SetupByData(data);
+
+        WeaponStatus craftedWeapon = WeaponManager.Instance.CraftWeaponByData(data.defaultWeaponId);
+        WeaponManager.Instance.EquipWeapon(survivor, craftedWeapon);
+
+        SpawnSurvivor(survivor);
+    }
+
+    private void SpawnSurvivor(Survivor survivor)
+    {
         RegisterSurvivor(survivor);
         OnSurvivorListChanged?.Invoke(survivor);
 
         // Test Code
-        if(_spawnedSurvivorList.Count == 1)
+        if (_spawnedSurvivorList.Count == 1)
             GameManager.Instance.StartGame();
     }
 

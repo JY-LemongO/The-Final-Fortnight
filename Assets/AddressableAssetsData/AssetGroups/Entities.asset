@@ -21,6 +21,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Entities
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 20df0770125dcc44bacea95cad70deb9
+    m_Address: ZOMBIE_BIG_01
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Entities
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 67dae1cb994e20c44994a7947c49e747
     m_Address: SURVIVOR_SOLDIER_03
     m_ReadOnly: 0

@@ -61,7 +61,7 @@ public class UI_EquipModeSurvivorSlot : UI_Item
         Survivor = survivor;
 
         _profileImage.gameObject.SetActive(true);
-        _profileImage.sprite = survivor.SurvivorStatus.ProfileSprite;
+        _profileImage.sprite = survivor.SurvivorStatusByData.ProfileSprite;
     }
 
     private void EmptySlot()

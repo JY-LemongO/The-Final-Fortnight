@@ -1,3 +1,4 @@
+using Data;
 using UnityEngine;
 
 public class WeaponStatus
@@ -27,5 +28,22 @@ public class WeaponStatus
         WeaponPosition = so.WeaponPosition;
         BulletShellPosition = so.BulletShellPosition;
         AnimController = so.AnimController;
+    }
+
+    public WeaponStatus(WeaponData data)
+    {
+        ResourceManager resourceManager = ResourceManager.Instance;
+
+        DisplayName = data.displayName;
+
+        Damage = data.damage;
+        FireRate = data.fireRate;
+        FireRange = data.fireRange;
+        MaxMagazine = data.magazine;
+
+        ProfileSprite = resourceManager.Load<Sprite>(data.profileSpriteKey);
+        WeaponPosition = data.weaponPosition;
+        BulletShellPosition = data.bulletShellPosition;
+        AnimController = resourceManager.Load<RuntimeAnimatorController>(data.animControllerKey);
     }
 }

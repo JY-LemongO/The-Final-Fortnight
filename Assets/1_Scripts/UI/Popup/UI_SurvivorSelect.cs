@@ -1,4 +1,6 @@
 using System;
+using System.Linq;
+using Data;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,9 +10,9 @@ public class UI_SurvivorSelect : UI_Popup
     [Header("Profile")]
     [SerializeField] private Image _survivorImage;
     [SerializeField] private Image _weaponImage;
-    [SerializeField] private TMP_Text _survivornameText;
-    [SerializeField] private TMP_Text _weaponNameText;
+    [SerializeField] private TMP_Text _survivornameText;    
     [SerializeField] private TMP_Text _descriptionText;
+    [SerializeField] private TMP_Text _weaponNameText;
 
     [Header("Stats")]
     //[SerializeField] private TMP_Text _hpValueText;
@@ -25,17 +27,15 @@ public class UI_SurvivorSelect : UI_Popup
     [SerializeField] private Button _selectBtn;
 
     private int _currentIndex = 0;
-    private string _currentSurvivorKey = string.Empty;
+    private int _currentSurvivorId = -1;
+    private string _currentSurvivorKey = string.Empty;    
 
     private void Awake()
     {
         base.Init();
 
-        _currentSurvivorKey = Constants.Key_S_Soldier_01;
-        Survivor_SO initSurvivor = ResourceManager.Instance.Load<Survivor_SO>(_currentSurvivorKey);        
-
-        OnUpdateProfile(initSurvivor);
-        OnUpdateStatsValue(initSurvivor);
+        //InitializeSurvivorBySO();
+        InitializeSurvivorByData();
     }
 
     protected override void ButtonsAddListener()
@@ -45,26 +45,68 @@ public class UI_SurvivorSelect : UI_Popup
         _selectBtn.onClick.AddListener(OnSelectBtn);
     }
 
-    #region Profile
-    private void OnUpdateProfile(Survivor_SO survivor)
+    private void InitializeSurvivorBySO()
     {
-        _survivorImage.sprite = survivor.ProfileSprite;
-        _weaponImage.sprite = survivor.DefaultWeapon.ProfileSprite;
+        _currentSurvivorKey = Constants.Key_S_Soldier_01;
+        Survivor_SO initSurvivor = ResourceManager.Instance.Load<Survivor_SO>(_currentSurvivorKey);
 
-        _survivornameText.text = survivor.DisplayName;
-        _weaponNameText.text = survivor.DefaultWeapon.DisplayName;
-        _descriptionText.text = survivor.DisplayDesc;
+        OnUpdateProfileBySO(initSurvivor);
+        OnUpdateStatsValueBySO(initSurvivor);
+    }
+
+    private void InitializeSurvivorByData()
+    {
+        _currentSurvivorId = DataManager.Instance.SurvivorData.Keys.First();
+        SurvivorData initSurvivor = DataManager.Instance.SurvivorData[_currentSurvivorId];
+
+        OnUpdateProfileByData(initSurvivor);
+        OnUpdateStatsValueByData(initSurvivor);
+    }
+
+    #region Profile
+    private void OnUpdateProfileBySO(Survivor_SO survivorSO)
+    {
+        _survivorImage.sprite = survivorSO.ProfileSprite;
+        _weaponImage.sprite = survivorSO.DefaultWeapon.ProfileSprite;
+
+        _survivornameText.text = survivorSO.DisplayName;        
+        _descriptionText.text = survivorSO.DisplayDesc;
+        _weaponNameText.text = survivorSO.DefaultWeapon.DisplayName;
+    }
+
+    private void OnUpdateProfileByData(SurvivorData survivorData)
+    {
+        ResourceManager resourceManager = ResourceManager.Instance;        
+        WeaponData weaponData = WeaponManager.Instance.GetWeaponData(survivorData.defaultWeaponId);
+
+        _survivorImage.sprite = resourceManager.Load<Sprite>(survivorData.profileSpriteKey);
+        _weaponImage.sprite = resourceManager.Load<Sprite>(weaponData.profileSpriteKey);
+
+        _survivornameText.text = survivorData.displayName;        
+        _descriptionText.text = survivorData.displayDesc;
+        _weaponNameText.text = weaponData.displayName;
     }
     #endregion
 
     #region Stats
-    private void OnUpdateStatsValue(Survivor_SO survivor)
+    private void OnUpdateStatsValueBySO(Survivor_SO survivor)
     {
         //_hpValueText.text = survivor.Hp.ToString();
         _damageValueText.text = survivor.DefaultWeapon.Damage.ToString();
         _magazineValueText.text = survivor.DefaultWeapon.Magazine.ToString();
         _fireRateValueText.text = survivor.DefaultWeapon.FireRate.ToString();
         _RangeValueText.text = survivor.DefaultWeapon.FireRange.ToString();
+    }
+
+    private void OnUpdateStatsValueByData(SurvivorData survivor)
+    {
+        WeaponData weaponData = WeaponManager.Instance.GetWeaponData(survivor.defaultWeaponId);
+
+        //_hpValueText.text = survivor.Hp.ToString();
+        _damageValueText.text = weaponData.damage.ToString();
+        _magazineValueText.text = weaponData.magazine.ToString();
+        _fireRateValueText.text = weaponData.fireRate.ToString();
+        _RangeValueText.text = weaponData.fireRange.ToString();
     }
     #endregion
 
@@ -77,15 +119,17 @@ public class UI_SurvivorSelect : UI_Popup
             return;
 
         Survivor_SO survivor = SurvivorManager.Instance.GetSelectableSurvivor(_currentIndex);
-        OnUpdateProfile(survivor);
-        OnUpdateStatsValue(survivor);
+        OnUpdateProfileBySO(survivor);
+        OnUpdateStatsValueBySO(survivor);
     }
 
     private void OnSelectBtn()
     {
-        string survivorKey = Enum.GetNames(typeof(Define.SurvivorKeys))[_currentIndex];
-        SurvivorManager.Instance.SpawnSurvivor(survivorKey);
-        //GameManager.Instance.StartGame();
+        //string survivorKey = Enum.GetNames(typeof(Define.SurvivorKeys))[_currentIndex];
+        //SurvivorManager.Instance.SpawnSurvivorBySO(survivorKey);
+
+        SurvivorManager.Instance.SpawnSurvivorByData(_currentSurvivorId);
+
         Close();
     }
 

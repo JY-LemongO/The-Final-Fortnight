@@ -67,7 +67,7 @@ public class EntityDamageEffect : MonoBehaviour
 
     private IEnumerator Co_HitFlash()
     {
-        _mat.SetFloat(_flashAmountKey, 0.7f);
+        _mat.SetFloat(_flashAmountKey, 1f);
         yield return Util.GetCachedWaitForSeconds(_hitFlashTime);
         _mat.SetFloat(_flashAmountKey, 0f);
     }

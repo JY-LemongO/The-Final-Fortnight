@@ -1,4 +1,5 @@
 using System;
+using Data;
 using UnityEngine;
 
 public abstract class EntityStatus
@@ -26,13 +27,22 @@ public abstract class EntityStatus
     }
     private bool _isDead;
 
-    public virtual void SetupStatus(Entity_SO so)
+    public virtual void SetupStatusBySO(Entity_SO so)
     {
         CodeName = so.CodeName;
         MaxHp = so.Hp;
         Hp = so.Hp;
         HPBarOffset = so.HPBarOffset;
         HPBarWidth = so.HPBarWidth;
+    }
+
+    public virtual void SetupStatusByData(CommonEntityData data)
+    {
+        CodeName = data.codeName;
+        MaxHp = data.hp;
+        Hp = data.hp;
+        HPBarOffset = data.hpBarOffset;
+        HPBarWidth = data.hpBarWidth;
     }
 
     public virtual void GetDamaged(float damage)

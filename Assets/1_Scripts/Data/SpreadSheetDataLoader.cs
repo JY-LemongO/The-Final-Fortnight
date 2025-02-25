@@ -18,7 +18,7 @@ public static class SpreadSheetDataLoader
 
             if (request.result == UnityWebRequest.Result.Success)
             {
-                Debug.Log("데이터 로드 성공");
+                DebugUtility.Log("데이터 로드 성공");
                 return request.downloadHandler.text;
             }
             else

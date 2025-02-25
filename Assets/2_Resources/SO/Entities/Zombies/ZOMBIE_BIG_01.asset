@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41cce93b63779cb40bc88469089f618f, type: 3}
+  m_Name: ZOMBIE_BIG_01
+  m_EditorClassIdentifier: 
+  _id: 500003
+  _codeName: ZOMBIE_BIG_01
+  _displayName: "\uB369\uCE58 \uC880\uBE44"
+  _displayDesc: "\uC774\uB3D9\uC18D\uB3C4\uAC00 \uB290\uB9AC\uACE0 \uCCB4\uB825\uC774
+    \uB192\uC740 \uC880\uBE44\uC785\uB2C8\uB2E4."
+  _hp: 50
+  _hpBarOffset: 1.5
+  _hpBarWidth: 8
+  _animController: {fileID: 22100000, guid: 84ebcd8e3881ff54ab51f1428e396bec, type: 2}
+  _moveSpeed: 1
+  _range: 1
+  _atk: 2
+  _atkRate: 0

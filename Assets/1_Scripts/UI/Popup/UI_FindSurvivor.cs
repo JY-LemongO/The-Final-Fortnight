@@ -46,7 +46,7 @@ public class UI_FindSurvivor : UI_Popup
     }
     private void OnEnlistSurvivor()
     {
-        SurvivorManager.Instance.SpawnSurvivor(_currentSurvivorKey);
+        SurvivorManager.Instance.SpawnSurvivorBySO(_currentSurvivorKey);
         Close();
     }
 

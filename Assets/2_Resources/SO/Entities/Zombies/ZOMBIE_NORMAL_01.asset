@@ -22,5 +22,5 @@ MonoBehaviour:
   _animController: {fileID: 9100000, guid: 28b0f8f7349e4b549b22f59ae75c1dca, type: 2}
   _moveSpeed: 2
   _range: 1
-  _atk: 1
+  _atk: 2
   _atkRate: 1

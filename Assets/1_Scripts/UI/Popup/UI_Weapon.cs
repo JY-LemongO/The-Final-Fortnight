@@ -59,7 +59,7 @@ public class UI_Weapon : UI_Popup
 
     private void OnCreateWeaponBtn()
     {
-        WeaponManager.Instance.CraftWeapon(_currentWeapon);
+        WeaponManager.Instance.CraftWeaponBySO(_currentWeapon);
         ShowCreateResult();
     }
 

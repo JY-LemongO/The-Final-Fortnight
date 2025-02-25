@@ -6,7 +6,7 @@ public class Zombie : Entity, IAnimatedObject
     [Header("AnimationData")]
     [SerializeField] private string _walkParamName;
     [SerializeField] private string _attackParamName;
-    [SerializeField] private string _dieParamName;    
+    [SerializeField] private string _dieParamName;
 
     public int WalkParamHash { get; private set; }
     public int AttackParamHash { get; private set; }
@@ -16,7 +16,7 @@ public class Zombie : Entity, IAnimatedObject
     public Animator Animator { get; private set; }
     public ZombieController ZombieController { get; private set; }
     public ZombieStatus ZombieStatus { get; private set; }
-    public Entity Target {  get; private set; }
+    public Entity Target { get; private set; }
     public float SpriteHalfSize { get; private set; }
 
     private void Update()
@@ -55,7 +55,7 @@ public class Zombie : Entity, IAnimatedObject
         base.Init();
         EntityType = Define.EntityType.Zombie;
         ZombieStatus = _status as ZombieStatus;
-        SpriteHalfSize = _renderer.sprite.textureRect.height / _renderer.sprite.pixelsPerUnit * 0.5f;        
+        SpriteHalfSize = _renderer.sprite.textureRect.height / _renderer.sprite.pixelsPerUnit * 0.5f;
         AnimationHashInitialize();
     }
 
@@ -69,12 +69,12 @@ public class Zombie : Entity, IAnimatedObject
     }
 
     protected override EntityStatus CreateStatusInstance()
-        => new ZombieStatus();        
+        => new ZombieStatus();
 
     private void AnimationHashInitialize()
     {
         WalkParamHash = Animator.StringToHash(_walkParamName);
         AttackParamHash = Animator.StringToHash(_attackParamName);
         DieParamHash = Animator.StringToHash(_dieParamName);
-    }    
+    }
 }

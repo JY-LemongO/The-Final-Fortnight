@@ -1,4 +1,4 @@
-using System;
+using Data;
 using UnityEngine;
 
 [RequireComponent(typeof(EntityDamageEffect))]
@@ -18,11 +18,19 @@ public abstract class Entity : MonoBehaviour
     {
         if (!_isInit)
             Init();
-        _status.SetupStatus(so);
+        _status.SetupStatusBySO(so);
         SetHPBarUI();
 
         if (this is IAnimatedObject animatedEntity && so.AnimatorController != null)
             animatedEntity.SetAnimatorController(so.AnimatorController);
+    }
+
+    public virtual void SetupByData(CommonEntityData data)
+    {
+        if (!_isInit)
+            Init();
+        _status.SetupStatusByData(data);
+        SetHPBarUI();
     }
 
     public virtual void GetDamaged(float damage)
@@ -56,11 +64,9 @@ public abstract class Entity : MonoBehaviour
 
         ComponentsSetting();        
         SetSpriteSortingOrder();
-        _status.OnDead += () =>
-        {
-            if (EntityType == Define.EntityType.MainBarricate)
-                GameManager.Instance.GameOver();
-        };
+
+        if (EntityType == Define.EntityType.MainBarricate)
+            _status.OnDead += () => GameManager.Instance.GameOver();
     }
 
     protected virtual void ComponentsSetting()

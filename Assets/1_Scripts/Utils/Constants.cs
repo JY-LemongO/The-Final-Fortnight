@@ -12,6 +12,8 @@ public static class Constants
     public const string Key_Prefabs = "Prefabs";
     public const string Key_Entities = "Entities";
     public const string Key_Equipments = "Equipments";
+    public const string Key_Sprites = "Sprites";
+    public const string Key_AnimControllers = "AnimControllers";
 
     // Prefabs
     public const string Key_Survivor = "Survivor.prefab";
