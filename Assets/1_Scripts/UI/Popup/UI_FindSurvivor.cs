@@ -1,3 +1,4 @@
+using Data;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -29,7 +30,7 @@ public class UI_FindSurvivor : UI_Popup
     [Header("Battery")]
     [SerializeField] private TMP_Text _batteryValueText;
 
-    private string _currentSurvivorKey;    
+    private int _currentSurvivorId;    
 
     protected override void Init()
     {
@@ -46,28 +47,28 @@ public class UI_FindSurvivor : UI_Popup
     }
     private void OnEnlistSurvivor()
     {
-        SurvivorManager.Instance.SpawnSurvivorBySO(_currentSurvivorKey);
+        SurvivorManager.Instance.SpawnSurvivorByData(_currentSurvivorId);
         Close();
     }
 
     private void OnReroll()
         => GachaManager.Instance.Reroll();
 
-    private void UpdateInfoTexts(Survivor_SO survivorData)
+    private void UpdateInfoTexts(SurvivorData survivorData)
     {
-        _currentSurvivorKey = survivorData.CodeName;
-        Weapon_SO defaultWeapon = survivorData.DefaultWeapon;
+        _currentSurvivorId = survivorData.id;
+        WeaponData defaultWeapon = WeaponManager.Instance.GetWeaponData(survivorData.defaultWeaponId);
 
-        _survivorProfileImage.sprite = survivorData.ProfileSprite;
-        _weaponProfileImage.sprite = defaultWeapon.ProfileSprite;
+        _survivorProfileImage.sprite = ResourceManager.Instance.Load<Sprite>(survivorData.profileSpriteKey);
+        _weaponProfileImage.sprite = ResourceManager.Instance.Load<Sprite>(defaultWeapon.profileSpriteKey);
 
-        _survivorNameText.text = survivorData.DisplayName;
-        _survivorDescText.text = survivorData.DisplayDesc;
-        _weaponNameText.text = defaultWeapon.DisplayName;
+        _survivorNameText.text = survivorData.displayName;
+        _survivorDescText.text = survivorData.displayDesc;
+        _weaponNameText.text = defaultWeapon.displayName;
 
-        _damageValueText.text = $"{defaultWeapon.Damage}";
-        _magazineValueText.text = $"{defaultWeapon.Magazine}";
-        _fireRateValueText.text = $"{defaultWeapon.FireRate}";
-        _fireRangeValueText.text = $"{defaultWeapon.FireRange}";
+        _damageValueText.text = $"{defaultWeapon.damage}";
+        _magazineValueText.text = $"{defaultWeapon.magazine}";
+        _fireRateValueText.text = $"{defaultWeapon.fireRate}";
+        _fireRangeValueText.text = $"{defaultWeapon.fireRange}";
     }
 }

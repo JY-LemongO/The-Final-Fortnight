@@ -6,14 +6,14 @@ using UnityEngine;
 
 public class SpawnData
 {
-    public string zombieKey;
+    public int zombieId;
     public float waitTime;
     public float spawnInterval;
     public int spawnCount;
 
     public SpawnData(WaveData waveData)
     {
-        this.zombieKey = waveData.zombieKey;
+        this.zombieId = waveData.zombieId;
         this.waitTime = waveData.waitTime;
         this.spawnInterval = waveData.spawnInterval;
         this.spawnCount = waveData.spawnCount;
@@ -96,11 +96,11 @@ public class WaveManager : SingletonBase<WaveManager>
         while (currentSpawnCount < spawnData.spawnCount)
         {
             currentSpawnCount++;
-            ZombieManager.Instance.SpawnZombie(spawnData.zombieKey);
+            ZombieManager.Instance.SpawnZombie(spawnData.zombieId);
             yield return Util.GetCachedWaitForSeconds(spawnData.spawnInterval);
         }
 
-        Debug.Log($"Zombie - {spawnData.zombieKey}:: Coroutine has Ended.");
+        Debug.Log($"Zombie - {spawnData.zombieId}:: Coroutine has Ended.");
 
         _currentSpawnEndedCount++;
         IsWaveEnd = true;

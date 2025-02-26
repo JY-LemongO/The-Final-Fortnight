@@ -19,6 +19,11 @@ public class Turret : Entity, IAnimatedObject
         
     }
 
+    public void SetAnimatorControllerByKey(string animControllerKey)
+    {
+        
+    }
+
     protected override EntityStatus CreateStatusInstance()
         => new TurretStatus();    
 }

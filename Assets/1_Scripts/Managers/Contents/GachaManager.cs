@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 public class GachaManager : SingletonBase<GachaManager>
 {
     #region Events
-    public event Action<Survivor_SO> OnGachaResult;
+    public event Action<SurvivorData> OnGachaResult;
     public event Action<int> OnExecuteGacha;    
     public event Action OnBatteryInSufficient;    
     #endregion
@@ -26,7 +26,7 @@ public class GachaManager : SingletonBase<GachaManager>
     private int _executeRequirement;
     private int _rerollRequirement = 1;
 
-    private Survivor_SO GetRandomSurvivor()
+    private SurvivorData GetRandomSurvivor()
     {
         float totalWeight = 0f;
 
@@ -40,7 +40,7 @@ public class GachaManager : SingletonBase<GachaManager>
         {
             currentSum += entry.weight;
             if (randomPercentage <= currentSum)
-                return GetSurvivor(entry.survivorKey);
+                return GetSurvivor(entry.survivorId);
         }
 
         DebugUtility.LogError("가챠 가중치 범위내에 해당하는 Survivor가 없음.");
@@ -71,8 +71,8 @@ public class GachaManager : SingletonBase<GachaManager>
         OnGachaResult?.Invoke(GetRandomSurvivor());        
     }
 
-    private Survivor_SO GetSurvivor(string key)
-        => ResourceManager.Instance.Load<Survivor_SO>(key);
+    private SurvivorData GetSurvivor(int id)
+        => SurvivorManager.Instance.GetSurvivorData(id);
 
     protected override void InitChild()
     {

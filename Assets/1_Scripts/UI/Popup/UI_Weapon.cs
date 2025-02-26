@@ -1,4 +1,6 @@
-using System;
+using System.Collections.Generic;
+using System.Linq;
+using Data;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,7 +15,7 @@ public class UI_Weapon : UI_Popup
     [SerializeField] private Image _weaponImage;
     [SerializeField] private TMP_Text _weaponDescValueText;
     [SerializeField] private TMP_Text _weaponOwnedValueText;
-    [SerializeField] private TMP_Text _weaponCostValueText;    
+    [SerializeField] private TMP_Text _weaponCostValueText;
 
     [Header("Book Right")]
     [SerializeField] private Button _closeBtn;
@@ -36,16 +38,17 @@ public class UI_Weapon : UI_Popup
     [SerializeField] private TMP_Text _fireRateResultValueText;
     [SerializeField] private TMP_Text _rangeResultValueText;
 
-    private Weapon_SO _currentWeapon;
-    private string[] _weaponKeys;
-    private int _weaponIndex;    
+    private List<int> _weaponsIdList = new();
+    private WeaponData _currentWeapon;    
+    private int _weaponIndex;
 
     protected override void Init()
     {
         base.Init();
-        _weaponKeys = Enum.GetNames(typeof(Define.WeaponKeys));
-        _currentWeapon = ResourceManager.Instance.Load<Weapon_SO>(_weaponKeys[0]);
-        
+
+        _currentWeapon = DataManager.Instance.WeaponData.Values.First();
+        _weaponsIdList = DataManager.Instance.WeaponData.Keys.ToList();
+
         UpdateWeaponInfo();
     }
 
@@ -59,30 +62,31 @@ public class UI_Weapon : UI_Popup
 
     private void OnCreateWeaponBtn()
     {
-        WeaponManager.Instance.CraftWeaponBySO(_currentWeapon);
+        WeaponManager.Instance.CraftWeaponByData(_currentWeapon.id);
         ShowCreateResult();
     }
 
     private void OnPrevOrNextWeaponBtn(int value)
     {
         int prev = _weaponIndex;
-        _weaponIndex = Mathf.Clamp(_weaponIndex + value, 0, (int)Define.WeaponKeys.Count - 1);
-        
+        int total = _weaponsIdList.Count;
+        _weaponIndex = Mathf.Clamp(_weaponIndex + value, 0, total - 1);
+
         if (prev == _weaponIndex)
             return;
-        
-        _currentWeapon = ResourceManager.Instance.Load<Weapon_SO>(_weaponKeys[_weaponIndex]);
+
+        _currentWeapon = WeaponManager.Instance.GetWeaponData(_weaponsIdList[_weaponIndex]);     
         UpdateWeaponInfo();
     }
 
     private void UpdateWeaponInfo()
     {
-        _weaponImage.sprite = _currentWeapon.ProfileSprite;
-        _weaponDescValueText.text = _currentWeapon.DisplayDesc;
-        _atkValueText.text = $"{(int)_currentWeapon.Damage}";
-        _magazineValueText.text = $"{_currentWeapon.Magazine}";
-        _fireRateValueText.text = $"{(int)_currentWeapon.FireRate}";
-        _rangeValueText.text = $"{(int)_currentWeapon.FireRange}";
+        _weaponImage.sprite = ResourceManager.Instance.Load<Sprite>(_currentWeapon.profileSpriteKey);
+        _weaponDescValueText.text = _currentWeapon.displayDesc;
+        _atkValueText.text = $"{(int)_currentWeapon.damage}";
+        _magazineValueText.text = $"{_currentWeapon.magazine}";
+        _fireRateValueText.text = $"{_currentWeapon.fireRate}";
+        _rangeValueText.text = $"{_currentWeapon.fireRange}";
     }
 
     private void ShowCreateResult()

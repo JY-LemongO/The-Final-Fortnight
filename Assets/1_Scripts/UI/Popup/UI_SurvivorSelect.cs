@@ -1,4 +1,4 @@
-using System;
+using System.Collections.Generic;
 using System.Linq;
 using Data;
 using TMPro;
@@ -26,15 +26,15 @@ public class UI_SurvivorSelect : UI_Popup
     [SerializeField] private Button _nextBtn;
     [SerializeField] private Button _selectBtn;
 
-    private int _currentIndex = 0;
-    private int _currentSurvivorId = -1;
-    private string _currentSurvivorKey = string.Empty;    
+    private List<int> _survivorsList = new();
+    private SurvivorData _currentSurvivor;
+    private int _currentIndex = 0;    
 
     private void Awake()
     {
         base.Init();
 
-        //InitializeSurvivorBySO();
+        _survivorsList = DataManager.Instance.SelectableSurvivorsData.Keys.ToList();
         InitializeSurvivorByData();
     }
 
@@ -45,35 +45,15 @@ public class UI_SurvivorSelect : UI_Popup
         _selectBtn.onClick.AddListener(OnSelectBtn);
     }
 
-    private void InitializeSurvivorBySO()
-    {
-        _currentSurvivorKey = Constants.Key_S_Soldier_01;
-        Survivor_SO initSurvivor = ResourceManager.Instance.Load<Survivor_SO>(_currentSurvivorKey);
-
-        OnUpdateProfileBySO(initSurvivor);
-        OnUpdateStatsValueBySO(initSurvivor);
-    }
-
     private void InitializeSurvivorByData()
     {
-        _currentSurvivorId = DataManager.Instance.SurvivorData.Keys.First();
-        SurvivorData initSurvivor = DataManager.Instance.SurvivorData[_currentSurvivorId];
+        _currentSurvivor = SurvivorManager.Instance.GetSurvivorData(_survivorsList[0]);
 
-        OnUpdateProfileByData(initSurvivor);
-        OnUpdateStatsValueByData(initSurvivor);
+        OnUpdateProfileByData(_currentSurvivor);
+        OnUpdateStatsValueByData(_currentSurvivor);
     }
 
     #region Profile
-    private void OnUpdateProfileBySO(Survivor_SO survivorSO)
-    {
-        _survivorImage.sprite = survivorSO.ProfileSprite;
-        _weaponImage.sprite = survivorSO.DefaultWeapon.ProfileSprite;
-
-        _survivornameText.text = survivorSO.DisplayName;        
-        _descriptionText.text = survivorSO.DisplayDesc;
-        _weaponNameText.text = survivorSO.DefaultWeapon.DisplayName;
-    }
-
     private void OnUpdateProfileByData(SurvivorData survivorData)
     {
         ResourceManager resourceManager = ResourceManager.Instance;        
@@ -89,15 +69,6 @@ public class UI_SurvivorSelect : UI_Popup
     #endregion
 
     #region Stats
-    private void OnUpdateStatsValueBySO(Survivor_SO survivor)
-    {
-        //_hpValueText.text = survivor.Hp.ToString();
-        _damageValueText.text = survivor.DefaultWeapon.Damage.ToString();
-        _magazineValueText.text = survivor.DefaultWeapon.Magazine.ToString();
-        _fireRateValueText.text = survivor.DefaultWeapon.FireRate.ToString();
-        _RangeValueText.text = survivor.DefaultWeapon.FireRange.ToString();
-    }
-
     private void OnUpdateStatsValueByData(SurvivorData survivor)
     {
         WeaponData weaponData = WeaponManager.Instance.GetWeaponData(survivor.defaultWeaponId);
@@ -114,29 +85,26 @@ public class UI_SurvivorSelect : UI_Popup
     private void OnPrevOrNextBtn(int buttonValue)
     {
         int prevIndex = _currentIndex;
-        _currentIndex = Mathf.Clamp(_currentIndex + buttonValue, 0, SurvivorManager.Instance.SelectableSurvivorList.Count - 1);
+        int total = _survivorsList.Count;
+        _currentIndex = Mathf.Clamp(_currentIndex + buttonValue, 0, total - 1);
         if (_currentIndex == prevIndex)
             return;
 
-        Survivor_SO survivor = SurvivorManager.Instance.GetSelectableSurvivor(_currentIndex);
-        OnUpdateProfileBySO(survivor);
-        OnUpdateStatsValueBySO(survivor);
+        _currentSurvivor = SurvivorManager.Instance.GetSurvivorData(_survivorsList[_currentIndex]);
+        OnUpdateProfileByData(_currentSurvivor);
+        OnUpdateStatsValueByData(_currentSurvivor);
     }
 
     private void OnSelectBtn()
-    {
-        //string survivorKey = Enum.GetNames(typeof(Define.SurvivorKeys))[_currentIndex];
-        //SurvivorManager.Instance.SpawnSurvivorBySO(survivorKey);
-
-        SurvivorManager.Instance.SpawnSurvivorByData(_currentSurvivorId);
-
+    {        
+        SurvivorManager.Instance.SpawnSurvivorByData(_currentSurvivor.id);
         Close();
     }
 
     protected override void Dispose()
     {
         _currentIndex = 0;
-        _currentSurvivorKey = string.Empty;
+        _survivorsList.Clear();
     }
     #endregion
 }

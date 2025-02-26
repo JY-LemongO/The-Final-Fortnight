@@ -64,6 +64,8 @@ public class Weapon : MonoBehaviour, IAnimatedObject
 
     public void SetAnimatorController(RuntimeAnimatorController controller)
         => Animator.runtimeAnimatorController = controller;
+    public void SetAnimatorControllerByKey(string animControllerKey)
+        => Animator.runtimeAnimatorController = ResourceManager.Instance.Load<RuntimeAnimatorController>(animControllerKey);
 
     private void Init()
     {
@@ -106,6 +108,6 @@ public class Weapon : MonoBehaviour, IAnimatedObject
     {
         CurrentMagazine = WeaponStatus.MaxMagazine;
         OnReload?.Invoke(false);
-    }
+    }    
     #endregion
 }

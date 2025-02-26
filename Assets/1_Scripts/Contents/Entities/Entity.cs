@@ -31,6 +31,8 @@ public abstract class Entity : MonoBehaviour
             Init();
         _status.SetupStatusByData(data);
         SetHPBarUI();
+        if (this is IAnimatedObject animatedEntity && data.animControllerKey != "None")
+            animatedEntity.SetAnimatorControllerByKey(data.animControllerKey);
     }
 
     public virtual void GetDamaged(float damage)

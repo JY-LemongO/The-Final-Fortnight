@@ -1,3 +1,4 @@
+using Data;
 using UnityEngine;
 
 public class Zombie : Entity, IAnimatedObject
@@ -14,8 +15,8 @@ public class Zombie : Entity, IAnimatedObject
     #endregion    
 
     public Animator Animator { get; private set; }
-    public ZombieController ZombieController { get; private set; }
-    public ZombieStatus ZombieStatus { get; private set; }
+    public ZombieController ZombieController { get; private set; }    
+    public ZombieStatusByData ZombieStatusByData { get; private set; }
     public Entity Target { get; private set; }
     public float SpriteHalfSize { get; private set; }
 
@@ -31,6 +32,12 @@ public class Zombie : Entity, IAnimatedObject
         ZombieController.Move();
     }
 
+    public override void SetupByData(CommonEntityData data)
+    {
+        base.SetupByData(data);
+        ZombieController.Move();
+    }
+
     public void SetTarget(Entity target)
         => Target = target;
 
@@ -42,6 +49,8 @@ public class Zombie : Entity, IAnimatedObject
 
     public void SetAnimatorController(RuntimeAnimatorController controller)
         => Animator.runtimeAnimatorController = controller;
+    public void SetAnimatorControllerByKey(string animControllerKey)
+        => Animator.runtimeAnimatorController = ResourceManager.Instance.Load<RuntimeAnimatorController>(animControllerKey);
 
     public override void ResetEntity()
     {
@@ -53,8 +62,10 @@ public class Zombie : Entity, IAnimatedObject
     protected override void Init()
     {
         base.Init();
-        EntityType = Define.EntityType.Zombie;
-        ZombieStatus = _status as ZombieStatus;
+        EntityType = Define.EntityType.Zombie;        
+        ZombieStatusByData = _status as ZombieStatusByData;
+        if (ZombieStatusByData == null)
+            DebugUtility.LogError($"[Zombie] Status 타입이 ZombieStatusByData 가 아닙니다.");
         SpriteHalfSize = _renderer.sprite.textureRect.height / _renderer.sprite.pixelsPerUnit * 0.5f;
         AnimationHashInitialize();
     }
@@ -69,7 +80,7 @@ public class Zombie : Entity, IAnimatedObject
     }
 
     protected override EntityStatus CreateStatusInstance()
-        => new ZombieStatus();
+        => new ZombieStatusByData();
 
     private void AnimationHashInitialize()
     {

@@ -23,16 +23,18 @@ public class DataManager : SingletonBase<DataManager>
     public Dictionary<int, WeaponData> WeaponData { get; private set; } = new();
     public Dictionary<int, StructureData> StructureData { get; private set; } = new();
     public Dictionary<int, WaveData> WaveData { get; private set; } = new();
-    public Dictionary<int, GachaData> GachaData { get; private set; } = new();    
-    
+    public Dictionary<int, GachaData> GachaData { get; private set; } = new();
+    public Dictionary<int, SelectableSurvivorsData> SelectableSurvivorsData { get; private set; } = new();
+
     public async Task DataInit()
     {
         SurvivorData = await LoadJson<GenericLoader<SurvivorData>, int, SurvivorData>("SurvivorData!A2:J");
-        ZombieData = await LoadJson<GenericLoader<ZombieData>, int, ZombieData>("ZombieData!A2:L");
+        ZombieData = await LoadJson<GenericLoader<ZombieData>, int, ZombieData>("ZombieData!A2:M");
         WeaponData = await LoadJson<GenericLoader<WeaponData>, int, WeaponData>("WeaponData!A2:N");
-        StructureData = await LoadJson<GenericLoader<StructureData>, int, StructureData>("StructureData!A2:H");        
+        StructureData = await LoadJson<GenericLoader<StructureData>, int, StructureData>("StructureData!A2:H");
         WaveData = await LoadJson<GenericLoader<WaveData>, int, WaveData>("WaveData!A2:F");
         GachaData = await LoadJson<GenericLoader<GachaData>, int, GachaData>("GachaData!A2:D");
+        SelectableSurvivorsData = await LoadJson<GenericLoader<SelectableSurvivorsData>, int, SelectableSurvivorsData>("SelectableSurvivorsData!A2:A");
 
         Debug.Log("Data Init Completed.");
     }

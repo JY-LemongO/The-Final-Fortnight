@@ -50,25 +50,4 @@ public static class Define
         Weapon,
         WorldUI,
     }
-
-    public enum SurvivorKeys
-    {
-        SURVIVOR_SOLDIER_01,
-        SURVIVOR_SOLDIER_02,
-        SURVIVOR_SOLDIER_03,
-    }
-
-    public enum WeaponKeys
-    {
-        WEAPON_PISTOL_01,
-        WEAPON_SMG_01,
-        WEAPON_AR_01,
-        Count,
-    }
-
-    public enum ZombieKeys
-    {
-        ZOMBIE_NORMAL_01,
-        ZOMBIE_NORMAL_02,
-    }
 }

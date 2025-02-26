@@ -116,6 +116,8 @@ public class Survivor : Entity, IAnimatedObject
 
     public void SetAnimatorController(RuntimeAnimatorController controller)
         => Animator.runtimeAnimatorController = controller;
+    public void SetAnimatorControllerByKey(string animControllerKey)
+        => Animator.runtimeAnimatorController = ResourceManager.Instance.Load<RuntimeAnimatorController>(animControllerKey);
 
     protected override EntityStatus CreateStatusInstance()
         => new SurvivorStatusByData();

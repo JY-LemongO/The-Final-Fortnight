@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Data;
 using UnityEngine;
 
@@ -11,8 +10,8 @@ public class SurvivorManager : SingletonBase<SurvivorManager>
     public event Action<Survivor> OnSurvivorListChanged;
     #endregion
 
-    public List<Survivor_SO> SelectableSurvivorList { get; private set; } = new();
-    public List<Weapon_SO> SelectableSurvivorsWeaponList { get; private set; } = new();
+    public List<SurvivorData> SelectableSurvivorList { get; private set; } = new();
+    public List<WeaponData> SelectableSurvivorsWeaponList { get; private set; } = new();
 
     private List<Survivor> _spawnedSurvivorList = new();
     private string _survivorPrefabKey;
@@ -22,32 +21,27 @@ public class SurvivorManager : SingletonBase<SurvivorManager>
     private const string SURVIVOR_SPAWN_MARKER = "SurvivorSpawnPoint";
     #endregion
 
-    public void SpawnSurvivorBySO(string survivorSOKey)
+    public void SpawnSurvivorByData(int id)
     {
-        Survivor_SO survivorSO = ResourceManager.Instance.Load<Survivor_SO>(survivorSOKey);
+        SurvivorData survivorData = GetSurvivorData(id);
+        
         Survivor survivor = NewSurvivor();
-        survivor.Setup(survivorSO);
+        survivor.SetupByData(survivorData);
 
-        WeaponStatus craftedWeapon = WeaponManager.Instance.CraftWeaponBySO(survivorSO.DefaultWeapon);
+        WeaponStatus craftedWeapon = WeaponManager.Instance.CraftWeaponByData(survivorData.defaultWeaponId);
         WeaponManager.Instance.EquipWeapon(survivor, craftedWeapon);
 
         SpawnSurvivor(survivor);
     }
 
-    public void SpawnSurvivorByData(int id)
+    public SurvivorData GetSurvivorData(int id)
     {
         if (!DataManager.Instance.SurvivorData.TryGetValue(id, out SurvivorData data))
         {
             DebugUtility.LogError($"[SurvivorManager] {id}에 해당하는 SurvivorData가 존재하지 않습니다.");
-            return;
+            return null;
         }
-        Survivor survivor = NewSurvivor();
-        survivor.SetupByData(data);
-
-        WeaponStatus craftedWeapon = WeaponManager.Instance.CraftWeaponByData(data.defaultWeaponId);
-        WeaponManager.Instance.EquipWeapon(survivor, craftedWeapon);
-
-        SpawnSurvivor(survivor);
+        return data;
     }
 
     private void SpawnSurvivor(Survivor survivor)
@@ -74,7 +68,7 @@ public class SurvivorManager : SingletonBase<SurvivorManager>
         }
     }
 
-    public Survivor_SO GetSelectableSurvivor(int index)
+    public SurvivorData GetSelectableSurvivor(int index)
         => SelectableSurvivorList[index];
 
     public List<Survivor> GetSurvivorsList()
@@ -82,14 +76,12 @@ public class SurvivorManager : SingletonBase<SurvivorManager>
 
     private void InitSelectableSurvivorList()
     {
-        string[] survivorSOKeys = Enum.GetNames(typeof(Define.SurvivorKeys));
-
-        foreach (var key in survivorSOKeys)
+        foreach (var selectableValue in DataManager.Instance.SelectableSurvivorsData.Values)
         {
-            Survivor_SO survivorRO = ResourceManager.Instance.Load<Survivor_SO>(key);
+            SurvivorData survivorData = GetSurvivorData(selectableValue.Id);
 
-            SelectableSurvivorList.Add(survivorRO);
-            SelectableSurvivorsWeaponList.Add(survivorRO.DefaultWeapon);
+            SelectableSurvivorList.Add(survivorData);
+            SelectableSurvivorsWeaponList.Add(WeaponManager.Instance.GetWeaponData(survivorData.defaultWeaponId));
         }
     }
 

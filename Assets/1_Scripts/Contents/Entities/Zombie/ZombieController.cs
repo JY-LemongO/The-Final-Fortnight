@@ -5,19 +5,19 @@ public class ZombieController : MonoBehaviour
 {
     [SerializeField] private LayerMask _targetLayer;
 
-    private Zombie _context;    
+    private Zombie _context;
 
     public void Setup(Zombie context)
     {
         _context = context;
         _context.Status.OnDead += Dead;
-    }        
+    }
 
     public void SearchTargetByRay()
     {
         Vector2 origin = (Vector2)transform.position + Vector2.down * _context.SpriteHalfSize;
         Vector2 direction = Vector2.left;
-        float distance = _context.ZombieStatus.Range;
+        float distance = _context.ZombieStatusByData.Range;
 
         RaycastHit2D hit = Physics2D.Raycast(origin, direction, distance, _targetLayer);
         if (hit)
@@ -44,7 +44,7 @@ public class ZombieController : MonoBehaviour
     private void HandleAttackTarget()
     {
         DebugUtility.Log($"[ZombieController] 좀비가 {_context.Target.name}을 공격.");
-        float damage = _context.ZombieStatus.Attack;
+        float damage = _context.ZombieStatusByData.Attack;
         _context.Target.GetDamaged(damage);
     }
 
@@ -72,7 +72,7 @@ public class ZombieController : MonoBehaviour
             if (_context.Status.IsDead) break;
             if (_context.Target != null) break;
 
-            transform.position += Vector3.left * _context.ZombieStatus.MoveSpeed * Time.deltaTime;
+            transform.position += Vector3.left * _context.ZombieStatusByData.MoveSpeed * Time.deltaTime;
             yield return null;
         }
     }

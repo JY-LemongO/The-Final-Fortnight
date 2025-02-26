@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Data;
 using UnityEngine;
 
 public class ZombieManager : SingletonBase<ZombieManager>
@@ -14,11 +15,11 @@ public class ZombieManager : SingletonBase<ZombieManager>
 
     public ZombieManager() => _isDontDestroy = false;
 
-    public void SpawnZombie(string zombieSOKey)
+    public void SpawnZombie(int zombieId)
     {
-        Zombie_SO zombieSO = ResourceManager.Instance.Load<Zombie_SO>(zombieSOKey);
+        ZombieData zombieData = GetZombieData(zombieId);
         Zombie zombie = NewZombie();
-        zombie.Setup(zombieSO);
+        zombie.SetupByData(zombieData);
 
         ZombiesList.Add(zombie);
     }
@@ -28,6 +29,16 @@ public class ZombieManager : SingletonBase<ZombieManager>
         ZombiesList.Remove(zombie);
         PoolManager.Instance.Return(zombie.gameObject);
     }    
+
+    public ZombieData GetZombieData(int zombieId)
+    {
+        if(!DataManager.Instance.ZombieData.TryGetValue(zombieId, out ZombieData zombieData))
+        {
+            DebugUtility.LogError($"[ZombieManager] {zombieId} 에 해당하는 좀비 데이터가 없습니다.");
+            return null;
+        }
+        return zombieData;
+    }
 
     private Zombie NewZombie()
     {

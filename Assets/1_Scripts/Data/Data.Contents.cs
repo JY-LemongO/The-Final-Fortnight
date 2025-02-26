@@ -76,6 +76,7 @@ namespace Data
     [Serializable]
     public class ZombieData : CommonEntityData
     {
+        public int level;
         public float moveSpeed;
         public float range;
         public float attack;
@@ -84,10 +85,11 @@ namespace Data
         public override void ConvertRow(List<string> row)
         {
             base.ConvertRow(row);
-            moveSpeed = float.Parse(row[8]);
-            range = float.Parse(row[9]);
-            attack = float.Parse(row[10]);
-            attackRate = float.Parse(row[11]);
+            level = int.Parse(row[8]);
+            moveSpeed = float.Parse(row[9]);
+            range = float.Parse(row[10]);
+            attack = float.Parse(row[11]);
+            attackRate = float.Parse(row[12]);
         }
     }
 
@@ -138,7 +140,7 @@ namespace Data
 
         public int id;
         public int wave;
-        public string zombieKey;
+        public int zombieId;
         public float waitTime;
         public float spawnInterval;
         public int spawnCount;
@@ -147,7 +149,7 @@ namespace Data
         {
             id = int.Parse(row[0]);
             wave = int.Parse(row[1]);
-            zombieKey = row[2];
+            zombieId = int.Parse(row[2]);
             waitTime = float.Parse(row[3]);
             spawnInterval = float.Parse(row[4]);
             spawnCount = int.Parse(row[5]);
@@ -160,14 +162,27 @@ namespace Data
         public int Id => id;
 
         public int id;
-        public string survivorKey;
+        public int survivorId;
         public float weight;
 
         public void ConvertRow(List<string> row)
         {
             id = int.Parse(row[0]);
-            survivorKey = row[1];
+            survivorId = int.Parse(row[1]);
             weight = float.Parse(row[2]);
+        }
+    }
+
+    [Serializable]
+    public class SelectableSurvivorsData : IConvertRowData
+    {
+        public int Id => survivorId;
+
+        public int survivorId;        
+
+        public void ConvertRow(List<string> row)
+        {
+            survivorId = int.Parse(row[0]);
         }
     }
 }
