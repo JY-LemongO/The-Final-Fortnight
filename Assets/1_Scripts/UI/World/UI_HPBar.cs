@@ -1,10 +1,13 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UI_HPBar : UI_World
 {
     [SerializeField] Slider _hpSlider;
+    [SerializeField] GameObject _levelObj;
+    [SerializeField] TMP_Text _levelText;
 
     private Animator _animator;
     private Entity _entity;
@@ -35,15 +38,28 @@ public class UI_HPBar : UI_World
         if (!gameObject.activeSelf)
             gameObject.SetActive(true);
 
-        _entity = entity;
+        _entity = entity;        
         _entity.Status.OnHPValueChanged += HandleHPSliderValueChange;
         _entity.Status.OnDead += OnDisappearImmediately;
+        SetLevelText();
     }
 
     public void SetHPBarWidth(float width)
     {
         RectTransform rect = GetComponent<RectTransform>();
         rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, width);
+    }
+
+    private void SetLevelText()
+    {
+        if (_entity.Status is not ZombieStatusByData zStatus)
+        {
+            _levelObj.SetActive(false);
+            return;
+        }
+
+        _levelObj.SetActive(true);
+        _levelText.text = zStatus.Level.ToString();
     }
 
     private void HandleHPSliderValueChange(float currentValue, float totalValue)
