@@ -16,19 +16,19 @@ MonoBehaviour:
   m_GUID: 0c720df867cf86340a17c554914f3a10
   m_SerializeEntries:
   - m_GUID: 12d2fa435c840db4a8ba103a3b0a3e55
-    m_Address: Ac_ZNormal_02
+    m_Address: Ac_ZRunner
     m_ReadOnly: 0
     m_SerializedLabels:
     - AnimControllers
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 28b0f8f7349e4b549b22f59ae75c1dca
-    m_Address: Ac_ZNormal_01
+    m_Address: Ac_ZNormal
     m_ReadOnly: 0
     m_SerializedLabels:
     - AnimControllers
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 3ae842d1aeab32d4e89c84caab35ac62
-    m_Address: Ac_SMG01
+    m_Address: Ac_SMG_01
     m_ReadOnly: 0
     m_SerializedLabels:
     - AnimControllers
@@ -40,7 +40,7 @@ MonoBehaviour:
     - AnimControllers
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 84ebcd8e3881ff54ab51f1428e396bec
-    m_Address: Ac_ZBig_01
+    m_Address: Ac_ZBig
     m_ReadOnly: 0
     m_SerializedLabels:
     - AnimControllers
