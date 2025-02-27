@@ -21,6 +21,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Sprites
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3f0b5884309f1c242b8c98a1794957e3
+    m_Address: Barricate_01
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Sprites
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 718f46f6345e2144d8324e47a4e18317
     m_Address: Profile_Pistol_01
     m_ReadOnly: 0

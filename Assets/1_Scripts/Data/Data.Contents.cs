@@ -127,9 +127,53 @@ namespace Data
     [Serializable]
     public class StructureData : CommonEntityData
     {
+        public Define.StructureType structureType;
+        public string objectSpriteKey;
+        public string previewSpriteKey;
+        public int buildCost;
+
+        public override void ConvertRow(List<string> row)
+        {            
+            base.ConvertRow(row);
+            if (!Enum.TryParse(row[8], true, out structureType))
+                DebugUtility.LogError($"[Data.COntents] Structure 타입이 올바르지 않습니다. Type::{row[8]}");
+            objectSpriteKey = row[9];
+            previewSpriteKey = row[10];
+            buildCost = int.Parse(row[11]);
+        }
+    }
+
+    [Serializable]
+    public class BarricateData : StructureData
+    {
+        public int tier;
+        public int upgradeCost;
+
         public override void ConvertRow(List<string> row)
         {
-            base.ConvertRow(row);            
+            base.ConvertRow(row);
+            tier = int.Parse(row[12]);
+            upgradeCost = int.Parse(row[13]);
+        }
+    }
+
+    [Serializable]
+    public class TurretData : StructureData
+    {
+        public int experimentCost;
+        public float damage;
+        public float lifeTime;
+        public float fireRate;
+        public float fireRange;
+
+        public override void ConvertRow(List<string> row)
+        {
+            base.ConvertRow(row);
+            experimentCost = int.Parse(row[13]);
+            damage = float.Parse(row[14]);
+            lifeTime = float.Parse(row[15]);
+            fireRate = float.Parse(row[16]);
+            fireRange = float.Parse(row[17]);
         }
     }
 

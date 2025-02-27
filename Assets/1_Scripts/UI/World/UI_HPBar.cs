@@ -52,7 +52,7 @@ public class UI_HPBar : UI_World
 
     private void SetLevelText()
     {
-        if (_entity.Status is not ZombieStatusByData zStatus)
+        if (_entity.Status is not ZombieStatus zStatus)
         {
             _levelObj.SetActive(false);
             return;

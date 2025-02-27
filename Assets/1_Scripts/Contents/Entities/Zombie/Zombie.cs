@@ -16,7 +16,7 @@ public class Zombie : Entity, IAnimatedObject
 
     public Animator Animator { get; private set; }
     public ZombieController ZombieController { get; private set; }    
-    public ZombieStatusByData ZombieStatusByData { get; private set; }
+    public ZombieStatus ZombieStatusByData { get; private set; }
     public Entity Target { get; private set; }
     public float SpriteHalfSize { get; private set; }
 
@@ -24,12 +24,6 @@ public class Zombie : Entity, IAnimatedObject
     {
         if (Target == null)
             ZombieController.SearchTargetByRay();
-    }
-
-    public override void Setup(Entity_SO so)
-    {
-        base.Setup(so);
-        ZombieController.Move();
     }
 
     public override void SetupByData(CommonEntityData data)
@@ -63,7 +57,7 @@ public class Zombie : Entity, IAnimatedObject
     {
         base.Init();
         EntityType = Define.EntityType.Zombie;        
-        ZombieStatusByData = _status as ZombieStatusByData;
+        ZombieStatusByData = _status as ZombieStatus;
         if (ZombieStatusByData == null)
             DebugUtility.LogError($"[Zombie] Status 타입이 ZombieStatusByData 가 아닙니다.");
         SpriteHalfSize = _renderer.sprite.textureRect.height / _renderer.sprite.pixelsPerUnit * 0.5f;
@@ -80,7 +74,7 @@ public class Zombie : Entity, IAnimatedObject
     }
 
     protected override EntityStatus CreateStatusInstance()
-        => new ZombieStatusByData();
+        => new ZombieStatus();
 
     private void AnimationHashInitialize()
     {

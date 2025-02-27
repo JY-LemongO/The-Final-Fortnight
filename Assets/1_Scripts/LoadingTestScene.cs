@@ -29,11 +29,9 @@ public class LoadingTestScene : MonoBehaviour
 
     private IEnumerator Co_LoadResources()
     {
-        _operations.Add(ResourceManager.Instance.LoadAllAsyncByLabel<BaseSO>(Constants.Key_Entities));
-        _operations.Add(ResourceManager.Instance.LoadAllAsyncByLabel<BaseSO>(Constants.Key_Equipments));
-        _operations.Add(ResourceManager.Instance.LoadAllAsyncByLabel<GameObject>(Constants.Key_Prefabs));
-        _operations.Add(ResourceManager.Instance.LoadAllAsyncByLabel<Sprite>(Constants.Key_Sprites));
-        _operations.Add(ResourceManager.Instance.LoadAllAsyncByLabel<RuntimeAnimatorController>(Constants.Key_AnimControllers));
+        _operations.Add(ResourceManager.Instance.LoadAllAsyncByLabel<GameObject>(Constants.Label_Prefabs));
+        _operations.Add(ResourceManager.Instance.LoadAllAsyncByLabel<Sprite>(Constants.Label_Sprites));
+        _operations.Add(ResourceManager.Instance.LoadAllAsyncByLabel<RuntimeAnimatorController>(Constants.Label_AnimControllers));
         _loadingText.text = "리소스 로드 중...";
         while (true)
         {

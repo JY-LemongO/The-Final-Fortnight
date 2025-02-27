@@ -1,11 +1,12 @@
+using Data;
 using UnityEngine;
 
 public class MainBarricate : Entity
 {
     private void Awake()
     {
-        Barricate_SO mainBarricateSO = ResourceManager.Instance.Load<Barricate_SO>(Constants.Key_MainBarricate);
-        Setup(mainBarricateSO);
+        BarricateData mainBarricateData = BuildingSystem.Instance.GetStructureData(Constants.MainBarricateId) as BarricateData;
+        SetupByData(mainBarricateData);
     }
 
     protected override void Init()

@@ -1,4 +1,7 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using Data;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -24,12 +27,17 @@ public class UI_BuildStructure : UI_Popup
     [Header("Turret")]
     [SerializeField] private Image _turretImage;
 
+    private List<int> _structureIdList = new();
+    private StructureData _currentStructure;
+
     protected override void Init()
     {
         base.Init();
 
         _barricateViewPort.SetActive(true);        
         _turretViewPort.SetActive(false);
+        _structureIdList = DataManager.Instance.StructureData.Keys.ToList();
+        _structureIdList.Sort();
     }
 
     protected override void ButtonsAddListener()
@@ -41,7 +49,7 @@ public class UI_BuildStructure : UI_Popup
 
         _buildBarricateBtn.onClick.AddListener(OnBarricateBuildBtn);
     }
-
+    
     #region Barricate
     private void OnBarricateBtn()
     {
@@ -54,15 +62,16 @@ public class UI_BuildStructure : UI_Popup
 
     private void UpdateBarricateInfo()
     {
-        Barricate_SO barricateInfo = BuildingSystem.Instance.GetBarricateInfo();
-        _barricateImage.sprite = barricateInfo.ObjectSprite;
-        _barricateHPText.text = barricateInfo.Hp.ToString();
-        _barricateBuildCostText.text = barricateInfo.Cost.ToString();
+        BarricateData barricateData = _currentStructure as BarricateData;        
+
+        _barricateImage.sprite = ResourceManager.Instance.Load<Sprite>(barricateData.objectSpriteKey);
+        _barricateHPText.text = barricateData.hp.ToString();
+        _barricateBuildCostText.text = barricateData.buildCost.ToString();
     }
 
     private void OnBarricateBuildBtn()
     {
-        BuildingSystem.Instance.EnterBuildMode(GetBarricateToStructureSO());
+        BuildingSystem.Instance.EnterBuildMode(GetBarricateToStructureData());
         Close();
     }
     #endregion
@@ -78,16 +87,16 @@ public class UI_BuildStructure : UI_Popup
     }
     #endregion   
 
-    private Structure_SO GetBarricateToStructureSO()
+    private StructureData GetBarricateToStructureData()
     {
         int barricateUpgradeTier = GameManager.Instance.CurrentBarricateUpgrade;
-        string key = Enum.GetNames(typeof(Define.BarricateTier))[barricateUpgradeTier];
+        int id = _structureIdList[barricateUpgradeTier - 1];
 
-        return GetStructureSO(key);
+        return GetStructureData(id);
     }
 
-    private Structure_SO GetStructureSO(string key)
-        => ResourceManager.Instance.Load<Structure_SO>(key);
+    private StructureData GetStructureData(int id)
+        => BuildingSystem.Instance.GetStructureData(id);
 
     private void ChangeViewPort(GameObject enableViewPort, GameObject disableViewPort)
     {

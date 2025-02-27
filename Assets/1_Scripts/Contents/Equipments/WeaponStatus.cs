@@ -15,21 +15,6 @@ public class WeaponStatus
     public Vector3 BulletShellPosition {  get; private set; }
     public RuntimeAnimatorController AnimController { get; private set; }
 
-    public WeaponStatus(Weapon_SO so)
-    {
-        DisplayName = so.DisplayName;
-        
-        Damage = so.Damage;
-        FireRate = so.FireRate;
-        FireRange = so.FireRange;
-        MaxMagazine = so.Magazine;        
-
-        ProfileSprite = so.ProfileSprite;
-        WeaponPosition = so.WeaponPosition;
-        BulletShellPosition = so.BulletShellPosition;
-        AnimController = so.AnimController;
-    }
-
     public WeaponStatus(WeaponData data)
     {
         ResourceManager resourceManager = ResourceManager.Instance;

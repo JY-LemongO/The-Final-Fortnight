@@ -21,7 +21,7 @@ public class DataManager : SingletonBase<DataManager>
     public Dictionary<int, SurvivorData> SurvivorData { get; private set; } = new();
     public Dictionary<int, ZombieData> ZombieData { get; private set; } = new();
     public Dictionary<int, WeaponData> WeaponData { get; private set; } = new();
-    public Dictionary<int, StructureData> StructureData { get; private set; } = new();
+    public Dictionary<int, StructureData> StructureData { get; private set; } = new(); // 이 부분 바꿔야 됨.
     public Dictionary<int, WaveData> WaveData { get; private set; } = new();
     public Dictionary<int, GachaData> GachaData { get; private set; } = new();
     public Dictionary<int, SelectableSurvivorsData> SelectableSurvivorsData { get; private set; } = new();

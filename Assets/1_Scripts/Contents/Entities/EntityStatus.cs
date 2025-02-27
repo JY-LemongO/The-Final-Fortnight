@@ -27,15 +27,6 @@ public abstract class EntityStatus
     }
     private bool _isDead;
 
-    public virtual void SetupStatusBySO(Entity_SO so)
-    {
-        CodeName = so.CodeName;
-        MaxHp = so.Hp;
-        Hp = so.Hp;
-        HPBarOffset = so.HPBarOffset;
-        HPBarWidth = so.HPBarWidth;
-    }
-
     public virtual void SetupStatusByData(CommonEntityData data)
     {
         CodeName = data.codeName;

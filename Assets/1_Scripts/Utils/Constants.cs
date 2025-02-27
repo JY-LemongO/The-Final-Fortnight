@@ -8,12 +8,10 @@ public static class Constants
 
     #region Key_Addressables
     // Labels
-    public const string Key_Init = "Init";
-    public const string Key_Prefabs = "Prefabs";
-    public const string Key_Entities = "Entities";
-    public const string Key_Equipments = "Equipments";
-    public const string Key_Sprites = "Sprites";
-    public const string Key_AnimControllers = "AnimControllers";
+    public const string Label_Init = "Init";
+    public const string Label_Prefabs = "Prefabs";
+    public const string Label_Sprites = "Sprites";
+    public const string Label_AnimControllers = "AnimControllers";
 
     // Prefabs
     public const string Key_Survivor = "Survivor.prefab";
@@ -31,18 +29,13 @@ public static class Constants
     // UI
     public const string Key_HPBar = "HP_Bar.prefab";
 
-    // Entities - Define으로 교체예정
-    public const string Key_MainBarricate = "BARRICATE_MAIN";
-    public const string Key_S_Soldier_01 = "SURVIVOR_SOLDIER_01";
-    public const string Key_S_Soldier_02 = "SURVIVOR_SOLDIER_02";
-    public const string Key_Z_Normal_01 = "ZOMBIE_NORMAL_01";
-    public const string Key_Z_Normal_02 = "ZOMBIE_NORMAL_02";
-
     // Equipments
     public const string Key_W_Pistol_02 = "WEAPON_PISTOL_01.asset";
     #endregion
 
     #region Values
+    public const int MainBarricateId = 400001;
+
     public const string HitFlashAmountShaderKey = "_FlashAmount";
 
     public const string DamageColorHEX_L = "#FF9700";

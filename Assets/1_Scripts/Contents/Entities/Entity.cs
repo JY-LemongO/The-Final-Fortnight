@@ -14,17 +14,6 @@ public abstract class Entity : MonoBehaviour
     
     private bool _isInit;
 
-    public virtual void Setup(Entity_SO so)
-    {
-        if (!_isInit)
-            Init();
-        _status.SetupStatusBySO(so);
-        SetHPBarUI();
-
-        if (this is IAnimatedObject animatedEntity && so.AnimatorController != null)
-            animatedEntity.SetAnimatorController(so.AnimatorController);
-    }
-
     public virtual void SetupByData(CommonEntityData data)
     {
         if (!_isInit)

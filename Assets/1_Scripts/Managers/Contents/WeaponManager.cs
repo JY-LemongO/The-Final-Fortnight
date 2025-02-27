@@ -12,13 +12,6 @@ public class WeaponManager : SingletonBase<WeaponManager>
     private Dictionary<WeaponStatus, Survivor> _equippedWeaponDict = new();
     private List<WeaponStatus> _weaponInventory = new();
 
-    public WeaponStatus CraftWeaponBySO(Weapon_SO originWeaponData)
-    {
-        WeaponStatus weapon = new WeaponStatus(originWeaponData);
-        CraftWeapon(weapon);
-        return weapon;
-    }
-
     public WeaponStatus CraftWeaponByData(int weaponId)
     {
         WeaponData weaponData = GetWeaponData(weaponId);

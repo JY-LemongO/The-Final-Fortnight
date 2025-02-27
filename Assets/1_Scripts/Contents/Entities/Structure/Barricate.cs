@@ -1,3 +1,4 @@
+using Data;
 using UnityEngine;
 
 public class Barricate : Entity
@@ -12,9 +13,9 @@ public class Barricate : Entity
         BarricateStatus.OnDead += ResetEntity;
     }
 
-    public override void Setup(Entity_SO so)
+    public override void SetupByData(CommonEntityData data)
     {
-        base.Setup(so);
+        base.SetupByData(data);
         _renderer.sprite = BarricateStatus.ObjectSprite;
     }
 

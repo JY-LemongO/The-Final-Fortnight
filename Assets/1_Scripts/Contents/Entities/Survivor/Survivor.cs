@@ -15,7 +15,7 @@ public class Survivor : Entity, IAnimatedObject
 
     public Animator Animator { get; private set; }
     public SurvivorController Controller { get; private set; }    
-    public SurvivorStatusByData SurvivorStatusByData { get; private set; }
+    public SurvivorStatus SurvivorStatusByData { get; private set; }
     public Weapon Weapon { get; private set; }
     public Zombie Target
     {
@@ -41,7 +41,7 @@ public class Survivor : Entity, IAnimatedObject
     {
         base.Init();
         EntityType = Define.EntityType.Survivor;        
-        SurvivorStatusByData = _status as SurvivorStatusByData;        
+        SurvivorStatusByData = _status as SurvivorStatus;        
         if (SurvivorStatusByData == null)
             DebugUtility.LogError($"[Survivor] Status 타입이 SurvivorStatusByData 가 아닙니다.");        
 
@@ -120,7 +120,7 @@ public class Survivor : Entity, IAnimatedObject
         => Animator.runtimeAnimatorController = ResourceManager.Instance.Load<RuntimeAnimatorController>(animControllerKey);
 
     protected override EntityStatus CreateStatusInstance()
-        => new SurvivorStatusByData();
+        => new SurvivorStatus();
 
     #region WeaponLogic
     private void HandleUseWeapon()
